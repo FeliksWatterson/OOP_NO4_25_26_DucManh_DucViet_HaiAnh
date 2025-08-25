@@ -13,9 +13,9 @@ public class Main {
         n1 = n2;  
 
         n2.i = 10;  
-        System.out.println(n2.i);  
+        System.out.println(n2.i);  //10
 
         n1.i = 20;  
-        System.out.println(n1.i);  
+        System.out.println(n1.i);  //20
     }
 }
