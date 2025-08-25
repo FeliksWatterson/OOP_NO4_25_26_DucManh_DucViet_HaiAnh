@@ -1,4 +1,4 @@
-package Controller;
+package DucManh;
 
 public class Number {
     public int i;

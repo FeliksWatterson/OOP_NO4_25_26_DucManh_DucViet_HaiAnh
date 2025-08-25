@@ -1,4 +1,4 @@
-package Controller;
+package DucManh;
 
 public class PassObject {
  static void f(Number m) {
