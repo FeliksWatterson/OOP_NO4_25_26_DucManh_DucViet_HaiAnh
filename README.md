@@ -11,8 +11,6 @@
 3. **Lê Nguyễn Hải Anh**  
    ID: 23010006
 
----
-
 ## Nội dung dự án
 
 **Project:** Xây dựng ứng dụng quản lý Sản phẩm & Đơn hàng
@@ -22,8 +20,6 @@
 - Giao diện **Java Spring Boot**
 - Có chức năng quản lý sản phẩm, khách hàng, đơn hàng
 - Và các chức năng khác
-
----
 
 ## Chức năng chi tiết
 
@@ -43,8 +39,6 @@
 - Gán sản phẩm theo số lượng
 - Tính tổng tiền tự động
 
----
-
 ## Lưu trữ dữ liệu
 
 - Lưu xuống file nhị phân (`.dat`, `.bin`)
@@ -54,8 +48,6 @@
   - `Order`
   - `OrderDetail`
 - Trong RAM sử dụng `ArrayList`, `Map`, ...
-
----
 
 ## Sơ đồ UML
 
