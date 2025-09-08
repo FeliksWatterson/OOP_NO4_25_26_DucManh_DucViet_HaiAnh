@@ -1,6 +1,6 @@
 public class TestUser {
     public static void main(String[] args) {
-        User u = new User("spencer", "12345");
+        User u = new User("DucManh", "12345");
 
         System.out.println(u);
 
