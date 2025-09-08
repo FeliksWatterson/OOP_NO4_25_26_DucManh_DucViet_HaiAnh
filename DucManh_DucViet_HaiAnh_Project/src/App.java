@@ -1,16 +1,12 @@
 public class App {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+    public static void main(String[] args) {
+        System.out.println("=== TestUser ===");
+        TestUser.main(new String[]{});
 
-        bia b1 = new bia();
+        System.out.println("\n=== TestTime ===");
+        TestTime.main(new String[]{});
 
-        bia b2 = new bia("Hanoi", "lap xanh", "bia");
-
-        bia b3 = new bia("Heniken xanh");
-
-        System.out.println("b1 = " + b1.nhanbia);
-        System.out.println("b2 = " + b2.nhanbia);//duy: Hanoi
-        System.out.println("b3 = " + b3.nhanbia + b3.lapbia);//duy: Hanoi
-
+        System.out.println("\n=== TestRecursion ===");
+        TestRecursion.main(new String[]{});
     }
 }
