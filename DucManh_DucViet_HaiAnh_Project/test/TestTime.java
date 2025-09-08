@@ -1,7 +1,7 @@
 public class TestTime {
     public static void main(String[] args) {
         Time t1 = new Time();
-        Time t2 = new Time(20, 3, 45);
+        Time t2 = new Time(6, 36, 45);
 
         t1.setHour(7).setMinute(32).setSecond(23);
 
