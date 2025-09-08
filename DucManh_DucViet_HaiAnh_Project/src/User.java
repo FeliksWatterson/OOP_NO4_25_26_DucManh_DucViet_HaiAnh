@@ -66,7 +66,10 @@ public class User {
     }
 
     @Override public String toString() {
-        return "User{id='%s', fullName='%s', email='%s', phone='%s', address='%s', createdAt=%s}"
-                .formatted(id, fullName, email, phone, address, createdAt);
-    }
+    return String.format(
+        "User{id='%s', fullName='%s', email='%s', phone='%s', address='%s', createdAt=%s}",
+        id, fullName, email, phone, address, createdAt
+    );
+}
+
 }
