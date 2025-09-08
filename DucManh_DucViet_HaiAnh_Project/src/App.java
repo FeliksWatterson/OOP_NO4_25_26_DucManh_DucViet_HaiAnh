@@ -5,5 +5,8 @@ public class App{
 
         System.out.println("TestTime");
         TestTime.main(new String[]{});
+
+        System.out.println("TestRecursion");
+        TestRecursion.main(new String[]{});
     }
 }
