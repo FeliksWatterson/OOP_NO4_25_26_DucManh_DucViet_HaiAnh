@@ -1,27 +1,36 @@
 public class User {
-    private String id;
-    private String fullName;
-    private String email;
+    private String username;
+    private String password;
 
     public User() {}
 
-    public User(String id, String fullName, String email) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getusername() {
+        return username;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setusername(String username) {
+        this.username = username;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getpassword() {
+        return password;
+    }
+
+    public void setpassword(String password) {
+        this.password = password;
+    }
+
+    public String forgotpassword() {
+        return "Reset link da duoc gui toi " + username;
+    }
 
     @Override
     public String toString() {
-        return "User{id='" + id + "', fullName='" + fullName + "', email='" + email + "'}";
+        return "User{username='" + username + "', password='" + password + "'}";
     }
 }
