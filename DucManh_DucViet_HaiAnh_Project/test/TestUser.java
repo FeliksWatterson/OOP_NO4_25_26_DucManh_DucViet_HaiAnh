@@ -4,7 +4,7 @@ public class TestUser {
 
         System.out.println(u);
 
-        u.setpassword("67890");
+        u.setpassword("678910");
         System.out.println("Password mới: " + u.getpassword());
 
         System.out.println(u.forgotpassword());
