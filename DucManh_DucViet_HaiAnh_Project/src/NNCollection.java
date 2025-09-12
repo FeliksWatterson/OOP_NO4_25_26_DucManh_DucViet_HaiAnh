@@ -10,9 +10,9 @@ public class NNCollection {
         data.add(nn);
     }
 
-    public String findNumber(String lastName) {
+    public String findNumber(String Ten) {
         for (NameNumber nn : data) {
-            if (nn.getLastName().equalsIgnoreCase(lastName)) {
+            if (nn.getTen().equalsIgnoreCase(Ten)) {
                 return nn.getPhone();
             }
         }
