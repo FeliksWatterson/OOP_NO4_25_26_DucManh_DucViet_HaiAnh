@@ -1,23 +1,23 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class NNCollection {
-    private final List<NameNumber> data = new ArrayList<>();
-
-    public NNCollection() {}
-
+    private ArrayList<NameNumber> list = new ArrayList<>();
     public void insert(NameNumber nn) {
-        data.add(nn);
+        list.add(nn);
     }
 
-    public String findNumber(String Ten) {
-        for (NameNumber nn : data) {
-            if (nn.getTen().equalsIgnoreCase(Ten)) {
+    public String findNumber(String lastName) {
+        for (NameNumber nn : list) {
+            if (nn.getLastName().equalsIgnoreCase(lastName)) {
                 return nn.getPhone();
             }
         }
-        return null;
+        return null; 
     }
 
-    public int size() { return data.size(); }
+    public void printAll() {
+        for (NameNumber nn : list) {
+            System.out.println(nn);
+        }
+    }
 }

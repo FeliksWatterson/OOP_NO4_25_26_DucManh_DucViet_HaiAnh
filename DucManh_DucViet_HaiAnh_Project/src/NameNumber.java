@@ -1,22 +1,17 @@
 public class NameNumber {
-    private String Ten;
-    private String Phone;
+    private String lastName;
+    private String phone;
 
-    public NameNumber() {}
-
-    public NameNumber(String Ten, String Phone) {
-        this.Ten = Ten;
-        this.Phone = Phone;
+    public NameNumber(String lastName, String phone) {
+        this.lastName = lastName;
+        this.phone = phone;
     }
 
-    public String getTen() { return Ten; }
-    public void setTen(String Ten) { this.Ten = Ten; }
-
-    public String getPhone() { return Phone; }
-    public void setPhone(String Phone) { this.Phone = Phone; }
+    public String getLastName() { return lastName; }
+    public String getPhone() { return phone; }
 
     @Override
     public String toString() {
-        return "NameNumber{Ten='" + Ten + "', Phone='" + Phone + "'}";
+        return lastName + " -> " + phone;
     }
 }
