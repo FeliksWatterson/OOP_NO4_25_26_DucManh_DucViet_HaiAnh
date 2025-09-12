@@ -1,7 +1,17 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class NNCollection {
-    private ArrayList<NameNumber> list = new ArrayList<>();
+    private final List<NameNumber> list;
+
+    public NNCollection() {
+        this.list = new ArrayList<>();
+    }
+
+    public NNCollection(List<NameNumber> initial) {
+        this.list = initial;
+    }
+
     public void insert(NameNumber nn) {
         list.add(nn);
     }
@@ -12,12 +22,10 @@ public class NNCollection {
                 return nn.getPhone();
             }
         }
-        return null; 
+        return null;
     }
 
-    public void printAll() {
-        for (NameNumber nn : list) {
-            System.out.println(nn);
-        }
+    public List<NameNumber> getList() {
+        return list;
     }
 }
