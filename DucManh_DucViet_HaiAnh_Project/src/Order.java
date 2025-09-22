@@ -44,7 +44,7 @@ public class Order {
         StringBuilder sb = new StringBuilder();
         sb.append("Order ID: ").append(id).append("\n")
           .append("Customer: ").append(customer.getName()).append("\n")
-          .append("Items:\n");
+          .append("Items: \n");
         for (OrderItem item : items) sb.append("  ").append(item).append("\n");
         sb.append("Total: ").append(getTotal());
         return sb.toString();
