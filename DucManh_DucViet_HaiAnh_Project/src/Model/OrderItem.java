@@ -1,3 +1,4 @@
+package Model;
 public class OrderItem {
     private Product product;
     private int quantity;

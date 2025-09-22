@@ -1,5 +1,11 @@
+package Controller;
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.Customer;
+import Model.Order;
+import Model.Product;
+
 
 public class MainCRUD {
     static List<Product> products = new ArrayList<>();
@@ -31,7 +37,6 @@ public class MainCRUD {
         System.out.println("\nĐơn hàng: ");
         for (Order o : orders) System.out.println(o);
 
-        // Demo cập nhật/xóa
         o1.updateItemQty("P02", 3);     
         o1.removeItem("P01");       
         System.out.println("\nĐơn hàng sau cập nhật:");
