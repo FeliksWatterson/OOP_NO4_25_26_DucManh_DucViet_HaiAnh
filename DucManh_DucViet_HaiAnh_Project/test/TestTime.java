@@ -8,5 +8,4 @@ public class TestTime {
         System.out.println("t1 is " + t1);
         System.out.println("t2 is " + t2);
     }
-
 }
