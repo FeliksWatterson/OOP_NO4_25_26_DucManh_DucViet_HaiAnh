@@ -11,5 +11,8 @@ public class App {
 
         System.out.println("TestSequence:");
         TestSequence.main(new String[]{}); 
+
+        System.out.println("TestCallback");
+        TestCallback.main(new String[]{});
     }
 }
