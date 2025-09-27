@@ -13,7 +13,7 @@
 
 ## Nội dung dự án
 
-**Project:** Xây dựng ứng dụng quản lý Sản phẩm & Đơn hàng
+**Project:** Xây dựng ứng dụng bán hàng online
 
 **Yêu cầu chính:**
 
