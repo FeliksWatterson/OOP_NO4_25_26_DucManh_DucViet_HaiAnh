@@ -1,0 +1,19 @@
+:root {
+  --radius: 14px;
+}
+
+.card,
+.btn,
+.img-fluid,
+.alert {
+  border-radius: var(--radius);
+}
+.navbar .navbar-brand {
+  letter-spacing: 0.3px;
+}
+.pretty-output {
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  line-height: 1.6;
+}

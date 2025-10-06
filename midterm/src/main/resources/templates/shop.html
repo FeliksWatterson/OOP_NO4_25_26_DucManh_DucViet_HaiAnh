@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cửa hàng – Demo tương tác</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card,
+      .btn,
+      .form-control,
+      .form-select {
+        border-radius: 12px;
+      }
+      pre.receipt {
+        background: #111827;
+        color: #e5e7eb;
+        padding: 16px;
+        border-radius: 12px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="/"
+          >Quản lý đơn hàng</a
+        >
+      </div>
+    </nav>
+
+    <div class="container py-4">
+      <!-- Khởi tạo đơn -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title mb-3">
+            <i class="bi bi-receipt"></i> Tạo đơn hàng
+          </h5>
+
+          <div th:if="${order == null}">
+            <form method="post" action="/shop/create-order" class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Mã đơn</label>
+                <input
+                  name="orderId"
+                  class="form-control"
+                  placeholder="VD: O1001"
+                  required
+                />
+              </div>
+              <div class="col-md-5">
+                <label class="form-label">Khách hàng</label>
+                <select name="customerId" class="form-select" required>
+                  <option value="" hidden>-- Chọn khách hàng --</option>
+                  <option
+                    th:each="c : ${customers}"
+                    th:value="${c.id}"
+                    th:text="${c.fullName + ' (' + c.id + ')'}"
+                  ></option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100">
+                  <i class="bi bi-plus-circle"></i> Tạo đơn
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div
+            th:if="${order != null}"
+            class="d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <div><b>Mã đơn:</b> <span th:text="${order.id}"></span></div>
+              <div>
+                <b>Khách hàng:</b>
+                <span th:text="${order.customer.fullName}"></span> (<span
+                  th:text="${order.customer.id}"
+                ></span
+                >)
+              </div>
+            </div>
+            <form method="post" action="/shop/reset">
+              <button class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i> Reset đơn
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thêm sản phẩm -->
+      <div class="card shadow-sm mb-4" th:if="${order != null}">
+        <div class="card-body">
+          <h5 class="card-title mb-3">
+            <i class="bi bi-bag-plus"></i> Thêm sản phẩm
+          </h5>
+          <form method="post" action="/shop/add-item" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Sản phẩm</label>
+              <select name="productId" class="form-select" required>
+                <option value="" hidden>-- Chọn sản phẩm --</option>
+                <option
+                  th:each="p : ${products}"
+                  th:value="${p.id}"
+                  th:text="${p.id + ' - ' + p.name + ' (' + #numbers.formatInteger(p.unitPrice, 0, 'POINT') + ' VND)'}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Số lượng</label>
+              <input
+                name="quantity"
+                type="number"
+                min="1"
+                value="1"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button class="btn btn-success w-100">
+                <i class="bi bi-plus-lg"></i> Thêm
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bảng đơn hàng -->
+      <div class="card shadow-sm" th:if="${order != null}">
+        <div class="card-body">
+          <h5 class="card-title mb-3">
+            <i class="bi bi-list-check"></i> Chi tiết đơn hàng
+          </h5>
+
+          <div th:if="${#lists.isEmpty(order.items)}" class="text-secondary">
+            Chưa có mặt hàng nào.
+          </div>
+
+          <div th:if="${!#lists.isEmpty(order.items)}" class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Mã</th>
+                  <th>Tên</th>
+                  <th>Đơn giá</th>
+                  <th>SL</th>
+                  <th>Tạm tính</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="it : ${order.items}">
+                  <td th:text="${it.product.id}"></td>
+                  <td th:text="${it.product.name}"></td>
+                  <td
+                    th:text="${#numbers.formatInteger(it.product.unitPrice, 0, 'POINT') + ' VND'}"
+                  ></td>
+                  <td th:text="${it.quantity}"></td>
+                  <td
+                    th:text="${#numbers.formatInteger(it.subTotal, 0, 'POINT') + ' VND'}"
+                  ></td>
+                  <td class="text-end">
+                    <form method="post" action="/shop/remove-item">
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${it.product.id}"
+                      />
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tổng kết -->
+          <div class="row">
+            <div class="col-lg-6">
+              <pre class="receipt" th:text="${order.summary()}">
+Biên lai...</pre
+              >
+            </div>
+            <div class="col-lg-6">
+              <ul class="list-group shadow-sm">
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Tổng hàng</span>
+                  <b
+                    th:text="${#numbers.formatInteger(order.subTotal,0,'POINT') + ' VND'}"
+                  ></b>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Giảm giá</span>
+                  <b
+                    th:text="${#numbers.formatInteger(order.discount,0,'POINT') + ' VND'}"
+                  ></b>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Thuế VAT</span>
+                  <b
+                    th:text="${#numbers.formatInteger(order.tax,0,'POINT') + ' VND'}"
+                  ></b>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Thành tiền</span>
+                  <b
+                    class="text-primary"
+                    th:text="${#numbers.formatInteger(order.grandTotal,0,'POINT') + ' VND'}"
+                  ></b>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-white border-top py-3 text-center text-secondary small">
+      © 2025 Nhóm OOP_NO4_25_26_DucManh_DucViet_HaiAnh
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
