@@ -14,10 +14,10 @@ public class CatalogService {
 
     @PostConstruct
     public void seed() {
-        products.put("P01", new Product("P01","iPhone 15","Phone", 28_000_000));
-        products.put("P02", new Product("P02","Dell Inspiron","Laptop", 22_000_000));
-        products.put("P03", new Product("P03","Logitech MX Keys","Accessory", 2_500_000));
-        products.put("P04", new Product("P04","Kindle Paperwhite","E-reader", 3_200_000));
+        products.put("P01", new Product("P01","iPhone 15","Phone", 28000000));
+        products.put("P02", new Product("P02","Dell Inspiron","Laptop", 22000000));
+        products.put("P03", new Product("P03","Logitech MX Keys","Accessory", 2500000));
+        products.put("P04", new Product("P04","Kindle Paperwhite","E-reader", 3200000));
 
         customers.put("C01", new Customer("C01","Nguyễn Văn A","a@example.com","0901234567"));
         customers.put("C02", new Customer("C02","Trần Thị B","b@example.com","0902345678"));

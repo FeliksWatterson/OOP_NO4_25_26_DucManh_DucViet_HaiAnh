@@ -18,16 +18,14 @@ public class OrderUiController {
         this.catalog = catalog;
     }
 
-    // Trang tương tác chính
     @GetMapping("/shop")
     public String shop(Model model, HttpSession session) {
         model.addAttribute("customers", catalog.allCustomers());
         model.addAttribute("products", catalog.allProducts());
-        model.addAttribute("order", session.getAttribute(SESSION_ORDER)); // có thể null
+        model.addAttribute("order", session.getAttribute(SESSION_ORDER));
         return "shop";
     }
 
-    // Tạo đơn hàng (chọn khách + mã đơn)
     @PostMapping("/shop/create-order")
     public String createOrder(@RequestParam String orderId,
                               @RequestParam String customerId,
@@ -37,7 +35,6 @@ public class OrderUiController {
         return "redirect:/shop";
     }
 
-    // Thêm sản phẩm vào đơn
     @PostMapping("/shop/add-item")
     public String addItem(@RequestParam String productId,
                           @RequestParam int quantity,
@@ -47,10 +44,9 @@ public class OrderUiController {
             Product p = catalog.product(productId);
             order.addItem(p, quantity);
         }
-        return "redirect:/shop";
+        return "redirect:/";
     }
 
-    // Xoá 1 dòng hàng (đặt số lượng = 0 => loại bỏ)
     @PostMapping("/shop/remove-item")
     public String removeItem(@RequestParam String productId, HttpSession session) {
         var order = (Order) session.getAttribute(SESSION_ORDER);
@@ -60,7 +56,6 @@ public class OrderUiController {
         return "redirect:/shop";
     }
 
-    // Reset đơn hiện tại
     @PostMapping("/shop/reset")
     public String reset(HttpSession session) {
         session.removeAttribute(SESSION_ORDER);

@@ -10,7 +10,7 @@ public class Order {
     private final List<OrderItem> items = new ArrayList<>();
 
     private static final double VAT = 0.08;
-    private static final long DISCOUNT_THRESHOLD = 30_000_000L;
+    private static final long DISCOUNT_THRESHOLD = 30_000_000;
     private static final double DISCOUNT_RATE = 0.05;
 
     public Order(String id, Customer customer) {
@@ -20,12 +20,11 @@ public class Order {
 
     public String getId() { return id; }
     public Customer getCustomer() { return customer; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public List<OrderItem> getItems() { return Collections.unmodifiableList(items); }
+    public List<OrderItem> getItems() { return items; }
 
     public void addItem(Product p, int qty) {
         for (OrderItem it : items) {
-            if (it.getProduct().equals(p)) {
+            if (it.getProduct().getId().equals(p.getId())) {
                 it.setQuantity(it.getQuantity() + qty);
                 return;
             }
@@ -53,25 +52,18 @@ public class Order {
 
     public String summary() {
         StringBuilder sb = new StringBuilder();
-        sb.append("===== HÓA ĐƠN BÁN HÀNG =====\n");
+        sb.append("===== HÓA ĐƠN =====\n");
         sb.append("Mã đơn: ").append(id).append("\n");
-        sb.append("Khách hàng: ").append(customer).append("\n");
-        sb.append("Thời gian: ").append(createdAt).append("\n\n");
-
-        sb.append("Danh sách mặt hàng:\n");
+        sb.append("Khách: ").append(customer).append("\n\n");
         for (OrderItem it : items) {
-            sb.append(" - ").append(it.getProduct().getId())
-              .append(" | ").append(it.getProduct().getName())
-              .append(" | ").append(String.format("%,d", it.getProduct().getUnitPrice())).append(" VND")
-              .append(" | SL: ").append(it.getQuantity())
-              .append(" | Tạm tính: ").append(String.format("%,d", it.getSubTotal())).append(" VND\n");
+            sb.append(" - ").append(it.getProduct().getName())
+              .append(" x ").append(it.getQuantity())
+              .append(" = ").append(String.format("%,d", it.getSubTotal())).append(" VND\n");
         }
-
-        sb.append("\nTổng hàng (SubTotal): ").append(String.format("%,d", getSubTotal())).append(" VND\n");
-        sb.append("Giảm giá: ").append(String.format("%,d", getDiscount())).append(" VND\n");
-        sb.append("Thuế VAT (8%): ").append(String.format("%,d", getTax())).append(" VND\n");
-        sb.append(">>> THÀNH TIỀN: ").append(String.format("%,d", getGrandTotal())).append(" VND\n");
-        sb.append("=============================\n");
+        sb.append("\nTổng hàng: ").append(String.format("%,d", getSubTotal())).append("\n");
+        sb.append("Giảm giá: ").append(String.format("%,d", getDiscount())).append("\n");
+        sb.append("VAT 8%: ").append(String.format("%,d", getTax())).append("\n");
+        sb.append("THÀNH TIỀN: ").append(String.format("%,d", getGrandTotal())).append("\n");
         return sb.toString();
     }
 }
