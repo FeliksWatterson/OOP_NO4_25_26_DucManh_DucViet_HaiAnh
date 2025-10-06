@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách khách hàng</title>
+</head>
+<body>
+<h1>Danh sách khách hàng</h1>
+<a th:href="@{/customers/add}">Thêm khách hàng</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.phone}"></td>
+        <td>
+            <a th:href="@{'/customers/edit/' + ${customer.id}}">Sửa</a> |
+            <a th:href="@{'/customers/delete/' + ${customer.id}}" onclick="return confirm('Xác nhận xoá?')">Xoá</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

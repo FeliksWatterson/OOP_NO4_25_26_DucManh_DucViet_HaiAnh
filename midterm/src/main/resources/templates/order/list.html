@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách đơn hàng</title>
+</head>
+<body>
+<h1>Danh sách đơn hàng</h1>
+<a th:href="@{/orders/add}">Tạo đơn hàng</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Khách hàng</th>
+        <th>Tổng tiền</th>
+        <th>Chi tiết</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.customer.name}"></td>
+        <td th:text="${order.totalAmount}"></td>
+        <td>
+            <ul>
+                <li th:each="detail : ${order.orderDetails}">
+                    <span th:text="${detail.product.name}"></span> x <span th:text="${detail.quantity}"></span> = <span th:text="${detail.price}"></span>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{'/orders/delete/' + ${order.id}}" onclick="return confirm('Xác nhận xoá?')">Xoá</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

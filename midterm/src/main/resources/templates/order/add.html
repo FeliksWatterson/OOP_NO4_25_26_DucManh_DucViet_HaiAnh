@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tạo đơn hàng</title>
+</head>
+<body>
+<h1>Tạo đơn hàng</h1>
+<form th:action="@{/orders/add}" th:object="${order}" method="post">
+    Khách hàng:
+    <select th:field="*{customer.id}">
+        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+    </select><br/>
+    <h3>Chọn sản phẩm</h3>
+    <div th:each="product : ${products}">
+        <input type="checkbox" th:name="orderDetails" th:value="${product.id}"/> <span th:text="${product.name}"></span>
+        Số lượng: <input type="number" th:name="quantity_${product.id}" min="1" value="1"/>
+        <br/>
+    </div>
+    <button type="submit">Tạo đơn hàng</button>
+</form>
+<a th:href="@{/orders}">Quay lại</a>
+</body>
+</html>
