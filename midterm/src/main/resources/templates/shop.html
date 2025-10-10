@@ -39,7 +39,6 @@
     </nav>
 
     <div class="container py-4">
-      <!-- Khởi tạo đơn -->
       <div class="card shadow-sm mb-4">
         <div class="card-body">
           <h5 class="card-title mb-3">
@@ -99,7 +98,6 @@
         </div>
       </div>
 
-      <!-- Thêm sản phẩm -->
       <div class="card shadow-sm mb-4" th:if="${order != null}">
         <div class="card-body">
           <h5 class="card-title mb-3">
@@ -137,7 +135,6 @@
         </div>
       </div>
 
-      <!-- Bảng đơn hàng -->
       <div class="card shadow-sm" th:if="${order != null}">
         <div class="card-body">
           <h5 class="card-title mb-3">
@@ -188,7 +185,6 @@
             </table>
           </div>
 
-          <!-- Tổng kết -->
           <div class="row">
             <div class="col-lg-6">
               <pre class="receipt" th:text="${order.summary()}">
