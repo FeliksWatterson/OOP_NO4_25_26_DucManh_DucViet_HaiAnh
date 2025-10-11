@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title th:text="${product.id} == '' ? 'Add Product' : 'Edit Product'">Form</title></head>
+<body>
+<h2 th:text="${product.id} == '' ? 'Add Product' : 'Edit Product'"></h2>
+
+<form th:action="${product.id} == '' ? @{/products/create} : @{'/products/edit/' + ${product.id}}" method="post">
+    <label>ID:</label><br>
+    <input type="text" name="id" th:value="${product.id}" th:readonly="${product.id != ''}"/><br>
+
+    <label>Name:</label><br>
+    <input type="text" name="name" th:value="${product.name}"/><br>
+
+    <label>Category:</label><br>
+    <input type="text" name="category" th:value="${product.category}"/><br>
+
+    <label>Unit Price:</label><br>
+    <input type="number" name="unitPrice" th:value="${product.unitPrice}"/><br><br>
+
+    <button type="submit">Save</button>
+    <a th:href="@{/products}">Cancel</a>
+</form>
+</body>
+</html>
