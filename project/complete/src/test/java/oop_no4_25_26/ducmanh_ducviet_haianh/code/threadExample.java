@@ -1,4 +1,4 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code;
 
 public class threadExample extends Thread{
 public static int count = 0 ;
