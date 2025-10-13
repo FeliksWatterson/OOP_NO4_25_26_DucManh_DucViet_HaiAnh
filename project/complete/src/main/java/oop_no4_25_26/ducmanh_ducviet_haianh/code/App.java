@@ -1,4 +1,4 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

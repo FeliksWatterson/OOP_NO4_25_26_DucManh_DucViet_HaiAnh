@@ -1,6 +1,6 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.controller;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.controller;
 
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.Customer;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.Customer;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedWriter;

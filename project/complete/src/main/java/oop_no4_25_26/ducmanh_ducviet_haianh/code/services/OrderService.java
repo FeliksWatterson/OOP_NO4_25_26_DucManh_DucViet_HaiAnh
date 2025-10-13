@@ -1,6 +1,6 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.services;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.services;
 
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.*;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.*;
 import org.springframework.stereotype.Service;
 
 @Service

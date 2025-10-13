@@ -1,4 +1,4 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.model;
 
 public class Product {
     private String id;

@@ -1,8 +1,8 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.services;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.services;
 
 import jakarta.annotation.PostConstruct;
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.Customer;
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.Product;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.Customer;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

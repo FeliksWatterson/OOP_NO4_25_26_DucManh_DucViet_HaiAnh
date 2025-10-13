@@ -1,7 +1,7 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.controller;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.controller;
 
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.Customer;
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.services.CustomerService;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.Customer;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.services.CustomerService;
 
 public class CustomerController {
     public static void main(String[] args) {

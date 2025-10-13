@@ -1,8 +1,8 @@
 // DUCMANH
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code;
 
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.model.Product;
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.services.ProductService;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.model.Product;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.services.ProductService;
 
 import java.util.List;
 import java.util.Scanner;

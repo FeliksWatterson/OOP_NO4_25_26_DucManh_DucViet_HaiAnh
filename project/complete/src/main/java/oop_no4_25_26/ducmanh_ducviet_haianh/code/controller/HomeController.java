@@ -1,7 +1,7 @@
-package oop_no4_25_26.ducmanh_ducviet_haianh.midterm.controller;
+package oop_no4_25_26.ducmanh_ducviet_haianh.code.controller;
 
 import jakarta.servlet.http.HttpSession;
-import oop_no4_25_26.ducmanh_ducviet_haianh.midterm.services.CatalogService;
+import oop_no4_25_26.ducmanh_ducviet_haianh.code.services.CatalogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
