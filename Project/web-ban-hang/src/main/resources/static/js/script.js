@@ -73,9 +73,9 @@ for (let i = 0; i < accordionBtn.length; i++) {
 
 // scroll bar
 const sliders = document.querySelectorAll(
-  ".slider-container, .showcase-wrapper.has-scrollbar"
+  ".slider-container, .showcase-wrapper"
 );
-const autoSlideInterval = 2000;
+const autoSlideInterval = 1800;
 
 sliders.forEach((slider) => {
   let isDown = false;
@@ -223,4 +223,15 @@ sliders.forEach((slider) => {
   slider.addEventListener("mouseup", () => {
     slider.style.cursor = "grab";
   });
+});
+
+// Tạo hiệu ứng trôi mượt liền mạch cho category
+const categoryContainers = document.querySelectorAll(
+  ".category-item-container.scrolling"
+);
+
+categoryContainers.forEach((container) => {
+  const wrapper = container.querySelector(".category-items-wrapper");
+  const clone = wrapper.cloneNode(true);
+  wrapper.parentElement.appendChild(clone);
 });

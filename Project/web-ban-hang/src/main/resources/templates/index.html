@@ -11,7 +11,6 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" th:href="@{/css/style-prefix.css}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -462,7 +461,7 @@
         </button>
       </div>
 
-      <nav class="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+      <nav class="mobile-navigation-menu" data-mobile-menu>
         <div class="menu-top">
           <h2 class="menu-title">Menu</h2>
 
@@ -681,7 +680,7 @@
     <main>
       <div class="banner">
         <div class="container">
-          <div class="slider-container has-scrollbar">
+          <div class="slider-container">
             <div class="slider-item">
               <img
                 th:src="@{/images/banner-1.jpg}"
@@ -741,23 +740,19 @@
 
       <div class="category">
         <div class="container">
-          <div class="category-item-container has-scrollbar">
-            <div class="category-item">
-              <div class="category-img-box">
-                <img
-                  th:src="@{/images/icons/tinhdau.jpg}"
-                  alt="dress & frock"
-                  width="30"
-                />
-              </div>
-
-              <div class="category-content-box">
-                <div class="category-content-flex">
-                  <h3 class="category-item-title">Tinh Dầu Thiên Nhiên</h3>
+          <div class="category-item-container scrolling">
+            <div class="category-items-wrapper">
+              <div class="category-item">
+                <div class="category-img-box">
+                  <img th:src="@{/images/icons/tinhdau.jpg}" alt="dress & frock" width="30" />
                 </div>
-                <a href="#" class="category-btn">Bán 24k+ / Tháng</a>
+                <div class="category-content-box">
+                  <div class="category-content-flex">
+                    <h3 class="category-item-title">Tinh Dầu Thiên Nhiên</h3>
+                  </div>
+                  <a href="#" class="category-btn">Bán 24k+ / Tháng</a>
+                </div>
               </div>
-            </div>
 
             <div class="category-item">
               <div class="category-img-box">
@@ -883,7 +878,7 @@
 
       <div class="product-container">
         <div class="container">
-          <div class="sidebar has-scrollbar" data-mobile-menu>
+          <div class="sidebar" data-mobile-menu>
             <div class="sidebar-category">
               <div class="sidebar-top">
                 <h2 class="sidebar-title">Danh Mục</h2>
@@ -1429,7 +1424,7 @@
               <div class="product-showcase">
                 <h2 class="title">Sản Phẩm Mới</h2>
 
-                <div class="showcase-wrapper has-scrollbar">
+                <div class="showcase-wrapper">
                   <div class="showcase-container">
                     <div class="showcase">
                       <a href="#" class="showcase-img-box">
@@ -1541,7 +1536,7 @@
               <div class="product-showcase">
                 <h2 class="title">Mua Nhiều Nhất</h2>
 
-                <div class="showcase-wrapper has-scrollbar">
+                <div class="showcase-wrapper">
                   <div class="showcase-container">
                     <div class="showcase">
                       <a href="#" class="showcase-img-box">
@@ -1653,7 +1648,7 @@
               <div class="product-showcase">
                 <h2 class="title">Được Đánh Giá Cao</h2>
 
-                <div class="showcase-wrapper has-scrollbar">
+                <div class="showcase-wrapper">
                   <div class="showcase-container">
                     <div class="showcase">
                       <a href="#" class="showcase-img-box">
@@ -1765,7 +1760,7 @@
             <div class="product-featured">
               <h2 class="title">Flash Sale</h2>
 
-              <div class="showcase-wrapper has-scrollbar">
+              <div class="showcase-wrapper">
                 <div class="showcase-container">
                   <div class="showcase">
                     <div class="showcase-banner">
