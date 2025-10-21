@@ -170,30 +170,6 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 0 15px;
 }
 
-.has-scrollbar {
-  padding-bottom: 5px;
-}
-
-.has-scrollbar::-webkit-scrollbar {
-  width: 12px; /* for vertical scroll */
-  height: 12px; /* for horizontal scroll */
-}
-
-.has-scrollbar::-webkit-scrollbar-thumb {
-  background: transparent;
-  border: 3px solid var(--white);
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-}
-
-.has-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: hsl(0, 0%, 90%);
-}
-
-.has-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 0%, 80%);
-}
-
 .title {
   color: var(--eerie-black);
   font-size: var(--fs-5);
@@ -870,7 +846,6 @@ body::-webkit-scrollbar-thumb:hover {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 10px;
   -webkit-border-radius: var(--border-radius-md);
   border-radius: var(--border-radius-md);
   overflow: auto hidden;
@@ -3148,7 +3123,6 @@ footer {
   }
 
   .product-grid {
-    -ms-grid-columns: (1fr) [3];
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -3292,7 +3266,6 @@ footer {
   }
 
   .product-grid {
-    -ms-grid-columns: (1fr) [4];
     grid-template-columns: repeat(4, 1fr);
   }
 
