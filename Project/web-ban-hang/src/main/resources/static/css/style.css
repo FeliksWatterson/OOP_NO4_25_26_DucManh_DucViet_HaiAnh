@@ -1,35 +1,19 @@
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
-
-/**
- * copyright 2022 @codewithsadee 
- */
-
-/*-----------------------------------*\
-  #CUSTOM PROPERTY
-\*-----------------------------------*/
-
 :root {
-  /**
-   * colors
-   */
+  /*colors*/
 
-  --spanish-gray: hsl(0, 0%, 60%);
-  --sonic-silver: hsl(0, 0%, 47%);
-  --eerie-black: hsl(0, 0%, 13%);
-  --salmon-pink: hsl(353, 100%, 78%);
-  --sandy-brown: hsl(29, 90%, 65%);
-  --bittersweet: hsl(0, 100%, 70%);
-  --ocean-green: hsl(152, 51%, 52%);
-  --davys-gray: hsl(0, 0%, 33%);
-  --cultured: hsl(0, 0%, 93%);
-  --white: hsl(0, 100%, 100%);
-  --onyx: hsl(0, 0%, 27%);
+  --spanish-gray: hsl(34, 20%, 70%);
+  --sonic-silver: hsl(34, 15%, 55%);
+  --eerie-black: hsl(34, 10%, 15%);
+  --salmon-pink: hsl(34, 35%, 70%);
+  --sandy-brown: hsl(34, 45%, 65%);
+  --bittersweet: hsl(34, 40%, 50%);
+  --ocean-green: hsl(34, 25%, 55%);
+  --davys-gray: hsl(34, 10%, 40%);
+  --cultured: hsl(34, 40%, 95%);
+  --white: hsl(0, 0%, 100%);
+  --onyx: hsl(34, 10%, 30%);
 
-  /**
-   * typography
-   */
+  /*typography*/
 
   --fs-1: 1.563rem;
   --fs-2: 1.375rem;
@@ -74,6 +58,29 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+/* Ẩn thanh cuộn trên tất cả slider, showcase và category */
+.slider-container::-webkit-scrollbar,
+.showcase-wrapper::-webkit-scrollbar,
+.category-item-container::-webkit-scrollbar {
+  display: none; /* Ẩn scrollbar cho trình duyệt WebKit (Chrome, Edge, Safari) */
+}
+
+/* Giữ cuộn mượt, nhưng không hiển thị thanh trượt */
+.slider-container,
+.showcase-wrapper,
+.category-item-container {
+  -ms-overflow-style: none; /* Ẩn scrollbar trên IE/Edge cũ */
+  scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+}
+
+/* Nếu muốn ẩn toàn trang (cả body luôn) */
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 a {
@@ -928,12 +935,9 @@ body::-webkit-scrollbar-thumb:hover {
   background: var(--eerie-black);
 }
 
-/*-----------------------------------*\
-  #CATEGORY
-\*-----------------------------------*/
-
+/*category*/
 .category {
-  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .category-item-container {
@@ -954,19 +958,19 @@ body::-webkit-scrollbar-thumb:hover {
     black 95%,
     transparent 100%
   );
-  position: relative; /* Added position relative */
+  position: relative;
 }
 
 .category-items-wrapper {
   display: flex;
   width: fit-content;
-  gap: 16px; /* Default gap */
+  gap: 16px;
   padding: 5px 0;
-  /* Animation is applied when .scrolling class is added */
+  margin-bottom: 30px;
 }
 
 .category-item-container.scrolling .category-items-wrapper {
-  animation: scrollInfinite var(--scroll-duration, 28s) linear infinite; /* Use CSS variable */
+  animation: scrollInfinite var(--scroll-duration, 28s) linear infinite;
 }
 
 .category-item-container.scrolling:hover .category-items-wrapper {
@@ -989,7 +993,6 @@ body::-webkit-scrollbar-thumb:hover {
   border: 1px solid var(--cultured);
   border-radius: var(--border-radius-md);
   flex-shrink: 0;
-  /* Adjust min/max width for base view */
   min-width: 180px;
   max-width: 200px;
   height: auto;
@@ -1004,27 +1007,26 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .category-img-box {
-  background: var(--cultured); /* Keep background */
-  border: 1px solid hsl(0, 0%, 80%); /* Keep border */
-  padding: 10px; /* Keep padding */
+  background: var(--cultured);
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 10px;
   border-radius: var(--border-radius-sm);
   flex-shrink: 0;
-  width: 50px; /* Original size */
-  height: 50px; /* Original size */
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   margin-right: 12px;
-  display: flex; /* Added for centering */
-  align-items: center; /* Added for centering */
-  justify-content: center; /* Added for centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-img-box img {
-  /* Let the image size itself within the padded box */
   max-width: 100%;
   max-height: 100%;
-  width: 30px; /* Original explicit width */
+  width: 30px;
   height: auto;
-  object-fit: contain; /* Use contain instead of cover */
+  object-fit: contain;
 }
 
 .category-content-box {
@@ -1063,56 +1065,47 @@ body::-webkit-scrollbar-thumb:hover {
   align-self: flex-start;
 }
 
-/* Responsive adjustments */
 @media (min-width: 570px) {
-  .category-items-wrapper {
-    gap: 15px; /* Slightly adjust gap */
-  }
-  .category-item {
-    /* Allow ~3 items */
-    min-width: calc(33.33% - 10px);
-    max-width: 190px;
-  }
-}
-
-@media (min-width: 768px) {
   .category-items-wrapper {
     gap: 15px;
   }
   .category-item {
-    /* Allow ~3-4 items */
-    min-width: calc(30% - 10px);
-    max-width: 210px;
+    min-width: calc(25% - 11.25px);
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-item {
+    flex: 1 1 calc(50% - 16px);
+    max-width: calc(50% - 16px);
   }
 }
 
 @media (min-width: 1024px) {
   .category-items-wrapper {
-    gap: 16px; /* Adjust gap to fit 4 items better */
+    gap: 16px;
   }
   .category-item {
-    /* Target ~4 items */
-    min-width: calc(25% - 12px); /* 16px gap * 3 / 4 items */
-    max-width: 230px; /* Increase max slightly if needed */
+    min-width: calc(25% - 12px);
+    max-width: 230px;
   }
 }
 
 @media (min-width: 1200px) {
   .category-items-wrapper {
-    gap: 20px; /* Increase gap slightly for larger screens */
+    gap: 20px;
   }
   .category-item {
-    /* Keep ~4 items, adjust calculation for new gap */
-    min-width: calc(25% - 15px); /* 20px gap * 3 / 4 items */
+    min-width: calc(25% - 15px);
     max-width: 250px;
   }
   .category-img-box {
-    /* Slightly larger image box */
     width: 55px;
     height: 55px;
   }
   .category-img-box img {
-    width: 35px; /* Adjust image size accordingly */
+    width: 35px;
   }
 }
 
@@ -1504,7 +1497,6 @@ body::-webkit-scrollbar-thumb:hover {
   border: 1px solid var(--cultured);
   -webkit-border-radius: var(--border-radius-md);
   border-radius: var(--border-radius-md);
-  scroll-snap-align: start;
 }
 
 .product-featured .showcase-img {
@@ -3469,4 +3461,56 @@ footer {
     left: 110px;
     max-width: 460px;
   }
+}
+
+/*-----------------------------------*\
+  # SLIDER ARROWS
+\*-----------------------------------*/
+
+/* Div bọc mới để định vị các nút */
+.slider-with-arrows {
+  position: relative;
+}
+
+/* Kiểu chung cho 2 nút */
+.slider-btn {
+  background: var(--salmon-pink); /* Màu hồng */
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.1);
+  z-index: 4;
+  transition: var(--transition-timing);
+  opacity: 1;
+  visibility: visible;
+  padding: 10px; /* Thêm padding để icon không bị sát */
+}
+
+.slider-btn:hover {
+  background: var(--eerie-black); /* Đổi màu khi hover */
+}
+
+/* Vị trí nút trái */
+.slider-btn.prev {
+  left: 5px; /* Đặt cách lề trái 5px */
+}
+
+/* Vị trí nút phải */
+.slider-btn.next {
+  right: 5px; /* Đặt cách lề phải 5px */
+}
+
+/* Class 'hidden' để ẩn nút */
+.slider-btn.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

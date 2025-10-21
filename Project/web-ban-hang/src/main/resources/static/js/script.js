@@ -1,29 +1,21 @@
 "use strict";
-
-// modal variables
 const modal = document.querySelector("[data-modal]");
 const modalCloseBtn = document.querySelector("[data-modal-close]");
 const modalCloseOverlay = document.querySelector("[data-modal-overlay]");
-
-// modal function
 const modalCloseFunc = function () {
-  modal.classList.add("closed");
+  if (modal) modal.classList.add("closed");
 };
-
-// modal eventListener
-modalCloseOverlay.addEventListener("click", modalCloseFunc);
-modalCloseBtn.addEventListener("click", modalCloseFunc);
-
-// notification toast variables
+if (modal && modalCloseOverlay && modalCloseBtn) {
+  modalCloseOverlay.addEventListener("click", modalCloseFunc);
+  modalCloseBtn.addEventListener("click", modalCloseFunc);
+}
 const notificationToast = document.querySelector("[data-toast]");
 const toastCloseBtn = document.querySelector("[data-toast-close]");
-
-// notification toast eventListener
-toastCloseBtn.addEventListener("click", function () {
-  notificationToast.classList.add("closed");
-});
-
-// mobile menu variables
+if (notificationToast && toastCloseBtn) {
+  toastCloseBtn.addEventListener("click", function () {
+    notificationToast.classList.add("closed");
+  });
+}
 const mobileMenuOpenBtn = document.querySelectorAll(
   "[data-mobile-menu-open-btn]"
 );
@@ -32,75 +24,126 @@ const mobileMenuCloseBtn = document.querySelectorAll(
   "[data-mobile-menu-close-btn]"
 );
 const overlay = document.querySelector("[data-overlay]");
-
 for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
-  // mobile menu function
   const mobileMenuCloseFunc = function () {
-    mobileMenu[i].classList.remove("active");
-    overlay.classList.remove("active");
+    if (mobileMenu[i]) mobileMenu[i].classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
   };
-
   mobileMenuOpenBtn[i].addEventListener("click", function () {
-    mobileMenu[i].classList.add("active");
-    overlay.classList.add("active");
+    if (mobileMenu[i]) mobileMenu[i].classList.add("active");
+    if (overlay) overlay.classList.add("active");
   });
-
-  mobileMenuCloseBtn[i].addEventListener("click", mobileMenuCloseFunc);
-  overlay.addEventListener("click", mobileMenuCloseFunc);
+  if (mobileMenuCloseBtn[i])
+    mobileMenuCloseBtn[i].addEventListener("click", mobileMenuCloseFunc);
+  if (overlay) overlay.addEventListener("click", mobileMenuCloseFunc);
 }
-
-// accordion variables
 const accordionBtn = document.querySelectorAll("[data-accordion-btn]");
 const accordion = document.querySelectorAll("[data-accordion]");
-
 for (let i = 0; i < accordionBtn.length; i++) {
   accordionBtn[i].addEventListener("click", function () {
-    const clickedBtn = this.nextElementSibling.classList.contains("active");
-
-    for (let i = 0; i < accordion.length; i++) {
-      if (clickedBtn) break;
-
-      if (accordion[i].classList.contains("active")) {
-        accordion[i].classList.remove("active");
-        accordionBtn[i].classList.remove("active");
+    const clickedBtnIsActive =
+      this.nextElementSibling &&
+      this.nextElementSibling.classList.contains("active");
+    for (let j = 0; j < accordion.length; j++) {
+      if (clickedBtnIsActive) break;
+      if (accordion[j] && accordion[j].classList.contains("active")) {
+        accordion[j].classList.remove("active");
+        if (accordionBtn[j]) {
+          accordionBtn[j].classList.remove("active");
+        }
       }
     }
-
-    this.nextElementSibling.classList.toggle("active");
-    this.classList.toggle("active");
+    if (this.nextElementSibling) {
+      this.nextElementSibling.classList.toggle("active");
+      this.classList.toggle("active");
+    }
   });
 }
 
-// scroll bar
 const sliders = document.querySelectorAll(
-  ".slider-container, .showcase-wrapper"
+  ".slider-container, .showcase-wrapper.has-scrollbar"
 );
-const autoSlideInterval = 1800;
+const autoSlideInterval = 2000;
 
 sliders.forEach((slider) => {
   let isDown = false;
   let startX;
   let scrollLeft;
   let autoSlideTimer = null;
-  let interactionTimeout = null;
+  let restartTimer = null;
+
+  const sliderWrapper = slider.closest(".slider-with-arrows");
+  const prevBtn = sliderWrapper
+    ? sliderWrapper.querySelector("[data-slider-prev]")
+    : null;
+  const nextBtn = sliderWrapper
+    ? sliderWrapper.querySelector("[data-slider-next]")
+    : null;
 
   slider.style.scrollSnapType = "none";
   slider.style.scrollBehavior = "auto";
 
-  const stopAutoSlideIfNeeded = () => {
-    if (autoSlideTimer && slider.classList.contains("slider-container")) {
-      clearInterval(autoSlideTimer);
-      autoSlideTimer = null;
+  const isAutoSlideTarget = () => {
+    return (
+      slider.classList.contains("slider-container") ||
+      (slider.classList.contains("showcase-wrapper") &&
+        slider.closest(".product-featured"))
+    );
+  };
+
+  const stopAutoSlide = () => {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = null;
+    clearTimeout(restartTimer);
+  };
+
+  const scheduleRestartAutoSlide = () => {
+    if (!isAutoSlideTarget()) return;
+    clearTimeout(restartTimer);
+    if (!autoSlideTimer) {
+      restartTimer = setTimeout(() => {
+        if (!isDown) {
+          startAutoSlide();
+        }
+      }, autoSlideInterval);
     }
   };
 
-  const startAutoSlideIfNeeded = () => {
-    if (slider.classList.contains("slider-container") && !autoSlideTimer) {
-      clearTimeout(interactionTimeout);
-      interactionTimeout = setTimeout(() => {
-        startAutoSlide();
-      }, autoSlideInterval);
-    }
+  const startAutoSlide = () => {
+    if (!isAutoSlideTarget() || autoSlideTimer) return;
+    stopAutoSlide();
+
+    autoSlideTimer = setInterval(() => {
+      const currentScroll = slider.scrollLeft;
+      const slideWidth = slider.clientWidth;
+      const totalSlides = slider.children.length;
+      const maxScrollLeft = slider.scrollWidth - slideWidth;
+
+      let currentNearestSlideIndex = Math.round(currentScroll / slideWidth);
+      let nextTargetIndex = (currentNearestSlideIndex + 1) % totalSlides;
+      let targetScrollLeft = nextTargetIndex * slideWidth;
+
+      if (targetScrollLeft > maxScrollLeft) {
+        if (Math.abs(currentScroll - maxScrollLeft) < 10) {
+          targetScrollLeft = 0;
+        } else {
+          targetScrollLeft = maxScrollLeft;
+        }
+      }
+
+      if (Math.abs(currentScroll - maxScrollLeft) < 10) {
+        targetScrollLeft = 0;
+      }
+
+      slider.style.scrollBehavior = "smooth";
+      slider.scrollTo({ left: targetScrollLeft });
+
+      setTimeout(() => {
+        if (!isDown) {
+          slider.style.scrollBehavior = "auto";
+        }
+      }, 700);
+    }, autoSlideInterval);
   };
 
   slider.addEventListener("mousedown", (e) => {
@@ -108,8 +151,7 @@ sliders.forEach((slider) => {
     slider.classList.add("active-drag");
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
-    stopAutoSlideIfNeeded();
-    clearTimeout(interactionTimeout);
+    stopAutoSlide();
     slider.style.scrollBehavior = "auto";
     e.preventDefault();
   });
@@ -132,17 +174,13 @@ sliders.forEach((slider) => {
     const totalSlides = slider.children.length;
     const maxScrollLeft = (totalSlides - 1) * slideWidth;
 
-    let targetScrollLeft;
+    let activeSlideIndex = Math.round(currentScroll / slideWidth);
+    activeSlideIndex = Math.max(0, Math.min(activeSlideIndex, totalSlides - 1));
 
-    if (Math.abs(currentScroll - maxScrollLeft) < slideWidth / 3) {
+    let targetScrollLeft = activeSlideIndex * slideWidth;
+
+    if (activeSlideIndex === totalSlides - 1) {
       targetScrollLeft = maxScrollLeft;
-    } else {
-      let activeSlideIndex = Math.round(currentScroll / slideWidth);
-      activeSlideIndex = Math.max(
-        0,
-        Math.min(activeSlideIndex, totalSlides - 1)
-      );
-      targetScrollLeft = activeSlideIndex * slideWidth;
     }
 
     slider.style.scrollBehavior = "smooth";
@@ -154,61 +192,64 @@ sliders.forEach((slider) => {
       slider.style.scrollBehavior = "auto";
     }, 600);
   };
+
   window.addEventListener("mouseup", snapAndEndInteraction);
   slider.addEventListener("mouseleave", () => {
     if (isDown) {
       snapAndEndInteraction();
-    } else if (
-      slider.classList.contains("slider-container") &&
-      !autoSlideTimer
-    ) {
-      startAutoSlideIfNeeded();
+    } else {
+      scheduleRestartAutoSlide();
     }
   });
 
-  const startAutoSlide = () => {
-    if (!slider.classList.contains("slider-container")) return;
-    stopAutoSlideIfNeeded();
-    clearTimeout(interactionTimeout);
+  const updateArrowState = () => {
+    if (!prevBtn || !nextBtn) return;
+    const slideWidth = slider.clientWidth;
+    const totalSlides = slider.children.length;
+    const currentIndex = Math.round(slider.scrollLeft / slideWidth);
+    prevBtn.classList.toggle("hidden", currentIndex === 0);
+    nextBtn.classList.toggle("hidden", currentIndex === totalSlides - 1);
+  };
 
-    autoSlideTimer = setInterval(() => {
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", () => {
+      stopAutoSlide();
+      const slideWidth = slider.clientWidth;
       const currentScroll = slider.scrollLeft;
+      let currentSlideIndex = Math.round(currentScroll / slideWidth);
+      let targetSlideIndex = Math.max(0, currentSlideIndex - 1);
+      slider.style.scrollBehavior = "smooth";
+      slider.scrollTo({ left: targetSlideIndex * slideWidth });
+      scheduleRestartAutoSlide();
+      setTimeout(updateArrowState, 500);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      stopAutoSlide();
       const slideWidth = slider.clientWidth;
       const totalSlides = slider.children.length;
-      const maxScrollLeft = slider.scrollWidth - slideWidth;
-
-      let nextScrollLeft = currentScroll + slideWidth;
-
-      let currentNearestSlideIndex = Math.round(currentScroll / slideWidth);
-      let nextTargetIndex = (currentNearestSlideIndex + 1) % totalSlides;
-      let targetScrollLeft = nextTargetIndex * slideWidth;
-
+      const maxScrollLeft = (totalSlides - 1) * slideWidth;
+      const currentScroll = slider.scrollLeft;
+      let currentSlideIndex = Math.round(currentScroll / slideWidth);
+      let targetSlideIndex = Math.min(currentSlideIndex + 1, totalSlides - 1);
+      let targetScrollLeft = targetSlideIndex * slideWidth;
       targetScrollLeft = Math.min(targetScrollLeft, maxScrollLeft);
-
-      if (
-        Math.abs(currentScroll - maxScrollLeft) < 10 &&
-        nextTargetIndex !== 0
-      ) {
-        targetScrollLeft = 0;
-      }
 
       slider.style.scrollBehavior = "smooth";
       slider.scrollTo({ left: targetScrollLeft });
+      scheduleRestartAutoSlide();
+      setTimeout(updateArrowState, 500);
+    });
 
-      setTimeout(() => {
-        if (!isDown) {
-          slider.style.scrollBehavior = "auto";
-        }
-      }, 700);
-    }, autoSlideInterval);
-  };
+    slider.addEventListener("scroll", updateArrowState);
+    updateArrowState();
+  }
 
-  if (slider.classList.contains("slider-container")) {
+  if (isAutoSlideTarget()) {
     startAutoSlide();
     slider.addEventListener("mouseenter", () => {
       if (!isDown) {
-        stopAutoSlideIfNeeded();
-        clearTimeout(interactionTimeout);
+        stopAutoSlide();
       }
     });
   }
@@ -225,13 +266,21 @@ sliders.forEach((slider) => {
   });
 });
 
-// Tạo hiệu ứng trôi mượt liền mạch cho category
 const categoryContainers = document.querySelectorAll(
   ".category-item-container.scrolling"
 );
 
 categoryContainers.forEach((container) => {
   const wrapper = container.querySelector(".category-items-wrapper");
+  if (!wrapper) return;
   const clone = wrapper.cloneNode(true);
+  clone.setAttribute("aria-hidden", "true");
   wrapper.parentElement.appendChild(clone);
+
+  const bannerDuration = getComputedStyle(document.documentElement)
+    .getPropertyValue("--scroll-duration")
+    .replace("s", "")
+    .trim();
+
+  const autoSlideInterval = Number(bannerDuration) * 2000;
 });
