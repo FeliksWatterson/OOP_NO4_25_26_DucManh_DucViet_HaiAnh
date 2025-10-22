@@ -37,6 +37,22 @@ for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
     mobileMenuCloseBtn[i].addEventListener("click", mobileMenuCloseFunc);
   if (overlay) overlay.addEventListener("click", mobileMenuCloseFunc);
 }
+
+document
+  .querySelector('a[href="#flash-sale"]')
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    const flashSale = document.querySelector("#flash-sale");
+    const rect = flashSale.getBoundingClientRect();
+    const offset =
+      rect.top + window.scrollY - window.innerHeight / 2 + rect.height / 2;
+
+    window.scrollTo({
+      top: offset,
+      behavior: "smooth",
+    });
+  });
+
 const accordionBtn = document.querySelectorAll("[data-accordion-btn]");
 const accordion = document.querySelectorAll("[data-accordion]");
 for (let i = 0; i < accordionBtn.length; i++) {
