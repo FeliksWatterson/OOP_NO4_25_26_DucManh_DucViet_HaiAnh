@@ -1,0 +1,260 @@
+/* auth.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body.auth-page-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: hsl(0, 0%, 100%);
+  font-family: "Montserrat", sans-serif;
+}
+
+.auth-need-help {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: hsl(34, 35%, 70%);
+  text-decoration: none;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+.auth-need-help:hover {
+  color: hsl(34, 10%, 15%);
+}
+
+.container#container {
+  margin: 50px auto;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px hsla(0, 0%, 0%, 0.1);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 90%;
+  min-height: 480px;
+}
+
+.container p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+  color: hsl(34, 15%, 55%);
+}
+
+.container span {
+  font-size: 12px;
+  color: hsl(34, 15%, 55%);
+}
+
+.container#container a {
+  color: hsl(34, 10%, 15%);
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0 10px;
+}
+.container#container a:hover {
+  color: hsl(34, 35%, 70%);
+}
+
+.container#container button {
+  background-color: hsl(34, 35%, 70%);
+  color: hsl(0, 0%, 100%);
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.container#container button:hover {
+  background-color: hsl(34, 10%, 15%);
+}
+
+.container#container button.hidden {
+  background-color: transparent;
+  border-color: hsl(34, 20%, 70%);
+  color: hsl(34, 10%, 30%);
+}
+.container#container button.hidden:hover {
+  background-color: hsla(34, 10%, 15%, 0.05);
+  color: hsl(34, 10%, 15%);
+}
+
+.container form {
+  background-color: hsl(0, 0%, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.container input {
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(34, 40%, 90%);
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+}
+.container input:focus {
+  border-color: hsl(34, 35%, 70%);
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.container.active .sign-in {
+  transform: translateX(100%);
+}
+
+.sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6s;
+}
+
+@keyframes move {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.social-icons {
+  margin: 20px 0;
+}
+
+.container#container .social-icons a {
+  border: 1px solid hsl(34, 40%, 90%);
+  border-radius: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  width: 40px;
+  height: 40px;
+  color: hsl(34, 15%, 55%);
+  transition: all 0.2s ease;
+}
+.container#container .social-icons a:hover {
+  color: hsl(34, 35%, 70%);
+  border-color: hsl(34, 35%, 70%);
+  background-color: transparent;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  border-radius: 0;
+  z-index: 1000;
+}
+
+.container.active .toggle-container {
+  transform: translateX(-100%);
+  border-radius: 0;
+}
+
+.toggle {
+  background: linear-gradient(to right, hsl(34, 40%, 95%), hsl(34, 20%, 90%));
+  color: hsl(34, 10%, 15%);
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle {
+  transform: translateX(50%);
+}
+
+.toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.toggle-panel h1 {
+  color: hsl(34, 10%, 15%);
+}
+.toggle-panel p {
+  color: hsl(34, 15%, 55%);
+}
+
+.toggle-left {
+  transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+  transform: translateX(0);
+}
+
+.toggle-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.active .toggle-right {
+  transform: translateX(200%);
+}
+
+.container#container h1 {
+  color: hsl(34, 10%, 15%);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
