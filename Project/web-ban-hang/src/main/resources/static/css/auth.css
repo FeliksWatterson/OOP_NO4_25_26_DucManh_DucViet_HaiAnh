@@ -1,4 +1,12 @@
-/* auth.css */
+:root {
+  --moc-bg: hsl(34, 42%, 94%); 
+  --moc-surface: hsl(34, 45%, 98%); 
+  --moc-brown: hsl(34, 20%, 25%); 
+  --moc-accent: hsl(34, 35%, 55%); 
+  --moc-accent-hover: hsl(34, 10%, 15%);
+  --moc-border: hsl(34, 30%, 85%); 
+  --moc-shadow: rgba(100, 85, 60, 0.1); 
+}
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
@@ -13,27 +21,28 @@ body.auth-page-body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--moc-bg); 
   font-family: "Montserrat", sans-serif;
+  color: var(--moc-brown); 
 }
 
 .auth-need-help {
   margin-left: auto;
   font-size: 0.9rem;
-  color: hsl(34, 35%, 70%);
+  color: var(--moc-accent); 
   text-decoration: none;
   padding: 10px 0;
   transition: color 0.2s ease;
 }
 .auth-need-help:hover {
-  color: hsl(34, 10%, 15%);
+  color: var(--moc-accent-hover); 
 }
 
 .container#container {
   margin: 50px auto;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--moc-surface); 
   border-radius: 10px;
-  box-shadow: 0 5px 15px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 5px 15px var(--moc-shadow); 
   position: relative;
   overflow: hidden;
   width: 768px;
@@ -46,27 +55,27 @@ body.auth-page-body {
   line-height: 20px;
   letter-spacing: 0.3px;
   margin: 20px 0;
-  color: hsl(34, 15%, 55%);
+  color: hsl(34, 15%, 55%); 
 }
 
 .container span {
   font-size: 12px;
-  color: hsl(34, 15%, 55%);
+  color: hsl(34, 15%, 55%); /
 }
 
 .container#container a {
-  color: hsl(34, 10%, 15%);
+  color: var(--moc-brown);
   font-size: 13px;
   text-decoration: none;
   margin: 15px 0 10px;
 }
 .container#container a:hover {
-  color: hsl(34, 35%, 70%);
+  color: var(--moc-accent); 
 }
 
 .container#container button {
-  background-color: hsl(34, 35%, 70%);
-  color: hsl(0, 0%, 100%);
+  background-color: hsl(34, 35%, 70%); 
+  color: var(--moc-surface); 
   font-size: 12px;
   padding: 10px 45px;
   border: 1px solid transparent;
@@ -76,24 +85,27 @@ body.auth-page-body {
   text-transform: uppercase;
   margin-top: 10px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease; /
 }
 .container#container button:hover {
-  background-color: hsl(34, 10%, 15%);
+  background-color: var(--moc-accent-hover); 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 10px rgba(176, 152, 116, 0.2); 
 }
 
 .container#container button.hidden {
   background-color: transparent;
-  border-color: hsl(34, 20%, 70%);
-  color: hsl(34, 10%, 30%);
+  border-color: #ffff; 
+  color: #ffff;
 }
 .container#container button.hidden:hover {
-  background-color: hsla(34, 10%, 15%, 0.05);
-  color: hsl(34, 10%, 15%);
+  background-color: hsla(0, 0%, 100%, 0.1); 
+  color: #fff; 
+  border-color: #fff;
 }
 
 .container form {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--moc-surface); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,16 +116,21 @@ body.auth-page-body {
 
 .container input {
   background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(34, 40%, 90%);
+  border: 1px solid var(--moc-border); 
   margin: 8px 0;
   padding: 10px 15px;
   font-size: 13px;
   border-radius: 5px;
   width: 100%;
   outline: none;
+  color: var(--moc-brown);
+}
+.container input::placeholder {
+  color: hsl(34, 15%, 65%); 
 }
 .container input:focus {
-  border-color: hsl(34, 35%, 70%);
+  border-color: var(--moc-accent); 
+  box-shadow: 0 0 5px hsla(34, 35%, 55%, 0.3); 
 }
 
 .form-container {
@@ -165,7 +182,7 @@ body.auth-page-body {
 }
 
 .container#container .social-icons a {
-  border: 1px solid hsl(34, 40%, 90%);
+  border: 1px solid var(--moc-border);
   border-radius: 5px;
   display: inline-flex;
   justify-content: center;
@@ -177,8 +194,8 @@ body.auth-page-body {
   transition: all 0.2s ease;
 }
 .container#container .social-icons a:hover {
-  color: hsl(34, 35%, 70%);
-  border-color: hsl(34, 35%, 70%);
+  color: var(--moc-accent);
+  border-color: var(--moc-accent);
   background-color: transparent;
 }
 
@@ -200,8 +217,8 @@ body.auth-page-body {
 }
 
 .toggle {
-  background: linear-gradient(to right, hsl(34, 40%, 95%), hsl(34, 20%, 90%));
-  color: hsl(34, 10%, 15%);
+  background-color: hsl(34, 35%, 70%);
+  color: var(--moc-surface);
   position: relative;
   left: -100%;
   height: 100%;
@@ -230,10 +247,11 @@ body.auth-page-body {
 }
 
 .toggle-panel h1 {
-  color: hsl(34, 10%, 15%);
+  color: #ffff;
+  font-weight: 600;
 }
 .toggle-panel p {
-  color: hsl(34, 15%, 55%);
+  color: #ffff;
 }
 
 .toggle-left {
@@ -254,7 +272,7 @@ body.auth-page-body {
 }
 
 .container#container h1 {
-  color: hsl(34, 10%, 15%);
+  color: var(--moc-brown); 
   font-weight: 700;
   margin-bottom: 10px;
 }

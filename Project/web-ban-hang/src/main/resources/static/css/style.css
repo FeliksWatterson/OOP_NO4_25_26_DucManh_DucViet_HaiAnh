@@ -541,6 +541,15 @@ body::-webkit-scrollbar-thumb:hover {
   border-bottom: 1px solid var(--cultured);
 }
 
+.header-main {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--cultured);
+  background-color: var(--white); /* thêm dòng này */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .header-logo {
   margin-bottom: 20px;
 }
