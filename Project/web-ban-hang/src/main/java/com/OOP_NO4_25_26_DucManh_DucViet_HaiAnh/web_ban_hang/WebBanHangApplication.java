@@ -9,5 +9,4 @@ public class WebBanHangApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WebBanHangApplication.class, args);
 	}
-
 }
