@@ -6,6 +6,9 @@ import java.util.Optional;
 
 public interface ProductInterface {
     Optional<Product> findProductById(Long id);
-    List<Product> findAllProducts(); // Cần để hiển thị danh sách sản phẩm trên trang chủ
-    // Có thể thêm các phương thức khác như saveProduct, deleteProduct,... sau này
+    List<Product> findAllProducts();
+    List<Product> findNewProducts(int limit); 
+    List<Product> findBestSellingProducts(int limit); 
+    List<Product> findHighlyRatedProducts(int limit); 
+    List<Product> findProductsOnSale(int limit); 
 }

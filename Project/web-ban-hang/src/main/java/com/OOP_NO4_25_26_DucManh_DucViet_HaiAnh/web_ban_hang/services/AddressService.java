@@ -30,26 +30,52 @@ public class AddressService implements AddressInterface {
     @Override
     @Transactional
     public Address saveAddress(Address address) {
+        Customer customer = address.getCustomer();
+        Long currentAddressId = address.getId(); 
+
         if (address.isDefault()) {
-            Optional<Address> currentDefault = findDefaultAddressByCustomer(address.getCustomer());
-            currentDefault.ifPresent(def -> {
-                if (!def.getId().equals(address.getId())) { 
-                    def.setDefault(false);
-                    addressRepository.save(def);
+            List<Address> allAddresses = findAddressesByCustomer(customer);
+            for (Address existingAddress : allAddresses) {
+                if (existingAddress.isDefault() && (currentAddressId == null || !existingAddress.getId().equals(currentAddressId))) {
+                    existingAddress.setDefault(false);
+                    addressRepository.save(existingAddress);
                 }
-            });
-        } else {
-            long addressCount = countAddressesByCustomer(address.getCustomer());
-            if (address.getId() == null && addressCount == 0) {
-                 address.setDefault(true);
-            } else if (address.getId() != null && !findDefaultAddressByCustomer(address.getCustomer()).isPresent()) {
-                 List<Address> addresses = findAddressesByCustomer(address.getCustomer());
-                 if (addresses.size() == 1 && addresses.get(0).getId().equals(address.getId())) {
-                      address.setDefault(true);
-                 }
+            }
+            address.setDefault(true);
+        }
+        else {
+             address.setDefault(false); 
+        }
+
+        Address savedAddress = addressRepository.save(address);
+        long addressCountAfterSave = countAddressesByCustomer(customer);
+        if (addressCountAfterSave > 0) { 
+            Optional<Address> checkDefaultExists = addressRepository.findByCustomerAndIsDefaultTrue(customer);
+            if (checkDefaultExists.isEmpty()) {
+                List<Address> remainingAddresses = findAddressesByCustomer(customer);
+                if (!remainingAddresses.isEmpty()) {
+                    Address addressToMakeDefault = null;
+                    for(Address addr : remainingAddresses) {
+                        if (addr.getId().equals(savedAddress.getId())) {
+                            addressToMakeDefault = addr;
+                            break;
+                        }
+                    }
+                    if (addressToMakeDefault == null) {
+                        addressToMakeDefault = remainingAddresses.get(0);
+                    }
+
+                    addressToMakeDefault.setDefault(true);
+                    addressRepository.save(addressToMakeDefault);
+                    if (savedAddress.getId().equals(addressToMakeDefault.getId())) {
+                        savedAddress.setDefault(true);
+                    }
+                }
             }
         }
-        return addressRepository.save(address);
+
+
+        return savedAddress; 
     }
 
 
@@ -85,26 +111,33 @@ public class AddressService implements AddressInterface {
     }
 
 
-    @Override
-    @Transactional
-    public void setDefaultAddress(Long id, Customer customer) {
-        Optional<Address> currentDefaultOpt = findDefaultAddressByCustomer(customer);
-        currentDefaultOpt.ifPresent(currentDefault -> {
-            currentDefault.setDefault(false);
-            addressRepository.save(currentDefault);
-        });
+   @Override
+@Transactional
+public void setDefaultAddress(Long id, Customer customer) {
+    Optional<Address> newDefaultOpt = findByIdAndCustomer(id, customer);
+    if (newDefaultOpt.isEmpty()) {
+        throw new RuntimeException("Không tìm thấy địa chỉ hoặc bạn không có quyền.");
+    }
+    Address newDefaultAddress = newDefaultOpt.get();
+    List<Address> allAddresses = findAddressesByCustomer(customer);
 
-        Optional<Address> newDefaultOpt = findByIdAndCustomer(id, customer);
-        if (newDefaultOpt.isPresent()) {
-            Address newDefault = newDefaultOpt.get();
-            newDefault.setDefault(true);
-            addressRepository.save(newDefault);
-        } else {
-            throw new RuntimeException("Không tìm thấy địa chỉ hoặc bạn không có quyền.");
+    for (Address address : allAddresses) {
+        if (!address.getId().equals(newDefaultAddress.getId()) && address.isDefault()) {
+            address.setDefault(false);
+            addressRepository.save(address); 
         }
+        else if (address.getId().equals(newDefaultAddress.getId()) && !address.isDefault()) {
+            address.setDefault(true);
+            addressRepository.save(address); 
+        }
+    
     }
 
-
+    if (!newDefaultAddress.isDefault()) {
+         newDefaultAddress.setDefault(true);
+         addressRepository.save(newDefaultAddress);
+    }
+}
     @Override
     public long countAddressesByCustomer(Customer customer) {
         return addressRepository.countByCustomer(customer);

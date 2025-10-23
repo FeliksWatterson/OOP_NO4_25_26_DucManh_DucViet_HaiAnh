@@ -30,6 +30,8 @@ public class Product {
 
     private Integer stock; 
 
+    private String section;
+
     public Long getId() {
         return id;
     }
