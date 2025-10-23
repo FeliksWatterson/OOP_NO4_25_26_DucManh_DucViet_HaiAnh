@@ -1,13 +1,10 @@
--- Làm sạch bảng để ID tăng lại theo thứ tự insert
--- Làm sạch bảng products cho MySQL
+
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE products;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
--- =========================
--- SIDEBAR: sản phẩm bán chạy
--- =========================
+-- ban chay
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Đèn Ngủ Led Cảm Ứng Thông Minh', 'Đèn ngủ LED cảm ứng thông minh.', 109000, 210000, 'Nhà Cửa & Đời Sống', '/images/products/1.jpg', '/images/products/1.jpg', 99, 'bestSeller'),
@@ -15,10 +12,7 @@ VALUES
 ('Son Lì Cao Cấp Velvet Rose', 'Son lì cao cấp Velvet Rose.', 210000, 350000, 'Sức Khỏe & Làm Đẹp', '/images/products/3.jpg', '/images/products/3.jpg', 150, 'bestSeller'),
 ('Dầu gội bồ kết gừng bưởi 500ml Nhà Mơ giảm rụng mọc tóc', 'Dầu gội thảo mộc giảm rụng tóc.', 75000, 170000, 'Sức Khỏe & Làm Đẹp', '/images/products/4.jpg', '/images/products/4.jpg', 120, 'bestSeller');
 
--- =========================
--- SẢN PHẨM MỚI
--- (thứ tự như HTML: denban, duongda, true, gom)
--- =========================
+-- san pham moi
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Đèn bàn LED thông minh', 'Đèn bàn LED cảm ứng, sạc USB.', 999000, 1500000, 'Nhà Cửa & Đời Sống', '/images/products/denban.jpg', '/images/products/denban.jpg', 40, 'new'),
@@ -26,10 +20,7 @@ VALUES
 ('Tai Nghe Không Dây Moondrop Ultra Sonic', 'Tai nghe true wireless âm thanh chi tiết.', 1490000, 2200000, 'Công Nghệ & Thiết Bị Số', '/images/products/true.jpg', '/images/products/true.jpg', 60, 'new'),
 ('Bình Gốm Decor Nhà Cửa', 'Bình gốm decor phong cách tối giản.', 720000, 1200000, 'Nhà Cửa & Đời Sống', '/images/products/gom.jpg', '/images/products/gom.jpg', 25, 'new');
 
--- =========================
--- MUA NHIỀU NHẤT
--- (vong, mtd, banphim, sinhto)
--- =========================
+-- mua nhieu nhat
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Vòng Tay Thông Minh Theo Dõi Sức Khỏe', 'Smartband theo dõi sức khỏe, pin bền.', 1360000, 1720000, 'Công Nghệ & Thiết Bị Số', '/images/products/vong.jpg', '/images/products/vong.jpg', 50, 'mostBought'),
@@ -37,10 +28,7 @@ VALUES
 ('Combo Bàn Phím & Chuột Không Dây', 'Combo không dây 2.4GHz tiết kiệm.', 1210000, 1500000, 'Công Nghệ & Thiết Bị Số', '/images/products/banphim.jpg', '/images/products/banphim.jpg', 80, 'mostBought'),
 ('Máy Xay Sinh Tố Cầm Tay', 'Máy xay cầm tay dung tích 500ml.', 749000, 1200000, 'Gia Dụng & Nhà Bếp', '/images/products/sinhto.jpg', '/images/products/sinhto.jpg', 70, 'mostBought');
 
--- =========================
--- ĐƯỢC ĐÁNH GIÁ CAO
--- (silver, nenthom, balo, vitamin)
--- =========================
+-- danh gia cao
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Đồng Hồ Thời Trang SilverLine', 'Đồng hồ thời trang, chống nước 3ATM.', 2760000, 3320000, 'Thời Trang & Phụ Kiện', '/images/products/silver.jpg', '/images/products/silver.jpg', 20, 'topRated'),
@@ -48,19 +36,13 @@ VALUES
 ('Ba lô Du Lịch Chống Nước AirFit', 'Balo 35L, chất liệu chống thấm.', 1490000, 2200000, 'Du Lịch & Cắm Trại', '/images/products/balo.jpg', '/images/products/balo.jpg', 33, 'topRated'),
 ('Tinh Chất Vitamin C 50ml', 'Serum Vitamin C sáng da, đều màu.', 420000, 570000, 'Sức Khỏe & Làm Đẹp', '/images/products/vitamin.jpg', '/images/products/vitamin.jpg', 90, 'topRated');
 
--- =========================
--- FLASH SALE (slider)
--- (shampoo, cubitt)
--- =========================
+-- flash sale
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Combo dầu gội, dầu xả, sữa tắm Old Spice Swagger', 'Bộ chăm sóc cơ thể cho nam giới.', 1250000, 1600000, 'Sức Khỏe & Làm Đẹp', '/images/products/shampoo.jpg', '/images/products/shampoo.jpg', 36, 'flashSale'),
 ('SmartWatch Cubitt AURA Pro', 'Đồng hồ thông minh nhiều tính năng, GPS.', 2320000, 2900000, 'Công Nghệ & Thiết Bị Số', '/images/products/cubitt.jpg', '/images/products/cubitt.jpg', 36, 'flashSale');
 
--- =========================
--- GỢI Ý HÔM NAY (grid)
--- (theo đúng thứ tự từng thẻ .showcase trong HTML)
--- =========================
+-- goi y
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
 ('Sách - Combo tự học + tập viết Tiếng Nga', 'Combo tự học + tập viết Tiếng Nga.', 75000, 89000, 'Sách Học Tập', '/images/products/nga2.jpg', '/images/products/nga1.jpg', 120, 'suggested'),
