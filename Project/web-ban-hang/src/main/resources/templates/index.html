@@ -730,11 +730,11 @@
 
               <div class="showcase-wrapper">
                 <div class="showcase-container">
-                  <div class="showcase">
-                    <a href="#" class="showcase-img-box">
+                  <div class="showcase" th:each="product : ${products}">
+                    <a th:href="@{/product/{id}(id=${product.id})}" class="showcase-img-box">
                       <img
-                        th:src="@{/images/products/1.jpg}"
-                        alt="baby fabric shoes"
+                        th:src="${product.imageUrl}"
+                        alt=""
                         width="75"
                         height="75"
                         class="showcase-img"
@@ -742,111 +742,17 @@
                     </a>
 
                     <div class="showcase-content">
-                      <a href="#">
-                        <h4 class="showcase-title">Đèn Ngủ Led Cảm Ứng Thông Minh</h4>
+                      <a th:href="@{/product/{id}(id=${product.id})}">
+                        <h4 class="showcase-title" th:text="${product.name}"></h4>
                       </a>
 
-                      <div class="showcase-rating">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
+                      <div class="showcase-rating" th:if="${product.rating > 0}">
+                        <ion-icon name="star" th:each="i : ${#numbers.sequence(1, product.rating)}"></ion-icon>
                       </div>
 
                       <div class="price-box">
-                        <del>210.000đ</del>
-                        <p class="price">109.000đ</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="showcase">
-                    <a href="#" class="showcase-img-box">
-                      <img
-                        th:src="@{/images/products/2.jpg}"
-                        alt="men's hoodies t-shirt"
-                        class="showcase-img"
-                        width="75"
-                        height="75"
-                      />
-                    </a>
-
-                    <div class="showcase-content">
-                      <a href="#">
-                        <h4 class="showcase-title">Chảo Chống Dính Đá Hoa Cương 26cm</h4>
-                      </a>
-                      <div class="showcase-rating">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-half-outline"></ion-icon>
-                      </div>
-
-                      <div class="price-box">
-                        <del>460.000đ</del>
-                        <p class="price">335.000đ</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="showcase">
-                    <a href="#" class="showcase-img-box">
-                      <img
-                        th:src="@{/images/products/3.jpg}"
-                        alt="girls t-shirt"
-                        class="showcase-img"
-                        width="75"
-                        height="75"
-                      />
-                    </a>
-
-                    <div class="showcase-content">
-                      <a href="#">
-                        <h4 class="showcase-title">Son Lì Cao Cấp Velvet Rose</h4>
-                      </a>
-                      <div class="showcase-rating">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-half-outline"></ion-icon>
-                      </div>
-
-                      <div class="price-box">
-                        <del>350.000đ</del>
-                        <p class="price">210.000đ</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="showcase">
-                    <a href="#" class="showcase-img-box">
-                      <img
-                        th:src="@{/images/products/4.jpg}"
-                        alt="woolen hat for men"
-                        class="showcase-img"
-                        width="75"
-                        height="75"
-                      />
-                    </a>
-
-                    <div class="showcase-content">
-                      <a href="#">
-                        <h4 class="showcase-title">Dầu gội bồ kết gừng bưởi 500ml Nhà Mơ giảm rụng mọc tóc</h4>
-                      </a>
-                      <div class="showcase-rating">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                      </div>
-
-                      <div class="price-box">
-                        <del>170.000đ</del>
-                        <p class="price">75.000đ</p>
+                        <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
+                        <p class="price" th:text="${product.price} + 'đ'"></p>
                       </div>
                     </div>
                   </div>
@@ -862,106 +768,26 @@
 
                 <div class="showcase-wrapper">
                   <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
+                    <div class="showcase" th:each="product : ${products}">
+                      <a th:href="@{/product/{id}(id=${product.id})}" class="showcase-img-box">
                         <img
-                          th:src="@{/images/products/denban.jpg}"
-                          alt="relaxed short full sleeve t-shirt"
+                          th:src="${product.imageUrl}"
+                          alt=""
                           width="70"
                           class="showcase-img"
                         />
                       </a>
 
                       <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Đàn bàn LED thông minh
-                          </h4>
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                          <h4 class="showcase-title" th:text="${product.name}"></h4>
                         </a>
 
-                        <a href="#" class="showcase-category">Nhà Cửa & Đời Sống</a>
+                        <a href="#" class="showcase-category" th:text="${product.category}">Danh mục</a>
 
                         <div class="price-box">
-                          <p class="price">999.000đ</p>
-                          <del>1.500.000Đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/duongda.jpg}"
-                          alt="girls pink embro design top"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Bộ Dưỡng Da Thiên Nhiên
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Sức Khỏe & Làm Đẹp</a>
-
-                        <div class="price-box">
-                          <p class="price">1.150.000đ</p>
-                          <del>1.870.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/true.jpg}"
-                          alt="black floral wrap midi skirt"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Tai Nghe Không Dây Moondrop Ultra Sonic
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Công Nghệ & Thiết Bị Số</a>
-
-                        <div class="price-box">
-                          <p class="price">1.490.000đ</p>
-                          <del>2.200.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/gom.jpg}"
-                          alt="pure garment dyed cotton shirt"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Bình Gốm Decor Nhà Cửa
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Nhà Cửa & Đời Sống</a>
-
-                        <div class="price-box">
-                          <p class="price">720.000đ</p>
-                          <del>1.200.000đ</del>
+                          <p class="price" th:text="${product.price} + 'đ'"></p>
+                          <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
                         </div>
                       </div>
                     </div>
@@ -974,106 +800,26 @@
 
                 <div class="showcase-wrapper">
                   <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
+                    <div class="showcase" th:each="product : ${products}">
+                      <a th:href="@{/product/{id}(id=${product.id})}" class="showcase-img-box">
                         <img
-                          th:src="@{/images/products/vong.jpg}"
-                          alt="running & trekking shoes - white"
+                          th:src="${product.imageUrl}"
+                          alt=""
                           class="showcase-img"
                           width="70"
                         />
                       </a>
 
                       <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Vòng Tay Thông Minh Theo Dõi Sức Khỏe
-                          </h4>
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                          <h4 class="showcase-title" th:text="${product.name}"></h4>
                         </a>
 
-                        <a href="#" class="showcase-category">Công Nghệ & Thiết Bị Số</a>
+                        <a href="#" class="showcase-category" th:text="${product.category}">Danh mục</a>
 
                         <div class="price-box">
-                          <p class="price">1.360.000đ</p>
-                          <del>1.720.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/mtd.jpg}"
-                          alt="trekking & running shoes - black"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Máy Khuếch Tán Tinh Dầu
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Nhà Cửa & Đời Sống</a>
-
-                        <div class="price-box">
-                          <p class="price">910.000đ</p>
-                          <del>1.450.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/banphim.jpg}"
-                          alt="womens party wear shoes"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Combo Bàn Phím & Chuột Không Dây
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Công Nghệ & Thiết Bị Số</a>
-
-                        <div class="price-box">
-                          <p class="price">1.210.000đ</p>
-                          <del>1.500.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/sinhto.jpg}"
-                          alt="sports claw women's shoes"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Máy Xay Sinh Tố Cầm Tay
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Gia Dụng & Nhà Bếp</a>
-
-                        <div class="price-box">
-                          <p class="price">749.000đ</p>
-                          <del>1.200.000đ</del>
+                          <p class="price" th:text="${product.price} + 'đ'"></p>
+                          <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
                         </div>
                       </div>
                     </div>
@@ -1086,105 +832,25 @@
 
                 <div class="showcase-wrapper">
                   <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
+                    <div class="showcase" th:each="product : ${products}">
+                      <a th:href="@{/product/{id}(id=${product.id})}" class="showcase-img-box">
                         <img
-                          th:src="@{/images/products/silver.jpg}"
-                          alt="pocket watch leather pouch"
+                          th:src="${product.imageUrl}"
+                          alt=""
                           class="showcase-img"
                           width="70"
                         />
                       </a>
 
                       <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Đồng Hồ Thời Trang SilverLine
-                          </h4>
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                          <h4 class="showcase-title" th:text="${product.name}"></h4>
                         </a>
-                        <a href="#" class="showcase-category">Thời Trang & Phụ Kiện</a>
+                        <a href="#" class="showcase-category" th:text="${product.category}">Danh mục</a>
 
                         <div class="price-box">
-                          <p class="price">2.760.000đ</p>
-                          <del>3.320.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/nenthom.jpg}"
-                          alt="silver deer heart necklace"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Bộ Nến Thơm Cao Cấp
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Nhà Cửa & Đời Sống</a>
-
-                        <div class="price-box">
-                          <p class="price">560.000đ</p>
-                          <del>920.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/balo.jpg}"
-                          alt="titan 100 ml womens perfume"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Ba lô Du Lịch Chống Nước AirFit
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Du Lịch & Cắm Trại</a>
-
-                        <div class="price-box">
-                          <p class="price">1.490.000đ</p>
-                          <del>2.200.000đ</del>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          th:src="@{/images/products/vitamin.jpg}"
-                          alt="men's leather reversible belt"
-                          class="showcase-img"
-                          width="70"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">
-                            Tinh Chất Vitamin C 50ml
-                          </h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Sức Khỏe & Làm Đẹp</a>
-
-                        <div class="price-box">
-                          <p class="price">420.000đ</p>
-                          <del>570.000đ</del>
+                          <p class="price" th:text="${product.price} + 'đ'"></p>
+                          <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
                         </div>
                       </div>
                     </div>
@@ -1193,53 +859,44 @@
               </div>
             </div>
 
-            <div id = "flash-sale" class="product-featured">
+            <div id="flash-sale" class="product-featured">
               <h2 class="title">Flash Sale</h2>
 
               <div class="slider-with-arrows">
                 <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">
+                  <div class="showcase-container" th:each="product : ${products}">
                     <div class="showcase">
                       <div class="showcase-banner">
                         <img
-                          th:src="@{/images/products/shampoo.jpg}"
-                          alt="shampoo, conditioner & facewash packs"
+                          th:src="${product.imageUrl}"
+                          alt=""
                           class="showcase-img"
                         />
                       </div>
 
                       <div class="showcase-content">
-                        <div class="showcase-rating">
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star-outline"></ion-icon>
-                          <ion-icon name="star-outline"></ion-icon>
+                        <div class="showcase-rating" th:if="${product.rating > 0}">
+                          <ion-icon name="star" th:each="i : ${#numbers.sequence(1, product.rating)}"></ion-icon>
                         </div>
 
-                        <a href="#">
-                          <h3 class="showcase-title">
-                            combo dầu gội, dầu xả, sửa tắm old spice swagger
-                          </h3>
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                          <h3 class="showcase-title" th:text="${product.name}"></h3>
                         </a>
 
-                        <p class="showcase-desc">
-                          Dầu gội, Dầu xả & Sữa tắm nam mang đến trải nghiệm chăm sóc toàn thân cho phái mạnh hiện đại. 
-                        </p>
+                        <p class="showcase-desc" th:text="${product.description}"></p>
 
                         <div class="price-box">
-                          <p class="price">1.250.000đ</p>
-
-                          <del>1.600.000đ</del>
+                          <p class="price" th:text="${product.price} + 'đ'"></p>
+                          <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
                         </div>
 
                         <button class="add-cart-btn">Thêm Vào Giỏ</button>
 
                         <div class="showcase-status">
                           <div class="wrapper">
-                            <p>Đã Bán: <b>36</b></p>
+                            <p>Đã Bán: <b th:text="${product.sold != null ? product.sold : 0}">0</b></p>
 
-                            <p>Kho: <b>18</b></p>
+                            <p>Kho: <b th:text="${product.stock != null ? product.stock : 0}">0</b></p>
                           </div>
 
                           <div class="showcase-status-bar"></div>
@@ -1251,7 +908,6 @@
                           <div class="countdown">
                             <div class="countdown-content">
                               <p class="display-number">01</p>
-
                               <p class="display-text">Ngày</p>
                             </div>
 
@@ -1275,81 +931,7 @@
                     </div>
                   </div>
 
-                  <div class="showcase-container">
-                    <div class="showcase">
-                      <div class="showcase-banner">
-                        <img
-                          th:src="@{/images/products/cubitt.jpg}"
-                          alt=""
-                          class="showcase-img"
-                        />
-                      </div>
-
-                      <div class="showcase-content">
-                        <div class="showcase-rating">
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star-outline"></ion-icon>
-                          <ion-icon name="star-outline"></ion-icon>
-                        </div>
-
-                        <h3 class="showcase-title">
-                          <a href="#" class="showcase-title"
-                            >SmartWatch Cubitt AURA Pro</a
-                          >
-                        </h3>
-
-                        <p class="showcase-desc">
-                          Đồng hồ thông minh Aura Pro mang phong cách hiện đại, 
-                          thiết kế sang trọng cùng nhiều tính năng vượt trội.
-                        </p>
-
-                        <div class="price-box">
-                          <p class="price">2.320.000đ</p>
-                          <del>2.900.000đ</del>
-                        </div>
-
-                        <button class="add-cart-btn">Thêm Vào Giỏ</button>
-
-                        <div class="showcase-status">
-                          <div class="wrapper">
-                            <p>Đã bán: <b>18</b></p>
-
-                            <p>Kho: <b>36</b></p>
-                          </div>
-
-                          <div class="showcase-status-bar"></div>
-                        </div>
-
-                        <div class="countdown-box">
-                          <p class="countdown-desc">Flash sale sẽ kết thúc sau:</p>
-
-                          <div class="countdown">
-                            <div class="countdown-content">
-                              <p class="display-number">00</p>
-                              <p class="display-text">Ngày</p>
-                            </div>
-
-                            <div class="countdown-content">
-                              <p class="display-number">14</p>
-                              <p class="display-text">Giờ</p>
-                            </div>
-
-                            <div class="countdown-content">
-                              <p class="display-number">36</p>
-                              <p class="display-text">Phút</p>
-                            </div>
-
-                            <div class="countdown-content">
-                              <p class="display-number">14</p>
-                              <p class="display-text">Giây</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="showcase-container" th:remove="tag"></div>
                 </div>
 
                 <button class="slider-btn prev" data-slider-prev>
@@ -1366,31 +948,31 @@
               <h2 class="title">Gợi Ý Hôm Nay</h2>
 
               <div class="product-grid">
-                <div class="showcase ">
+                <div class="showcase" th:each="product : ${products}">
                   <div class="showcase-banner">
                     <img
-                      th:src="@{/images/products/nga2.jpg}"
+                      th:src="${product.imageUrl}"
                       alt=""
                       width="300"
                       class="product-img default"
                     />
                     <img
-                      th:src="@{/images/products/nga1.jpg}"
-                      alt="Mens Winter Leathers Jackets"
+                      th:src="${product.hoverImageUrl != null ? product.hoverImageUrl : product.imageUrl}"
+                      alt=""
                       width="300"
                       class="product-img hover"
                     />
 
-                    <p class="showcase-badge">15%</p>
+                    <p class="showcase-badge" th:if="${product.discount != null}" th:text="${product.discount} + '%'"></p>
 
                     <div class="showcase-actions">
                       <button class="btn-action">
                         <ion-icon name="heart-outline"></ion-icon>
                       </button>
 
-                      <button class="btn-action">
+                      <a th:href="@{/product/{id}(id=${product.id})}" class="btn-action">
                         <ion-icon name="eye-outline"></ion-icon>
-                      </button>
+                      </a>
 
                       <button class="btn-action">
                         <ion-icon name="repeat-outline"></ion-icon>
@@ -1403,680 +985,25 @@
                   </div>
 
                   <div class="showcase-content">
-                    <a href="#" class="showcase-category">Sách Học Tập</a>
+                    <a href="#" class="showcase-category" th:text="${product.category}">Danh mục</a>
 
-                    <a href="#">
-                      <h3 class="showcase-title">
-                        Sách - Combo tự học + tập viết Tiếng Nga
-                      </h3>
+                    <a th:href="@{/product/{id}(id=${product.id})}">
+                      <h3 class="showcase-title" th:text="${product.name}"></h3>
                     </a>
 
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
+                    <div class="showcase-rating" th:if="${product.rating > 0}">
+                      <ion-icon name="star" th:each="i : ${#numbers.sequence(1, product.rating)}"></ion-icon>
                     </div>
 
                     <div class="price-box">
-                      <p class="price">75.000đ</p>
-                      <del>89.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/td1.jpg}"
-                      alt="Pure Garment Dyed Cotton Shirt"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/td2.jpg}"
-                      alt="Pure Garment Dyed Cotton Shirt"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle black">sale</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Nhà Cửa & Đời Sống</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Máy khuyếch tán tinh dầu</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">104.000đ</p>
-                      <del>210.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/kinh1.jpg}"
-                      alt="MEN Yarn Fleece Full-Zip Jacket"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/kinh2.jpg}"
-                      alt="MEN Yarn Fleece Full-Zip Jacket"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Phụ Kiện & Trang Sức</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Combo 3 hộp 300 miếng lau kính</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">45.000đ</p>
-                      <del>92.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/op1.jpg}"
-                      alt="Black Floral Wrap Midi Skirt"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/op2.jpg}"
-                      alt="Black Floral Wrap Midi Skirt"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle pink">new</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Điện thoại & Phụ kiện</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Ốp Điện Thoại Mềm Chống Sốc</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">38.000đ</p>
-                      <del>55.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/tv1.jpg}"
-                      alt="Casual Men's Brown shoes"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/tv2.jpg}"
-                      alt="Casual Men's Brown shoes"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Sách Tiếng Việt</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Sách - Thiên văn học trực quan</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">427.000đ</p>
-                      <del>550.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/keo1.jpg}"
-                      alt="Pocket Watch Leather Pouch"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/keo2.jpg}"
-                      alt="Pocket Watch Leather Pouch"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle black">sale</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">đồ ăn vặt</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Kẹo Sữa Trà Xanh Matcha UHA</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">34.000đ</p>
-                      <del>45.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/nhac1.jpg}"
-                      alt="Smart watche Vital Plus"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/nhac2.jpg}"
-                      alt="Smart watche Vital Plus"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Thiết Bị Điện Tử</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Máy Nghe Nhạc FiiO SNOWSKY Echo Mini</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">1.349.000đ</p>
-                      <del>1.700.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/waner1.jpg}"
-                      alt="Womens Party Wear Shoes"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/waner2.jpg}"
-                      alt="Womens Party Wear Shoes"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle black">sale</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Thiết Bị Điện Tử</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >IEM TangZu Wan'er SG 2 Jade Dragon</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">521.000đ</p>
-                      <del>660.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/tem1.jpg}"
-                      alt="Mens Winter Leathers Jackets"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/tem2.jpg}"
-                      alt="Mens Winter Leathers Jackets"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Nhà Sách Online</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Sticker tem thư series Memories</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">34.000đ</p>
-                      <del>76.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/ku1.jpg}"
-                      alt="Trekking & Running Shoes - black"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/ku2.jpg}"
-                      alt="Trekking & Running Shoes - black"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle black">sale</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Thể Thao & Du Lịch</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Vợt Kumpoo K520 Pro chính hãng</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">458.000đ</p>
-                      <del>650.000đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/sam1.jpg}"
-                      alt="Men's Leather Formal Wear shoes"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/sam2.jpg}"
-                      alt="Men's Leather Formal Wear shoes"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Sức Khỏe & Làm Đẹp</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >TPCN Revive KSM-66 Ashwagandha</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">540.000Đ</p>
-                      <del>570.000Đ</del>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="showcase">
-                  <div class="showcase-banner">
-                    <img
-                      th:src="@{/images/products/moon1.jpg}"
-                      alt="Better Basics French Terry Sweatshorts"
-                      class="product-img default"
-                      width="300"
-                    />
-                    <img
-                      th:src="@{/images/products/moon2.jpg}"
-                      alt="Better Basics French Terry Sweatshorts"
-                      class="product-img hover"
-                      width="300"
-                    />
-
-                    <p class="showcase-badge angle black">sale</p>
-
-                    <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="repeat-outline"></ion-icon>
-                      </button>
-
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="showcase-content">
-                    <a href="#" class="showcase-category">Thời Trang Nam</a>
-
-                    <h3>
-                      <a href="#" class="showcase-title"
-                        >Áo Polo MYO Vải Cotton To The Moon</a
-                      >
-                    </h3>
-
-                    <div class="showcase-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                      <ion-icon name="star-outline"></ion-icon>
-                    </div>
-
-                    <div class="price-box">
-                      <p class="price">350.000đ</p>
-                      <del>390.000đ</del>
+                      <p class="price" th:text="${product.price} + 'đ'"></p>
+                      <del th:if="${product.originalPrice != null}" th:text="${product.originalPrice} + 'đ'"></del>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

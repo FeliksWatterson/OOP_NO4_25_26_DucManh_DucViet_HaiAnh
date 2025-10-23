@@ -13,26 +13,22 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Lob // Dùng @Lob cho các chuỗi dài như mô tả
-    @Column(columnDefinition = "TEXT") // Định nghĩa kiểu cột trong DB là TEXT
+    @Lob 
+    @Column(columnDefinition = "TEXT") 
     private String description;
 
     @Column(nullable = false)
     private double price;
 
-    private Double originalPrice; // Giá gốc để hiển thị giảm giá (tùy chọn)
+    private Double originalPrice;
 
     private String category;
 
-    private String imageUrl; // Ảnh chính
+    private String imageUrl; 
 
-    private String hoverImageUrl; // Ảnh hiển thị khi di chuột (tùy chọn)
+    private String hoverImageUrl; 
 
-    private Integer stock; // Số lượng tồn kho
-
-    // Thêm các trường khác nếu cần, ví dụ: rating, badges,...
-
-    // --- Getters and Setters ---
+    private Integer stock; 
 
     public Long getId() {
         return id;
