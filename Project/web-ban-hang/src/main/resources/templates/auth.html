@@ -17,6 +17,23 @@
   </head>
 
   <body class="auth-page-body">
+    <div
+      th:if="${successMessage}"
+      id="authToast"
+      class="notification-toast"
+      role="alert"
+    >
+      <div class="toast-detail">
+        <p class="toast-message" th:text="${successMessage}"></p>
+      </div>
+      <button
+        type="button"
+        class="toast-close-btn"
+        onclick="document.getElementById('authToast').classList.remove('show-once')"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
     <header>
       <div class="header-main">
         <div class="container">
@@ -325,6 +342,36 @@
         </div>
       </div>
     </footer>
+
     <script th:src="@{/js/auth.js}"></script>
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("container");
+
+        const showSuccessPopup = false;
+        const successMessage = null;
+        const authToast = document.getElementById("authToast");
+
+        if (showSuccessPopup && successMessage && authToast) {
+          authToast.classList.add("show-once");
+          setTimeout(() => {
+            if (authToast) authToast.classList.remove("show-once");
+          }, 5000);
+        }
+        const showRegisterPanel = false;
+        if (showRegisterPanel && container) {
+          container.classList.add("active");
+        }
+      });
+    </script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

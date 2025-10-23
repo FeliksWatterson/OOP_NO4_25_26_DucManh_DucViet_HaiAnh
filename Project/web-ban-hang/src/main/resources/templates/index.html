@@ -83,6 +83,24 @@
         />
       </div>
 
+      <div
+        th:if="${welcomeMessage}"
+        id="welcomeToast"
+        class="welcome-toast"
+        role="alert"
+      >
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${welcomeMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="document.getElementById('welcomeToast').classList.remove('show-once')"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
       <div class="toast-detail">
         <p class="toast-message">Ai đó ở Hà Nội vừa mua</p>
 
@@ -92,43 +110,22 @@
       </div>
     </div>
     <header>
+
+    <header>
       <div class="header-top">
         <div class="container">
           <ul class="header-social-container">
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <li><a href="#" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
           </ul>
 
           <div class="header-alert-news">
-            <p>
-              <b>Miễn Phí Vận Chuyển</b>
-              Cho Đơn Hàng Trên 100.000đ
-            </p>
+            <p><b>Miễn Phí Vận Chuyển</b> Cho Đơn Hàng Trên 100.000đ</p>
           </div>
 
           <div class="header-top-actions">
-
             <select name="language">
               <option value="vi-VN">Tiếng Việt</option>
               <option value="en-US">English</option>
@@ -138,15 +135,10 @@
         </div>
       </div>
 
-      <div class="header-main">
+      <div class="header-main fixed-main">
         <div class="container">
           <a href="#" class="header-logo">
-            <img
-              th:src="@{/images/logo/logo.svg}"
-              alt=""
-              width="120"
-              height="36"
-            />
+            <img th:src="@{/images/logo/logo.svg}" alt="Logo Mộc" width="120" height="36" />
           </a>
 
           <div class="header-search-container">
@@ -156,24 +148,23 @@
               class="search-field"
               placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
             />
-
             <button class="search-btn">
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </div>
 
           <div class="header-user-actions">
-              <a th:href="@{/auth}" class="action-btn">
-                <ion-icon name="person-outline"></ion-icon>
-              </a>
-              <button class="action-btn">
-                <ion-icon name="heart-outline"></ion-icon>
-                <span class="count">0</span>
-              </button>
-              <button class="action-btn">
-                <ion-icon name="bag-handle-outline"></ion-icon>
-                <span class="count">0</span>
-              </button>
+            <a th:href="@{/auth}" class="action-btn">
+              <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <button class="action-btn">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
+            <button class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
           </div>
         </div>
       </div>
@@ -181,495 +172,66 @@
       <nav class="desktop-navigation-menu">
         <div class="container">
           <ul class="desktop-menu-category-list">
-            <li class="menu-category">
-              <a href="#" class="menu-title">Trang Chủ</a>
-            </li>
+            <li class="menu-category"><a href="#" class="menu-title">Trang Chủ</a></li>
 
             <li class="menu-category">
               <a href="#" class="menu-title">Danh Mục Hàng</a>
-
               <div class="dropdown-panel">
                 <ul class="dropdown-panel-list">
-                  <li class="menu-title">
-                    <a href="#">Thiết Bị Điện Tử</a>
-                  </li>
-
+                  <li class="menu-title"><a href="#">Thiết Bị Điện Tử</a></li>
+                  <li class="panel-list-item"><a href="#">Máy Ảnh & Máy Quay Phim</a></li>
+                  <li class="panel-list-item"><a href="#">Điện Thoại & Phụ Kiện</a></li>
+                  <li class="panel-list-item"><a href="#">Laptop</a></li>
+                  <li class="panel-list-item"><a href="#">Tablet</a></li>
+                  <li class="panel-list-item"><a href="#">Tai Nghe</a></li>
                   <li class="panel-list-item">
-                    <a href="#">Máy Ảnh & Máy Quay Phim</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Điện Thoại & Phụ Kiện</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Laptop</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Tablet</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Tai Nghe</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">
-                      <img
-                        th:src="@{/images/electronics-banner-1.jpg}"
-                        alt=""
-                        width="250"
-                        height="119"
-                      />
-                    </a>
+                    <a href="#"><img th:src="@{/images/electronics-banner-1.jpg}" alt="" width="250" height="119" /></a>
                   </li>
                 </ul>
 
                 <ul class="dropdown-panel-list">
-                  <li class="menu-title">
-                    <a href="#">Thời Trang Nam</a>
-                  </li>
-
+                  <li class="menu-title"><a href="#">Thời Trang Nam</a></li>
+                  <li class="panel-list-item"><a href="#">Đồ Mặc Hàng Ngày</a></li>
+                  <li class="panel-list-item"><a href="#">Đồ Công Sở</a></li>
+                  <li class="panel-list-item"><a href="#">Áo Khoác</a></li>
+                  <li class="panel-list-item"><a href="#">Thể Thao</a></li>
+                  <li class="panel-list-item"><a href="#">Kính</a></li>
                   <li class="panel-list-item">
-                    <a href="#">Đồ Mặc Hàng Ngày</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Đồ Công Sở</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Áo khoác</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Thể Thao</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Kính</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">
-                      <img
-                        th:src="@{/images/mens-banner.jpg}"
-                        alt=""
-                        width="250"
-                        height="119"
-                      />
-                    </a>
+                    <a href="#"><img th:src="@{/images/mens-banner.jpg}" alt="" width="250" height="119" /></a>
                   </li>
                 </ul>
 
                 <ul class="dropdown-panel-list">
-                  <li class="menu-title">
-                    <a href="#">Thời Trang Nữ</a>
-                  </li>
-
+                  <li class="menu-title"><a href="#">Thời Trang Nữ</a></li>
+                  <li class="panel-list-item"><a href="#">Đồ Mặc Hàng Ngày</a></li>
+                  <li class="panel-list-item"><a href="#">Đồ Công Sở</a></li>
+                  <li class="panel-list-item"><a href="#">Nước Hoa</a></li>
+                  <li class="panel-list-item"><a href="#">Mỹ Phẩm</a></li>
+                  <li class="panel-list-item"><a href="#">Túi Xách</a></li>
                   <li class="panel-list-item">
-                    <a href="#">Đồ Mặc Hàng Ngày</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Đồ Công Sở</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Nước Hoa</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Mỹ Phẩm</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Túi Xách</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">
-                      <img
-                        th:src="@{/images/womens-banner.jpg}"
-                        alt=""
-                        width="250"
-                        height="119"
-                      />
-                    </a>
+                    <a href="#"><img th:src="@{/images/womens-banner.jpg}" alt="" width="250" height="119" /></a>
                   </li>
                 </ul>
 
                 <ul class="dropdown-panel-list">
-                  <li class="menu-title">
-                    <a href="#">Đồ Điện Gia Dụng</a>
-                  </li>
-
+                  <li class="menu-title"><a href="#">Đồ Điện Gia Dụng</a></li>
+                  <li class="panel-list-item"><a href="#">Smart TV</a></li>
+                  <li class="panel-list-item"><a href="#">Tủ Lạnh</a></li>
+                  <li class="panel-list-item"><a href="#">Điều Hòa</a></li>
+                  <li class="panel-list-item"><a href="#">Máy Giặt</a></li>
+                  <li class="panel-list-item"><a href="#">Máy Hút Bụi</a></li>
                   <li class="panel-list-item">
-                    <a href="#">Smart TV</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Tủ Lạnh</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Điều Hòa</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Máy Giặt</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">Máy Hút Bụi</a>
-                  </li>
-
-                  <li class="panel-list-item">
-                    <a href="#">
-                      <img
-                        th:src="@{/images/electronics-banner-2.jpg}"
-                        alt=""
-                        width="250"
-                        height="119"
-                      />
-                    </a>
+                    <a href="#"><img th:src="@{/images/electronics-banner-2.jpg}" alt="" width="250" height="119" /></a>
                   </li>
                 </ul>
               </div>
             </li>
 
-            <li class="menu-category">
-              <a href="#" class="menu-title">Đời Sống</a>
-
-              <ul class="dropdown-list">
-                <li class="dropdown-item">
-                  <a href="#">Trang Trí Nhà Cửa</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Dụng Cụ Nhà Bếp</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Nội Thất & Đồ Dùng Sinh Hoạt</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Đồ Gia Dụng Thông Minh</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-category">
-              <a href="#" class="menu-title">Phụ Kiện & Trang Sức Nữ</a>
-
-              <ul class="dropdown-list">
-                <li class="dropdown-item">
-                  <a href="#">Váy & Đầm</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Bông Tai</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Dây Chuyền</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Đồ Trang Điểm</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-category">
-              <a href="#" class="menu-title">Thể Thao & Du Lịch</a>
-
-              <ul class="dropdown-list">
-                <li class="dropdown-item">
-                  <a href="#">Trang Phục Thể Thao</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#"></a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Giày Thể Thao & Leo Núi</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Ba lô & Túi Du Lịch</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-category">
-              <a href="#" class="menu-title">Nhà Sách Online</a>
-              <ul class="dropdown-list">
-                <li class="dropdown-item">
-                  <a href="#">Sách Học Tập & Tham Khảo</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Văn Học & Tiểu Thuyết</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Kĩ Năng Sống & Phát Triển Bản Thân</a>
-                </li>
-
-                <li class="dropdown-item">
-                  <a href="#">Văn Phòng Phẩm</a>
-                </li>
-              </ul>
-            </li>
-            
-            <li class="menu-category">
-              <a href="#flash-sale" class="menu-title">Khuyến Mãi</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="mobile-bottom-navigation">
-        <button class="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="menu-outline"></ion-icon>
-        </button>
-
-        <button class="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
-
-          <span class="count">0</span>
-        </button>
-
-        <button class="action-btn">
-          <ion-icon name="home-outline"></ion-icon>
-        </button>
-
-        <button class="action-btn">
-          <ion-icon name="heart-outline"></ion-icon>
-
-          <span class="count">0</span>
-        </button>
-
-        <button class="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="grid-outline"></ion-icon>
-        </button>
-      </div>
-
-      <nav class="mobile-navigation-menu" data-mobile-menu>
-        <div class="menu-top">
-          <h2 class="menu-title">Menu</h2>
-
-          <button class="menu-close-btn" data-mobile-menu-close-btn>
-            <ion-icon name="close-outline"></ion-icon>
-          </button>
-        </div>
-
-        <ul class="mobile-menu-category-list">
-          <li class="menu-category">
-            <a href="#" class="menu-title">Home</a>
-          </li>
-
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Men's</p>
-
-              <div>
-                <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-              </div>
-            </button>
-
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Shirt</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Shorts & Jeans</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Safety Shoes</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Wallet</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Women's</p>
-
-              <div>
-                <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-              </div>
-            </button>
-
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Dress & Frock</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Earrings</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Necklace</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Makeup Kit</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Jewelry</p>
-
-              <div>
-                <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-              </div>
-            </button>
-
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Earrings</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Couple Rings</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Necklace</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Bracelets</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Perfume</p>
-
-              <div>
-                <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-              </div>
-            </button>
-
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Clothes Perfume</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Deodorant</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Flower Fragrance</a>
-              </li>
-
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Air Freshener</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Blog</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Hot Offers</a>
-          </li>
-        </ul>
-
-        <div class="menu-bottom">
-          <ul class="menu-category-list">
-            <li class="menu-category">
-              <button class="accordion-menu" data-accordion-btn>
-                <p class="menu-title">Language</p>
-
-                <ion-icon
-                  name="caret-back-outline"
-                  class="caret-back"
-                ></ion-icon>
-              </button>
-
-              <ul class="submenu-category-list" data-accordion>
-                <li class="submenu-category">
-                  <a href="#" class="submenu-title">English</a>
-                </li>
-
-                <li class="submenu-category">
-                  <a href="#" class="submenu-title">Espa&ntilde;ol</a>
-                </li>
-
-                <li class="submenu-category">
-                  <a href="#" class="submenu-title">Fren&ccedil;h</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="menu-category">
-              <button class="accordion-menu" data-accordion-btn>
-                <p class="menu-title">Currency</p>
-                <ion-icon
-                  name="caret-back-outline"
-                  class="caret-back"
-                ></ion-icon>
-              </button>
-
-              <ul class="submenu-category-list" data-accordion>
-                <li class="submenu-category">
-                  <a href="#" class="submenu-title">USD &dollar;</a>
-                </li>
-
-                <li class="submenu-category">
-                  <a href="#" class="submenu-title">EUR &euro;</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
-          <ul class="menu-social-container">
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
+            <li class="menu-category"><a href="#" class="menu-title">Đời Sống</a></li>
+            <li class="menu-category"><a href="#" class="menu-title">Phụ Kiện & Trang Sức</a></li>
+            <li class="menu-category"><a href="#" class="menu-title">Thể Thao & Du Lịch</a></li>
+            <li class="menu-category"><a href="#" class="menu-title">Nhà Sách Online</a></li>
+            <li class="menu-category"><a href="#flash-sale" class="menu-title">Khuyến Mãi</a></li>
           </ul>
         </div>
       </nav>
@@ -2835,6 +2397,21 @@
         </div>
       </div>
     </footer>
+
+    <script th:inline="javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        const showWelcomePopup = false;
+        const welcomeMessage = null;
+        const welcomeToast = document.getElementById('welcomeToast');
+        
+        if (showWelcomePopup && welcomeMessage && welcomeToast) {
+          welcomeToast.classList.add('show-once');
+          setTimeout(() => {
+            if (welcomeToast) welcomeToast.classList.remove('show-once');
+          }, 5000);
+        }
+      });
+    </script>
     <script th:src="@{/js/script.js}"></script>
 
     <script

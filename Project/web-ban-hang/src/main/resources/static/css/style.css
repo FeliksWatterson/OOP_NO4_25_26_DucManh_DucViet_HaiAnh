@@ -81,6 +81,7 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  padding-top: 160px;
 }
 
 a {
@@ -544,10 +545,8 @@ body::-webkit-scrollbar-thumb:hover {
 .header-main {
   padding: 20px 0;
   border-bottom: 1px solid var(--cultured);
-  background-color: var(--white); /* thêm dòng này */
-  position: sticky;
+  background-color: var(--white);
   top: 0;
-  z-index: 10;
 }
 
 .header-logo {
@@ -3480,18 +3479,12 @@ footer {
   }
 }
 
-/*-----------------------------------*\
-  # SLIDER ARROWS
-\*-----------------------------------*/
-
-/* Div bọc mới để định vị các nút */
 .slider-with-arrows {
   position: relative;
 }
 
-/* Kiểu chung cho 2 nút */
 .slider-btn {
-  background: var(--salmon-pink); /* Màu hồng */
+  background: var(--salmon-pink);
   color: var(--white);
   position: absolute;
   top: 50%;
@@ -3508,26 +3501,99 @@ footer {
   transition: var(--transition-timing);
   opacity: 1;
   visibility: visible;
-  padding: 10px; /* Thêm padding để icon không bị sát */
+  padding: 10px;
 }
 
 .slider-btn:hover {
-  background: var(--eerie-black); /* Đổi màu khi hover */
+  background: var(--eerie-black);
 }
 
-/* Vị trí nút trái */
 .slider-btn.prev {
-  left: 5px; /* Đặt cách lề trái 5px */
+  left: 5px;
 }
 
-/* Vị trí nút phải */
 .slider-btn.next {
-  right: 5px; /* Đặt cách lề phải 5px */
+  right: 5px;
 }
 
-/* Class 'hidden' để ẩn nút */
 .slider-btn.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+.welcome-toast {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--moc-surface, hsl(34, 45%, 98%));
+  border: 1px solid var(--moc-border, hsl(34, 30%, 85%));
+  box-shadow: 0 5px 20px var(--moc-shadow, rgba(100, 85, 60, 0.15));
+  border-radius: 10px;
+  padding: 10px 15px;
+  z-index: 9999;
+  transform: translateX(calc(-100% - 40px));
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.welcome-toast.show-once {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.welcome-toast .toast-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-toast .toast-message {
+  font-weight: 600;
+  color: var(--moc-brown, hsl(34, 20%, 25%));
+}
+
+.welcome-toast .toast-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--onyx, hsl(34, 10%, 30%));
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.welcome-toast .toast-close-btn:hover {
+  color: var(--moc-accent, hsl(34, 35%, 55%));
+}
+
+.sticky-nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.header-main,
+.desktop-navigation-menu {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.header-main {
+  top: 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+}
+
+.desktop-navigation-menu {
+  top: 80px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
 }

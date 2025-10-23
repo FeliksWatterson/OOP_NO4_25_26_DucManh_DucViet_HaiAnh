@@ -300,3 +300,19 @@ categoryContainers.forEach((container) => {
 
   const autoSlideInterval = Number(bannerDuration) * 2000;
 });
+
+const headerTop = document.querySelector(".header-top");
+const navMenu = document.querySelector(".desktop-navigation-menu");
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > 50) {
+    headerTop?.classList.add("hide-top");
+  } else {
+    headerTop?.classList.remove("hide-top");
+  }
+
+  lastScrollY = currentScrollY;
+});
