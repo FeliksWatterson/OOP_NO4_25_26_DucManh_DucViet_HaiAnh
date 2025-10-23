@@ -35,8 +35,9 @@
     </header>
     <div class="container" id="container">
       <div class="form-container sign-up">
-        <form>
+        <form th:action="@{/register}" method="post" th:object="${customer}">
           <h1>Tạo tài khoản</h1>
+
           <div class="social-icons">
             <a href="#" class="icon"
               ><i class="fa-brands fa-google-plus-g"></i
@@ -47,15 +48,39 @@
               ><i class="fa-brands fa-linkedin-in"></i
             ></a>
           </div>
+
           <span>hoặc dùng email của bạn để đăng ký</span>
-          <input type="text" placeholder="Tên Đăng Nhập" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Mật Khẩu" />
-          <button>Đăng ký</button>
+
+          <input
+            type="text"
+            th:field="*{fullName}"
+            placeholder="Tên Đăng Nhập"
+            required
+          />
+          <input
+            type="email"
+            th:field="*{email}"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            th:field="*{password}"
+            placeholder="Mật Khẩu"
+            required
+          />
+
+          <p
+            th:if="${errorMessage}"
+            style="color: red; font-size: 13px; margin-top: 5px"
+            th:text="${errorMessage}"
+          ></p>
+
+          <button type="submit">Đăng ký</button>
         </form>
       </div>
       <div class="form-container sign-in">
-        <form>
+        <form th:action="@{/login}" method="post">
           <h1>Đăng Nhập</h1>
           <div class="social-icons">
             <a href="#" class="icon"
@@ -67,11 +92,30 @@
               ><i class="fa-brands fa-linkedin-in"></i
             ></a>
           </div>
+
           <span>hoặc sử dụng email và mật khẩu</span>
-          <input type="email" placeholder="Email / Tên Đăng Nhập" />
-          <input type="password" placeholder="Mật Khẩu" />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email / Tên Đăng Nhập"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Mật Khẩu"
+            required
+          />
+
           <a href="#">Quên Mật Khẩu?</a>
-          <button>Đăng Nhập</button>
+          <button type="submit">Đăng Nhập</button>
+
+          <p
+            th:if="${loginError}"
+            style="color: red; font-size: 13px"
+            th:text="${loginError}"
+          ></p>
         </form>
       </div>
       <div class="toggle-container">
@@ -281,7 +325,6 @@
         </div>
       </div>
     </footer>
-
     <script th:src="@{/js/auth.js}"></script>
   </body>
 </html>

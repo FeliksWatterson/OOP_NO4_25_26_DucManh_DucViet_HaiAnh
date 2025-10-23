@@ -276,3 +276,63 @@ body.auth-page-body {
   font-weight: 700;
   margin-bottom: 10px;
 }
+
+.notification-toast {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: hsl(34, 45%, 98%);
+  border: 1px solid hsl(34, 30%, 85%);
+  box-shadow: 0 5px 20px rgba(100, 85, 60, 0.15);
+  border-radius: 10px;
+  padding: 10px 15px;
+  z-index: 9999;
+  transform: translateX(calc(-100% - 40px));
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.notification-toast.show-once {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification-toast.closed {
+  display: none;
+}
+
+.toast-banner img {
+  border-radius: 8px;
+}
+
+.toast-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-message {
+  font-weight: 600;
+  color: hsl(34, 20%, 25%);
+}
+
+.toast-meta {
+  font-size: 13px;
+  color: hsl(34, 15%, 55%);
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: hsl(34, 10%, 30%);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.toast-close-btn:hover {
+  color: hsl(34, 35%, 55%);
+}
+
