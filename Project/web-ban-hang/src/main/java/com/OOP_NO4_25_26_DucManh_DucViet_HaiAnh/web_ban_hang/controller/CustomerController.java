@@ -1,28 +1,31 @@
 package com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.controller;
 
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Customer;
-
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.CustomerInterface;
-
+import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute; 
-import org.springframework.web.bind.annotation.PostMapping; 
-import org.springframework.web.bind.annotation.RequestParam; 
-import org.springframework.web.servlet.mvc.support.RedirectAttributes; 
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
 @Controller
 public class CustomerController {
 
-    @Autowired 
+    @Autowired
     private CustomerInterface customerService;
 
     @GetMapping("/auth")
-    public String showAuthPage(Model model) {
+    public String showAuthPage(Model model, HttpSession session) {
+        if (session.getAttribute("loggedInCustomer") != null) {
+            return "redirect:/account";
+        }
+
         if (!model.containsAttribute("customer")) {
             model.addAttribute("customer", new Customer());
         }
@@ -30,7 +33,7 @@ public class CustomerController {
     }
 
     // Sign Up
-    @PostMapping("/register")
+     @PostMapping("/register")
     public String processRegistration(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
         try {
             customerService.registerCustomer(customer);
@@ -48,21 +51,48 @@ public class CustomerController {
 
     // Sign In
     @PostMapping("/login")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, RedirectAttributes redirectAttributes) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model,
+            RedirectAttributes redirectAttributes, HttpSession session) { // Thêm HttpSession
         Optional<Customer> authenticatedCustomer = customerService.authenticateCustomer(email, password);
 
         if (authenticatedCustomer.isPresent()) {
             Customer customer = authenticatedCustomer.get();
+            session.setAttribute("loggedInCustomer", customer);
+
             redirectAttributes.addFlashAttribute("welcomeMessage", "Chào mừng trở lại, " + customer.getFullName() + "!");
             redirectAttributes.addFlashAttribute("popup", true);
-            return "redirect:/"; 
+            return "redirect:/";
         } else {
             model.addAttribute("loginError", "Email hoặc mật khẩu không chính xác.");
-            model.addAttribute("email", email); 
+            model.addAttribute("email", email);
             if (!model.containsAttribute("customer")) {
-                 model.addAttribute("customer", new Customer());
+                model.addAttribute("customer", new Customer());
             }
-            return "auth"; 
+            return "auth";
         }
+    }
+
+    @GetMapping("/account")
+    public String showAccountPage(Model model, HttpSession session) {
+        Customer customer = (Customer) session.getAttribute("loggedInCustomer");
+
+        if (customer == null) {
+            return "redirect:/auth";
+        }
+
+        Optional<Customer> freshCustomer = customerService.findCustomerByEmail(customer.getEmail());
+        if (freshCustomer.isEmpty()) {
+            session.invalidate();
+            return "redirect:/auth";
+        }
+
+        model.addAttribute("customer", freshCustomer.get());
+        return "account"; 
+    }
+
+    @GetMapping("/logout")
+    public String processLogout(HttpSession session) {
+        session.invalidate(); 
+        return "redirect:/";
     }
 }

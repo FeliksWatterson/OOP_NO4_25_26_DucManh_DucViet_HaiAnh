@@ -2,158 +2,209 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài khoản - Mộc E-commerce</title>
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="shortcut icon"
+      th:href="@{/images/logo/favicon.svg}"
+      type="image/x-icon"
     />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" th:href="@{/css/auth.css}" />
-    <title>Login-Mộc E-Commmerce</title>
+    <link rel="stylesheet" th:href="@{/css/account.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #333;
+      background-color: #ffff;
+    }
+  </style>
 
-  <body class="auth-page-body">
-    <div
-      th:if="${successMessage}"
-      id="authToast"
-      class="notification-toast"
-      role="alert"
-    >
-      <div class="toast-detail">
-        <p class="toast-message" th:text="${successMessage}"></p>
-      </div>
-      <button
-        type="button"
-        class="toast-close-btn"
-        onclick="document.getElementById('authToast').classList.remove('show-once')"
-      >
-        <ion-icon name="close-outline"></ion-icon>
-      </button>
-    </div>
+  <body>
     <header>
-      <div class="header-main">
+      <div class="header-top">
+        <div class="container">
+          <ul class="header-social-container">
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-linkedin"></ion-icon
+              ></a>
+            </li>
+          </ul>
+          <div class="header-alert-news">
+            <p><b>Miễn Phí Vận Chuyển</b> Cho Đơn Hàng Trên 100.000đ</p>
+          </div>
+          <div class="header-top-actions">
+            <select name="language">
+              <option value="vi-VN">Tiếng Việt</option>
+              <option value="en-US">English</option>
+              <option value="ru-RU">Русский</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-main fixed-main">
         <div class="container">
           <a th:href="@{/}" class="header-logo">
             <img
               th:src="@{/images/logo/logo.svg}"
-              alt="Mộc Logo"
+              alt="Logo Mộc"
               width="120"
               height="36"
             />
           </a>
-
-          <a href="#" class="auth-need-help">Bạn cần trợ giúp?</a>
+          <div class="header-search-container">
+            <input
+              type="search"
+              name="search"
+              class="search-field"
+              placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
+            />
+            <button class="search-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="header-user-actions">
+            <a
+              th:if="${session.loggedInCustomer}"
+              th:href="@{/account}"
+              class="action-btn"
+            >
+              <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <a
+              th:unless="${session.loggedInCustomer}"
+              th:href="@{/auth}"
+              class="action-btn"
+            >
+              <ion-icon name="log-in-outline"></ion-icon>
+            </a>
+            <button class="action-btn">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
+            <button class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
-    <div
-      class="container"
-      id="container"
-      th:classappend="${showRegister} ? ' active' : ''"
-    >
-      <div class="form-container sign-up">
-        <form th:action="@{/register}" method="post" th:object="${customer}">
-          <h1>Tạo tài khoản</h1>
 
-          <div class="social-icons">
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-google-plus-g"></i
-            ></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-linkedin-in"></i
-            ></a>
+    <main class="account-main">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a th:href="@{/}">Trang chủ</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <span>Tài khoản</span>
+        </div>
+
+        <div class="account-container">
+          <div class="account-content">
+            <div class="account-overview-cards">
+              <div class="account-card overview-card">
+                <div class="card-icon">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                  <span class="badge">3</span>
+                </div>
+                <p>Lịch sử đơn hàng</p>
+              </div>
+
+              <div class="account-card overview-card">
+                <div class="card-icon">
+                  <ion-icon name="happy-outline"></ion-icon>
+                </div>
+                <p th:text="'Hi, ' + ${customer.fullName} + '!'"></p>
+              </div>
+            </div>
+
+            <div class="account-card info-card">
+              <h3>Thông tin cá nhân</h3>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Họ và tên:</span>
+                  <span class="info-value" th:text="${customer.fullName}"
+                    >Nguyễn Thị Thanh Thanh</span
+                  >
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Email:</span>
+                  <span class="info-value" th:text="${customer.email}"
+                    >ntthanh.dhgt17a3hn@sv.uneti.edu.vn</span
+                  >
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Số điện thoại:</span>
+                  <span
+                    class="info-value"
+                    th:text="${customer.phone ?: 'Chưa cập nhật'}"
+                    >0387287486</span
+                  >
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Địa chỉ:</span>
+                  <span class="info-value">Vietnam</span>
+                </div>
+              </div>
+              <a href="#" class="edit-btn">Chỉnh sửa thông tin</a>
+            </div>
           </div>
 
-          <span>hoặc dùng email của bạn để đăng ký</span>
-
-          <input
-            type="text"
-            th:field="*{fullName}"
-            placeholder="Tên Đăng Nhập"
-            required
-          />
-          <input
-            type="email"
-            th:field="*{email}"
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            th:field="*{password}"
-            placeholder="Mật Khẩu"
-            required
-          />
-
-          <p
-            th:if="${errorMessage}"
-            style="color: red; font-size: 13px; margin-top: 5px"
-            th:text="${errorMessage}"
-          ></p>
-
-          <button type="submit">Đăng ký</button>
-        </form>
-      </div>
-      <div class="form-container sign-in">
-        <form th:action="@{/login}" method="post">
-          <h1>Đăng Nhập</h1>
-          <div class="social-icons">
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-google-plus-g"></i
-            ></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-linkedin-in"></i
-            ></a>
-          </div>
-
-          <span>hoặc sử dụng email và mật khẩu</span>
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email / Tên Đăng Nhập"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Mật Khẩu"
-            required
-          />
-
-          <a href="#">Quên Mật Khẩu?</a>
-          <button type="submit">Đăng Nhập</button>
-
-          <p
-            th:if="${loginError}"
-            style="color: red; font-size: 13px"
-            th:text="${loginError}"
-          ></p>
-        </form>
-      </div>
-      <div class="toggle-container">
-        <div class="toggle">
-          <div class="toggle-panel toggle-left">
-            <h1>Đã Có Tài Khoản?</h1>
-            <p>Đăng nhập để tiếp tục.</p>
-            <button class="hidden" id="login">Đăng Nhập</button>
-          </div>
-          <div class="toggle-panel toggle-right">
-            <h1>Chưa Có Tài Khoản?</h1>
-            <p>Tạo tài khoản mới để nhận nhiều ưu đãi hấp dẫn.</p>
-            <button class="hidden" id="register">Đăng Ký</button>
+          <div class="account-sidebar">
+            <div class="account-card sidebar-card">
+              <nav class="sidebar-nav">
+                <ul>
+                  <li>
+                    <a href="#" class="active">
+                      <ion-icon name="person-outline"></ion-icon>
+                      <span>Thông tin cá nhân</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <ion-icon name="location-outline"></ion-icon>
+                      <span>Quản lý địa chỉ (0)</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a th:href="@{/logout}">
+                      <ion-icon name="log-out-outline"></ion-icon>
+                      <span>Đăng xuất</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <footer>
       <div class="footer-nav">
@@ -162,145 +213,113 @@
             <li class="footer-nav-item">
               <h2 class="nav-title">Popular Categories</h2>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Fashion</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Electronic</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Cosmetic</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Health</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Watches</a>
             </li>
           </ul>
-
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
               <h2 class="nav-title">Products</h2>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Prices drop</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">New products</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Best sales</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Contact us</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Sitemap</a>
             </li>
           </ul>
-
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
               <h2 class="nav-title">Our Company</h2>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Delivery</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Legal Notice</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Terms and conditions</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">About us</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Secure payment</a>
             </li>
           </ul>
-
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
               <h2 class="nav-title">Services</h2>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Prices drop</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">New products</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Best sales</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Contact us</a>
             </li>
-
             <li class="footer-nav-item">
               <a href="#" class="footer-nav-link">Sitemap</a>
             </li>
           </ul>
-
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
               <h2 class="nav-title">Contact</h2>
             </li>
-
             <li class="footer-nav-item flex">
               <div class="icon-box">
                 <ion-icon name="location-outline"></ion-icon>
               </div>
-
               <address class="content">Hà Đông, Hà Nội, Việt Nam</address>
             </li>
-
             <li class="footer-nav-item flex">
               <div class="icon-box">
                 <ion-icon name="call-outline"></ion-icon>
               </div>
-
               <a href="tel:+607936-8058" class="footer-nav-link"
                 >(+84) 384 887 042</a
               >
             </li>
-
             <li class="footer-nav-item flex">
               <div class="icon-box">
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
-
               <a href="mailto:ducmanhlehoang@gmail.com" class="footer-nav-link"
                 >ducmanhlehoang@gmail.com</a
               >
             </li>
           </ul>
-
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
               <h2 class="nav-title">Follow Us</h2>
             </li>
-
             <li>
               <ul class="social-link">
                 <li class="footer-nav-item">
@@ -308,19 +327,16 @@
                     <ion-icon name="logo-facebook"></ion-icon>
                   </a>
                 </li>
-
                 <li class="footer-nav-item">
                   <a href="#" class="footer-nav-link">
                     <ion-icon name="logo-twitter"></ion-icon>
                   </a>
                 </li>
-
                 <li class="footer-nav-item">
                   <a href="#" class="footer-nav-link">
                     <ion-icon name="logo-linkedin"></ion-icon>
                   </a>
                 </li>
-
                 <li class="footer-nav-item">
                   <a href="#" class="footer-nav-link">
                     <ion-icon name="logo-instagram"></ion-icon>
@@ -339,7 +355,6 @@
             alt="payment method"
             class="payment-img"
           />
-
           <p class="copyright">
             &copy; 2025 <a href="#">Mộc</a> all rights reserved.
           </p>
@@ -347,24 +362,7 @@
       </div>
     </footer>
 
-    <script th:src="@{/js/auth.js}"></script>
-    <script th:inline="javascript">
-      document.addEventListener("DOMContentLoaded", function () {
-        const container = document.getElementById("container");
-
-        const showSuccessPopup = false;
-        const successMessage = null;
-        const authToast = document.getElementById("authToast");
-
-        if (showSuccessPopup && successMessage && authToast) {
-          authToast.classList.add("show-once");
-          setTimeout(() => {
-            if (authToast) authToast.classList.remove("show-once");
-          }, 5000);
-        }
-      });
-    </script>
-
+    <script th:src="@{/js/script.js}"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"

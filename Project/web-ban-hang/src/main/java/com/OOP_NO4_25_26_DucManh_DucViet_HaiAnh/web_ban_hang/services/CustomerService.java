@@ -40,4 +40,16 @@ public class CustomerService implements CustomerInterface {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Customer findById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateCustomer'");
+    }
 }

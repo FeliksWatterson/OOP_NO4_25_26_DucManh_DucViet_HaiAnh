@@ -154,8 +154,11 @@
           </div>
 
           <div class="header-user-actions">
-            <a th:href="@{/auth}" class="action-btn">
+           <a th:if="${session.loggedInCustomer}" th:href="@{/account}" class="action-btn">
               <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <a th:unless="${session.loggedInCustomer}" th:href="@{/auth}" class="action-btn">
+              <ion-icon name="log-in-outline"></ion-icon>
             </a>
             <button class="action-btn">
               <ion-icon name="heart-outline"></ion-icon>

@@ -81,7 +81,6 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding-top: 160px;
 }
 
 a {
@@ -3579,21 +3578,7 @@ footer {
   transition: transform 0.3s ease;
 }
 
-.header-main,
-.desktop-navigation-menu {
-  position: fixed;
-  left: 0;
-  width: 100%;
+.header-top {
   background-color: #fff;
-  z-index: 999;
-}
-
-.header-main {
-  top: 0;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-}
-
-.desktop-navigation-menu {
-  top: 80px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+  z-index: 997;
 }

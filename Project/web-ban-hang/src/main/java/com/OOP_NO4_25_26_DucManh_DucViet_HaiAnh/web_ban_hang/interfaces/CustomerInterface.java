@@ -7,6 +7,8 @@ import java.util.Optional;
 public interface CustomerInterface {
 
     Customer registerCustomer(Customer customer);
+    Customer findById(Long id);
+    void updateCustomer(Customer customer);
     Optional<Customer> findCustomerByEmail(String email);
     Optional<Customer> authenticateCustomer(String email, String rawPassword);
 }
