@@ -144,14 +144,14 @@
 }
 
 .address-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
   background-color: var(--white);
   padding: 15px 20px;
   border: 1px solid var(--cultured);
   border-radius: var(--border-radius-md);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 15px;
 }
 
 .address-item.default-address {
@@ -159,19 +159,41 @@
   padding-left: 16px;
 }
 
+.address-info {
+  flex-grow: 1;
+  /* Thêm để fix lỗi wrapping */
+  min-width: 0; /* Cho phép flex item co lại nếu cần */
+}
+
 .address-info p {
+  display: flex;
+  /* align-items: baseline; Bỏ baseline, thử dùng flex-start */
+  align-items: flex-start; /* Căn label và value lên đầu dòng */
+  gap: 8px;
   margin-bottom: 8px;
   color: var(--onyx);
   font-size: 0.95rem;
   line-height: 1.4;
 }
+
 .address-info p:last-child {
   margin-bottom: 0;
 }
+
 .address-info strong {
   color: var(--eerie-black);
-  min-width: 90px;
-  display: inline-block;
+  min-width: 85px;
+  flex-shrink: 0;
+  /* Bỏ display: inline-block; */
+  /* Căn chỉnh text trong strong nếu cần */
+  /* text-align: left; */
+}
+
+.address-info span {
+  word-break: break-word;
+  /* Thêm để fix lỗi wrapping */
+  min-width: 0; /* Cho phép span co lại và wrap */
+  flex-grow: 1; /* Cho phép span chiếm không gian còn lại */
 }
 
 .default-badge {
@@ -179,44 +201,46 @@
   font-size: 0.8rem;
   font-weight: 500;
   margin-left: 5px;
+  white-space: nowrap; /* Ngăn không cho badge xuống dòng */
 }
 
 .address-actions {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   flex-shrink: 0;
 }
 
-.address-actions .action-btn,
+.address-actions a,
 .address-actions form {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
   margin: 0;
   padding: 0;
+  line-height: 1;
+  vertical-align: middle;
 }
 
-.address-actions form .action-btn {
+.address-actions .action-btn {
   background: none;
   border: none;
   color: var(--sonic-silver);
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   padding: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   transition: color 0.2s ease, background-color 0.2s ease;
   vertical-align: middle;
 }
 
 .address-actions .action-btn ion-icon {
-  --ionicon-stroke-width: 45px;
+  --ionicon-stroke-width: 40px;
   line-height: 1;
 }
 
@@ -224,9 +248,14 @@
   color: var(--eerie-black);
   background-color: var(--cultured);
 }
+
 .address-actions .delete-btn:hover {
   color: hsl(0, 70%, 50%);
   background-color: hsl(0, 100%, 95%);
+}
+
+.address-item.default-address .address-actions {
+  justify-content: center;
 }
 
 .set-default-btn {
@@ -246,23 +275,6 @@
   background-color: hsla(34, 35%, 70%, 0.1);
   color: var(--salmon-pink);
   border-color: var(--salmon-pink);
-}
-
-@media (max-width: 768px) {
-  .address-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .address-actions {
-    margin-top: 10px;
-    width: 100%;
-    justify-content: flex-end;
-  }
-  .address-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
 }
 
 .alert {

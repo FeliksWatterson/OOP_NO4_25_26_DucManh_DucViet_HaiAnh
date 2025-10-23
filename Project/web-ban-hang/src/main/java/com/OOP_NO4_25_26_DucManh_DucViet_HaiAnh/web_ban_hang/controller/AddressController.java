@@ -56,7 +56,7 @@ public class AddressController {
         return "redirect:/account/address";
     }
 
-    @GetMapping("/account/address/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditAddressForm(@PathVariable Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
          Customer customer = (Customer) session.getAttribute("loggedInCustomer");
          if (customer == null) {
@@ -68,7 +68,10 @@ public class AddressController {
              model.addAttribute("customer", customer); 
              model.addAttribute("addresses", addressService.findAddressesByCustomer(customer));
              model.addAttribute("addressCount", addressService.countAddressesByCustomer(customer));
-             return "account/address"; 
+             if (!model.containsAttribute("newAddress")) {
+                model.addAttribute("newAddress", new Address());
+            }
+             return "address"; 
          } else {
              redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy địa chỉ.");
              return "redirect:/account/address";

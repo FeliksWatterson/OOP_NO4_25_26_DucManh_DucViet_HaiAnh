@@ -257,7 +257,11 @@
               </form>
             </div>
 
-            <div class="address-list">
+            <div
+              class="address-list"
+              id="addressListContainer"
+              th:unless="${editAddress}"
+            >
               <div
                 th:each="address : ${addresses}"
                 class="address-item"
@@ -290,7 +294,8 @@
                   <form
                     th:action="@{/account/address/delete/{id}(id=${address.id})}"
                     method="post"
-                    style="display: inline"
+                    style="margin: 0"
+                    th:unless="${address.default}"
                     onsubmit="return confirm('Bạn có chắc chắn muốn xóa địa chỉ này?');"
                   >
                     <button type="submit" class="action-btn delete-btn">
@@ -302,11 +307,7 @@
                     th:action="@{/account/address/setDefault/{id}(id=${address.id})}"
                     method="post"
                     style="display: inline"
-                  >
-                    <button type="submit" class="set-default-btn">
-                      Đặt làm mặc định
-                    </button>
-                  </form>
+                  ></form>
                 </div>
               </div>
               <p th:if="${#lists.isEmpty(addresses)}">
@@ -346,87 +347,91 @@
         </div>
       </div>
     </main>
-    <footer>
+    <footer th:fragment="footer">
       <div class="footer-nav">
         <div class="container">
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
-              <h2 class="nav-title">Popular Categories</h2>
+              <h2 class="nav-title">Danh Mục Phổ Biến</h2>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Fashion</a>
+              <a href="#" class="footer-nav-link">Thời trang</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Electronic</a>
+              <a href="#" class="footer-nav-link">Điện tử</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Cosmetic</a>
+              <a href="#" class="footer-nav-link">Mỹ phẩm</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Health</a>
+              <a href="#" class="footer-nav-link">Sức khỏe</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Watches</a>
+              <a href="#" class="footer-nav-link">Đồng hồ</a>
             </li>
           </ul>
+
           <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Products</h2></li>
+            <li class="footer-nav-item"><h2 class="nav-title">Sản Phẩm</h2></li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Prices drop</a>
+              <a href="#" class="footer-nav-link">Giảm giá</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">New products</a>
+              <a href="#" class="footer-nav-link">Sản phẩm mới</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Best sales</a>
+              <a href="#" class="footer-nav-link">Bán chạy nhất</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Contact us</a>
+              <a href="#" class="footer-nav-link">Liên hệ chúng tôi</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sitemap</a>
+              <a href="#" class="footer-nav-link">Sơ đồ trang</a>
             </li>
           </ul>
+
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
-              <h2 class="nav-title">Our Company</h2>
+              <h2 class="nav-title">Công Ty Chúng Tôi</h2>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Delivery</a>
+              <a href="#" class="footer-nav-link">Giao hàng</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Legal Notice</a>
+              <a href="#" class="footer-nav-link">Thông báo pháp lý</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Terms and conditions</a>
+              <a href="#" class="footer-nav-link">Điều khoản và điều kiện</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">About us</a>
+              <a href="#" class="footer-nav-link">Về chúng tôi</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Secure payment</a>
+              <a href="#" class="footer-nav-link">Thanh toán an toàn</a>
             </li>
           </ul>
+
           <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Services</h2></li>
+            <li class="footer-nav-item"><h2 class="nav-title">Dịch Vụ</h2></li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Prices drop</a>
+              <a href="#" class="footer-nav-link">Giảm giá</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">New products</a>
+              <a href="#" class="footer-nav-link">Sản phẩm mới</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Best sales</a>
+              <a href="#" class="footer-nav-link">Bán chạy nhất</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Contact us</a>
+              <a href="#" class="footer-nav-link">Liên hệ chúng tôi</a>
             </li>
             <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sitemap</a>
+              <a href="#" class="footer-nav-link">Sơ đồ trang</a>
             </li>
           </ul>
+
           <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Contact</h2></li>
+            <li class="footer-nav-item"><h2 class="nav-title">Liên Hệ</h2></li>
             <li class="footer-nav-item flex">
               <div class="icon-box">
                 <ion-icon name="location-outline"></ion-icon>
@@ -437,7 +442,7 @@
               <div class="icon-box">
                 <ion-icon name="call-outline"></ion-icon>
               </div>
-              <a href="tel:+607936-8058" class="footer-nav-link"
+              <a href="tel:+84384887042" class="footer-nav-link"
                 >(+84) 384 887 042</a
               >
             </li>
@@ -450,9 +455,10 @@
               >
             </li>
           </ul>
+
           <ul class="footer-nav-list">
             <li class="footer-nav-item">
-              <h2 class="nav-title">Follow Us</h2>
+              <h2 class="nav-title">Theo Dõi Chúng Tôi</h2>
             </li>
             <li>
               <ul class="social-link">
@@ -481,15 +487,16 @@
           </ul>
         </div>
       </div>
+
       <div class="footer-bottom">
         <div class="container">
           <img
             th:src="@{/images/payment.png}"
-            alt="payment method"
+            alt="Phương thức thanh toán"
             class="payment-img"
           />
           <p class="copyright">
-            &copy; 2025 <a href="#">Mộc</a> all rights reserved.
+            &copy; 2025 <a href="#">Mộc</a>. Đã đăng ký bản quyền.
           </p>
         </div>
       </div>
@@ -507,12 +514,21 @@
       function toggleAddForm() {
         var form = document.getElementById("addAddressForm");
         var editForm = document.getElementById("editAddressForm");
+        var addressList = document.getElementById("addressListContainer");
+
         if (form) {
-          if (editForm && editForm.style.display !== "none") {
+          if (editForm && editForm.offsetParent !== null) {
             window.location.href = "/account/address";
             return;
           }
-          form.style.display = form.style.display === "none" ? "block" : "none";
+
+          var isHidden =
+            form.style.display === "none" || form.style.display === "";
+          form.style.display = isHidden ? "block" : "none";
+
+          if (addressList) {
+            addressList.style.display = isHidden ? "none" : "flex";
+          }
         }
       }
 
