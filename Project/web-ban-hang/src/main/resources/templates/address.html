@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sổ địa chỉ - Mộc E-commerce</title>
+    <link
+      rel="shortcut icon"
+      th:href="@{/images/logo/favicon.svg}"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/account.css}" />
+    <link rel="stylesheet" th:href="@{/css/address.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #333;
+        background-color: #f7f7f7; /* Hoặc màu nền bạn muốn */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-top">
+        <div class="container">
+          <ul class="header-social-container">
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-linkedin"></ion-icon
+              ></a>
+            </li>
+          </ul>
+          <div class="header-alert-news">
+            <p><b>Miễn Phí Vận Chuyển</b> Cho Đơn Hàng Trên 100.000đ</p>
+          </div>
+          <div class="header-top-actions">
+            <select name="language">
+              <option value="vi-VN">Tiếng Việt</option>
+              <option value="en-US">English</option>
+              <option value="ru-RU">Русский</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="header-main fixed-main">
+        <div class="container">
+          <a th:href="@{/}" class="header-logo">
+            <img
+              th:src="@{/images/logo/logo.svg}"
+              alt="Logo Mộc"
+              width="120"
+              height="36"
+            />
+          </a>
+          <div class="header-search-container">
+            <input
+              type="search"
+              name="search"
+              class="search-field"
+              placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
+            />
+            <button class="search-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="header-user-actions">
+            <a
+              th:if="${session.loggedInCustomer}"
+              th:href="@{/account}"
+              class="action-btn"
+              ><ion-icon name="person-outline"></ion-icon
+            ></a>
+            <a
+              th:unless="${session.loggedInCustomer}"
+              th:href="@{/auth}"
+              class="action-btn"
+              ><ion-icon name="log-in-outline"></ion-icon
+            ></a>
+            <button class="action-btn">
+              <ion-icon name="heart-outline"></ion-icon
+              ><span class="count">0</span>
+            </button>
+            <button class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon
+              ><span class="count">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="account-main">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a th:href="@{/}">Trang chủ</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <a th:href="@{/account}">Tài khoản</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <span>Sổ địa chỉ</span>
+        </div>
+
+        <div
+          th:if="${successMessage}"
+          class="alert alert-success"
+          th:text="${successMessage}"
+        ></div>
+        <div
+          th:if="${errorMessage}"
+          class="alert alert-danger"
+          th:text="${errorMessage}"
+        ></div>
+
+        <div class="account-container">
+          <div class="account-content address-content">
+            <div class="address-header">
+              <h2>Sổ địa chỉ</h2>
+              <button class="add-address-btn" onclick="toggleAddForm()">
+                Thêm địa chỉ mới
+              </button>
+            </div>
+
+            <div
+              id="addAddressForm"
+              class="address-form-container"
+              style="display: none"
+            >
+              <h3>Thêm địa chỉ mới</h3>
+              <form
+                th:action="@{/account/address/add}"
+                method="post"
+                th:object="${newAddress}"
+                class="address-form"
+              >
+                <div class="form-group">
+                  <label for="addFullName">Họ và tên:</label>
+                  <input
+                    type="text"
+                    id="addFullName"
+                    th:field="*{fullName}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addPhone">Số điện thoại:</label>
+                  <input
+                    type="tel"
+                    id="addPhone"
+                    th:field="*{phone}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addAddressDetail">Địa chỉ chi tiết:</label>
+                  <textarea
+                    id="addAddressDetail"
+                    th:field="*{addressDetail}"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    id="addIsDefault"
+                    th:field="*{default}"
+                  />
+                  <label for="addIsDefault">Đặt làm địa chỉ mặc định</label>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn-save">Lưu</button>
+                  <button
+                    type="button"
+                    class="btn-cancel"
+                    onclick="toggleAddForm()"
+                  >
+                    Hủy
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              th:if="${editAddress}"
+              id="editAddressForm"
+              class="address-form-container"
+            >
+              <h3>Chỉnh sửa địa chỉ</h3>
+              <form
+                th:action="@{/account/address/update/{id}(id=${editAddress.id})}"
+                method="post"
+                th:object="${editAddress}"
+                class="address-form"
+              >
+                <div class="form-group">
+                  <label for="editFullName">Họ và tên:</label>
+                  <input
+                    type="text"
+                    id="editFullName"
+                    th:field="*{fullName}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editPhone">Số điện thoại:</label>
+                  <input
+                    type="tel"
+                    id="editPhone"
+                    th:field="*{phone}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editAddressDetail">Địa chỉ chi tiết:</label>
+                  <textarea
+                    id="editAddressDetail"
+                    th:field="*{addressDetail}"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    id="editIsDefault"
+                    th:field="*{default}"
+                  />
+                  <label for="editIsDefault">Đặt làm địa chỉ mặc định</label>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn-save">Lưu thay đổi</button>
+                  <a th:href="@{/account/address}" class="btn-cancel">Hủy</a>
+                </div>
+              </form>
+            </div>
+
+            <div class="address-list">
+              <div
+                th:each="address : ${addresses}"
+                class="address-item"
+                th:classappend="${address.default} ? 'default-address' : ''"
+              >
+                <div class="address-info">
+                  <p>
+                    <strong>Họ và tên:</strong>
+                    <span th:text="${address.fullName}"></span>
+                    <span th:if="${address.default}" class="default-badge"
+                      >(Địa chỉ mặc định)</span
+                    >
+                  </p>
+                  <p>
+                    <strong>Địa chỉ:</strong>
+                    <span th:text="${address.addressDetail}"></span>
+                  </p>
+                  <p>
+                    <strong>Số điện thoại:</strong>
+                    <span th:text="${address.phone}"></span>
+                  </p>
+                </div>
+                <div class="address-actions">
+                  <a
+                    th:href="@{/account/address/edit/{id}(id=${address.id})}"
+                    class="action-btn edit-btn"
+                  >
+                    <ion-icon name="create-outline"></ion-icon>
+                  </a>
+                  <form
+                    th:action="@{/account/address/delete/{id}(id=${address.id})}"
+                    method="post"
+                    style="display: inline"
+                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa địa chỉ này?');"
+                  >
+                    <button type="submit" class="action-btn delete-btn">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </form>
+                  <form
+                    th:unless="${address.default}"
+                    th:action="@{/account/address/setDefault/{id}(id=${address.id})}"
+                    method="post"
+                    style="display: inline"
+                  >
+                    <button type="submit" class="set-default-btn">
+                      Đặt làm mặc định
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <p th:if="${#lists.isEmpty(addresses)}">
+                Bạn chưa có địa chỉ nào được lưu.
+              </p>
+            </div>
+          </div>
+
+          <div class="account-sidebar">
+            <div class="account-card sidebar-card">
+              <nav class="sidebar-nav">
+                <ul>
+                  <li>
+                    <a th:href="@{/account}"
+                      ><ion-icon name="person-outline"></ion-icon
+                      ><span>Thông tin cá nhân</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" class="active"
+                      ><ion-icon name="location-outline"></ion-icon
+                      ><span th:text="|Quản lý địa chỉ (${addressCount})|"
+                        >Quản lý địa chỉ (0)</span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a th:href="@{/logout}"
+                      ><ion-icon name="log-out-outline"></ion-icon
+                      ><span>Đăng xuất</span></a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-nav">
+        <div class="container">
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Popular Categories</h2>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Fashion</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Electronic</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Cosmetic</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Health</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Watches</a>
+            </li>
+          </ul>
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item"><h2 class="nav-title">Products</h2></li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Prices drop</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">New products</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Best sales</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Contact us</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Sitemap</a>
+            </li>
+          </ul>
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Our Company</h2>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Delivery</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Legal Notice</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Terms and conditions</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">About us</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Secure payment</a>
+            </li>
+          </ul>
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item"><h2 class="nav-title">Services</h2></li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Prices drop</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">New products</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Best sales</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Contact us</a>
+            </li>
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Sitemap</a>
+            </li>
+          </ul>
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item"><h2 class="nav-title">Contact</h2></li>
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+              <address class="content">Hà Đông, Hà Nội, Việt Nam</address>
+            </li>
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+              <a href="tel:+607936-8058" class="footer-nav-link"
+                >(+84) 384 887 042</a
+              >
+            </li>
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+              <a href="mailto:ducmanhlehoang@gmail.com" class="footer-nav-link"
+                >ducmanhlehoang@gmail.com</a
+              >
+            </li>
+          </ul>
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Follow Us</h2>
+            </li>
+            <li>
+              <ul class="social-link">
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link"
+                    ><ion-icon name="logo-facebook"></ion-icon
+                  ></a>
+                </li>
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link"
+                    ><ion-icon name="logo-twitter"></ion-icon
+                  ></a>
+                </li>
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link"
+                    ><ion-icon name="logo-linkedin"></ion-icon
+                  ></a>
+                </li>
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link"
+                    ><ion-icon name="logo-instagram"></ion-icon
+                  ></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <img
+            th:src="@{/images/payment.png}"
+            alt="payment method"
+            class="payment-img"
+          />
+          <p class="copyright">
+            &copy; 2025 <a href="#">Mộc</a> all rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script th:src="@{/js/script.js}"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      function toggleAddForm() {
+        var form = document.getElementById("addAddressForm");
+        var editForm = document.getElementById("editAddressForm");
+        if (form) {
+          if (editForm && editForm.style.display !== "none") {
+            window.location.href = "/account/address";
+            return;
+          }
+          form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const alertSuccess = document.querySelector(".alert-success");
+        const alertError = document.querySelector(".alert-danger");
+        if (alertSuccess) {
+          setTimeout(() => (alertSuccess.style.display = "none"), 3000);
+        }
+        if (alertError) {
+          setTimeout(() => (alertError.style.display = "none"), 5000);
+        }
+
+        const addForm = document.getElementById("addAddressForm");
+        const hasAddError = document.querySelector(".alert-danger") && false;
+        const editFormIsVisible = document.getElementById("editAddressForm");
+
+        if (hasAddError && addForm && !editFormIsVisible) {
+          addForm.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -150,26 +150,30 @@
                 <div class="info-item">
                   <span class="info-label">Họ và tên:</span>
                   <span class="info-value" th:text="${customer.fullName}"
-                    >Nguyễn Thị Thanh Thanh</span
+                    >...</span
                   >
                 </div>
                 <div class="info-item">
                   <span class="info-label">Email:</span>
                   <span class="info-value" th:text="${customer.email}"
-                    >ntthanh.dhgt17a3hn@sv.uneti.edu.vn</span
+                    >...</span
                   >
                 </div>
                 <div class="info-item">
                   <span class="info-label">Số điện thoại:</span>
                   <span
                     class="info-value"
-                    th:text="${customer.phone ?: 'Chưa cập nhật'}"
-                    >0387287486</span
+                    th:text="${defaultAddress?.phone ?: customer.phone ?: 'Chưa cập nhật'}"
+                    >...</span
                   >
                 </div>
                 <div class="info-item">
-                  <span class="info-label">Địa chỉ:</span>
-                  <span class="info-value">Vietnam</span>
+                  <span class="info-label">Địa chỉ mặc định:</span>
+                  <span
+                    class="info-value"
+                    th:text="${defaultAddress?.addressDetail ?: 'Chưa có địa chỉ mặc định'}"
+                    >Vietnam</span
+                  >
                 </div>
               </div>
               <a href="#" class="edit-btn">Chỉnh sửa thông tin</a>
@@ -187,9 +191,11 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a th:href="@{/account/address}">
                       <ion-icon name="location-outline"></ion-icon>
-                      <span>Quản lý địa chỉ (0)</span>
+                      <span th:text="|Quản lý địa chỉ (${addressCount})|"
+                        >Quản lý địa chỉ (0)</span
+                      >
                     </a>
                   </li>
                   <li>

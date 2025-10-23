@@ -2,6 +2,8 @@ package com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.controller;
 
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Customer;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.CustomerInterface;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Address;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.AddressInterface;
 import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ import java.util.Optional;
 
 @Controller
 public class CustomerController {
+
+    @Autowired 
+    private AddressInterface addressService;
 
     @Autowired
     private CustomerInterface customerService;
@@ -52,7 +57,7 @@ public class CustomerController {
     // Sign In
     @PostMapping("/login")
     public String processLogin(@RequestParam String email, @RequestParam String password, Model model,
-            RedirectAttributes redirectAttributes, HttpSession session) { // Thêm HttpSession
+            RedirectAttributes redirectAttributes, HttpSession session) { 
         Optional<Customer> authenticatedCustomer = customerService.authenticateCustomer(email, password);
 
         if (authenticatedCustomer.isPresent()) {
@@ -79,15 +84,22 @@ public class CustomerController {
         if (customer == null) {
             return "redirect:/auth";
         }
-
-        Optional<Customer> freshCustomer = customerService.findCustomerByEmail(customer.getEmail());
-        if (freshCustomer.isEmpty()) {
-            session.invalidate();
+        Optional<Customer> freshCustomerOpt = customerService.findCustomerByEmail(customer.getEmail());
+        if (freshCustomerOpt.isEmpty()) {
+            session.invalidate(); 
             return "redirect:/auth";
         }
+        Customer freshCustomer = freshCustomerOpt.get();
+        model.addAttribute("customer", freshCustomer);
 
-        model.addAttribute("customer", freshCustomer.get());
-        return "account"; 
+        Optional<Address> defaultAddressOpt = addressService.findDefaultAddressByCustomer(freshCustomer);
+        model.addAttribute("defaultAddress", defaultAddressOpt.orElse(null)); 
+
+        long addressCount = addressService.countAddressesByCustomer(freshCustomer);
+        model.addAttribute("addressCount", addressCount);
+
+
+        return "account";
     }
 
     @GetMapping("/logout")
