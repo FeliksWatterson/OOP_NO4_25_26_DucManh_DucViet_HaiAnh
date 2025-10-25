@@ -316,3 +316,34 @@ window.addEventListener("scroll", () => {
 
   lastScrollY = currentScrollY;
 });
+
+const toasts = document.querySelectorAll(".toast-notification");
+
+toasts.forEach((toast) => {
+  let duration = 5000;
+
+  if (
+    toast.classList.contains("cart-success-toast") ||
+    toast.classList.contains("welcome-toast")
+  ) {
+    duration = 3000;
+  }
+
+  const timer = setTimeout(() => {
+    toast.style.animation = "toastFadeOut 0.5s ease forwards";
+    setTimeout(() => {
+      if (toast) toast.style.display = "none";
+    }, 500);
+  }, duration);
+
+  const closeButton = toast.querySelector(".toast-close-btn");
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      clearTimeout(timer);
+      toast.style.animation = "toastFadeOut 0.5s ease forwards";
+      setTimeout(() => {
+        if (toast) toast.style.display = "none";
+      }, 500);
+    });
+  }
+});

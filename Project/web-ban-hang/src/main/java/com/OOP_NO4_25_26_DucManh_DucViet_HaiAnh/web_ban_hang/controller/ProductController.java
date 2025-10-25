@@ -23,13 +23,10 @@ public class ProductController {
 
         if (productOpt.isPresent()) {
             model.addAttribute("product", productOpt.get());
-            // Bạn có thể thêm các thuộc tính khác vào model nếu cần, ví dụ: sản phẩm liên quan
-            // model.addAttribute("relatedProducts", productService.findRelatedProducts(productOpt.get()));
-            return "productdetail"; // Trả về tên file HTML (không có .html)
+            return "productdetail"; 
         } else {
-            // Xử lý trường hợp không tìm thấy sản phẩm
             redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy sản phẩm với ID: " + productId);
-            return "redirect:/"; // Chuyển hướng về trang chủ hoặc trang lỗi
+            return "redirect:/";
         }
     }
 }

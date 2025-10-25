@@ -66,13 +66,13 @@
               <span
                 th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"
               >
-                299.000đ
               </span>
               <span
                 class="original"
                 th:if="${product.originalPrice != null and product.originalPrice > product.price}"
                 th:text="${#numbers.formatDecimal(product.originalPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"
-              ></span>
+              >
+              </span>
             </div>
 
             <div class="extra-info">
@@ -90,44 +90,53 @@
               </p>
             </div>
 
-            <div class="quantity-selector">
-              <label for="quantity">Số lượng:</label>
-              <div class="quantity-controls">
-                <button
-                  type="button"
-                  class="quantity-btn minus"
-                  onclick="adjustQty(-1)"
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  value="1"
-                  min="1"
-                  th:max="${product.stock > 0 ? product.stock : 1}"
-                  th:attr="data-max=${product.stock > 0 ? product.stock : 1}"
-                />
-                <button
-                  type="button"
-                  class="quantity-btn plus"
-                  onclick="adjustQty(1)"
-                >
-                  +
+            <form th:action="@{/cart/add}" method="post">
+              <input type="hidden" name="productId" th:value="${product.id}" />
+
+              <div class="quantity-selector">
+                <label for="quantity">Số lượng:</label>
+                <div class="quantity-controls">
+                  <button
+                    type="button"
+                    class="quantity-btn minus"
+                    onclick="adjustQty(-1)"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    th:max="${product.stock > 0 ? product.stock : 1}"
+                    th:attr="data-max=${product.stock > 0 ? product.stock : 1}"
+                  />
+                  <button
+                    type="button"
+                    class="quantity-btn plus"
+                    onclick="adjustQty(1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <span
+                  class="stock-info"
+                  th:text="${'(Còn ' + (product.stock != null and product.stock > 0 ? product.stock : 0) + ' sản phẩm)'}"
+                ></span>
+              </div>
+
+              <div class="action-buttons">
+                <button type="submit" class="btn-add-to-cart">
+                  <ion-icon
+                    name="cart-outline"
+                    style="margin-right: 5px; vertical-align: middle"
+                  ></ion-icon>
+                  Thêm vào giỏ hàng
                 </button>
               </div>
-              <span
-                class="stock-info"
-                th:text="${'(Còn ' + (product.stock != null and product.stock > 0 ? product.stock : 0) + ' sản phẩm)'}"
-              ></span>
-            </div>
-
-            <div class="action-buttons">
-              <button type="button" class="btn-add-to-cart">
-                <ion-icon name="cart-outline"></ion-icon>
-                Thêm vào giỏ hàng
-              </button>
+            </form>
+            <div class="action-buttons" style="margin-top: 10px">
               <button type="button" class="btn-buy-now">Mua ngay</button>
             </div>
           </div>
@@ -140,6 +149,68 @@
               : 'Chưa có mô tả cho sản phẩm này.'}"
           ></p>
         </div>
+      </div>
+      <div
+        th:if="${welcomeMessage}"
+        id="welcomeToast"
+        class="toast-notification welcome-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${welcomeMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartSuccessMessage}"
+        id="cartSuccessToast"
+        class="toast-notification cart-success-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartSuccessMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartErrorMessage}"
+        id="cartErrorToast"
+        class="toast-notification cart-error-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartErrorMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
       </div>
     </main>
 

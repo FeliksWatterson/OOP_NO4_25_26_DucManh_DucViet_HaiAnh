@@ -25,94 +25,12 @@
         font-weight: 300;
         line-height: 1.5;
         color: #333;
-        background-color: #f7f7f7; /* Hoặc màu nền bạn muốn */
+        background-color: #f7f7f7;
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="header-top">
-        <div class="container">
-          <ul class="header-social-container">
-            <li>
-              <a href="#" class="social-link"
-                ><ion-icon name="logo-facebook"></ion-icon
-              ></a>
-            </li>
-            <li>
-              <a href="#" class="social-link"
-                ><ion-icon name="logo-twitter"></ion-icon
-              ></a>
-            </li>
-            <li>
-              <a href="#" class="social-link"
-                ><ion-icon name="logo-instagram"></ion-icon
-              ></a>
-            </li>
-            <li>
-              <a href="#" class="social-link"
-                ><ion-icon name="logo-linkedin"></ion-icon
-              ></a>
-            </li>
-          </ul>
-          <div class="header-alert-news">
-            <p><b>Miễn Phí Vận Chuyển</b> Cho Đơn Hàng Trên 100.000đ</p>
-          </div>
-          <div class="header-top-actions">
-            <select name="language">
-              <option value="vi-VN">Tiếng Việt</option>
-              <option value="en-US">English</option>
-              <option value="ru-RU">Русский</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="header-main fixed-main">
-        <div class="container">
-          <a th:href="@{/}" class="header-logo">
-            <img
-              th:src="@{/images/logo/logo.svg}"
-              alt="Logo Mộc"
-              width="120"
-              height="36"
-            />
-          </a>
-          <div class="header-search-container">
-            <input
-              type="search"
-              name="search"
-              class="search-field"
-              placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
-            />
-            <button class="search-btn">
-              <ion-icon name="search-outline"></ion-icon>
-            </button>
-          </div>
-          <div class="header-user-actions">
-            <a
-              th:if="${session.loggedInCustomer}"
-              th:href="@{/account}"
-              class="action-btn"
-              ><ion-icon name="person-outline"></ion-icon
-            ></a>
-            <a
-              th:unless="${session.loggedInCustomer}"
-              th:href="@{/auth}"
-              class="action-btn"
-              ><ion-icon name="log-in-outline"></ion-icon
-            ></a>
-            <button class="action-btn">
-              <ion-icon name="heart-outline"></ion-icon
-              ><span class="count">0</span>
-            </button>
-            <button class="action-btn">
-              <ion-icon name="bag-handle-outline"></ion-icon
-              ><span class="count">0</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
+    <header th:replace="~{fragment/header :: header}"></header>
     <main class="account-main">
       <div class="container">
         <div class="breadcrumbs">

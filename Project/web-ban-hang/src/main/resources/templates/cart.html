@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng - Mộc E-commerce</title>
+
+    <link
+      rel="shortcut icon"
+      th:href="@{/images/logo/favicon.svg}"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:fragment="header">
+      <div class="header-top">
+        <div class="container">
+          <ul class="header-social-container">
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="social-link"
+                ><ion-icon name="logo-linkedin"></ion-icon
+              ></a>
+            </li>
+          </ul>
+
+          <div class="header-alert-news">
+            <p><b>Miễn Phí Vận Chuyển</b> Cho Đơn Hàng Trên 100.000đ</p>
+          </div>
+
+          <div class="header-top-actions">
+            <select name="language">
+              <option value="vi-VN">Tiếng Việt</option>
+              <option value="en-US">English</option>
+              <option value="ru-RU">Русский</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-main fixed-main">
+        <div class="container">
+          <a th:href="@{/}" class="header-logo">
+            <img
+              th:src="@{/images/logo/logo.svg}"
+              alt="Logo Mộc"
+              width="120"
+              height="36"
+            />
+          </a>
+
+          <div class="header-search-container">
+            <input
+              type="search"
+              name="search"
+              class="search-field"
+              placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
+            />
+            <button class="search-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </div>
+
+          <div class="header-user-actions">
+            <a
+              th:if="${session.loggedInCustomer}"
+              th:href="@{/account}"
+              class="action-btn"
+            >
+              <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <a
+              th:unless="${session.loggedInCustomer}"
+              th:href="@{/auth}"
+              class="action-btn"
+            >
+              <ion-icon name="log-in-outline"></ion-icon>
+            </a>
+            <a th:href="@{/cart}" class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon>
+              <span
+                class="count"
+                th:with="loggedInCustomer=${session.loggedInCustomer}"
+                th:text="${loggedInCustomer != null ? @cartService.getTotalItems(loggedInCustomer) : '0'}"
+                >0</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="cart-main">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a th:href="@{/}">Trang chủ</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <span>Giỏ Hàng</span>
+        </div>
+
+        <h2>Giỏ Hàng</h2>
+        <div class="cart-container">
+          <div class="cart-items-list">
+            <div class="cart-header">
+              <span th:text="|Mặt Hàng (${cartItemCount ?: 0})|"
+                >Mặt Hàng (0)</span
+              >
+              <span>Tạm Tính</span>
+            </div>
+
+            <div th:each="item : ${cartItems}" class="cart-item">
+              <div class="item-main-info">
+                <a
+                  th:href="@{'/product/' + ${item.product.id}}"
+                  class="item-image-link"
+                >
+                  <img
+                    th:src="${item.product.imageUrl ?: '/images/placeholder.png'}"
+                    th:alt="${item.product.name}"
+                    class="item-image"
+                  />
+                </a>
+                <div class="item-details">
+                  <a
+                    th:href="@{'/product/' + ${item.product.id}}"
+                    class="item-name"
+                    th:text="${item.product.name}"
+                    >Product Name</a
+                  >
+                  <div class="item-price">
+                    <span
+                      class="current-price"
+                      th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                      >Price</span
+                    >
+                    <span
+                      class="original-price"
+                      th:if="${item.product.originalPrice != null and item.product.originalPrice > item.product.price}"
+                      th:text="${#numbers.formatDecimal(item.product.originalPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                      >Original Price</span
+                    >
+                  </div>
+                  <form
+                    th:action="@{/cart/update}"
+                    method="post"
+                    class="quantity-selector item-quantity"
+                  >
+                    <input
+                      type="hidden"
+                      name="productId"
+                      th:value="${item.product.id}"
+                    />
+                    <div class="quantity-controls">
+                      <button
+                        type="button"
+                        class="quantity-btn minus"
+                        th:onclick="|updateQty('${item.product.id}', -1)|"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        name="quantity"
+                        th:value="${item.quantity}"
+                        min="1"
+                        th:max="${item.product.stock ?: 99}"
+                        th:id="'quantity-' + ${item.product.id}"
+                        onchange="submitUpdateForm(this)"
+                      />
+                      <button
+                        type="button"
+                        class="quantity-btn plus"
+                        th:onclick="|updateQty('${item.product.id}', 1)|"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      type="submit"
+                      style="display: none"
+                      th:id="'submit-' + ${item.product.id}"
+                    >
+                      Update
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="item-subtotal">
+                <span
+                  th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                  >Subtotal</span
+                >
+                <form
+                  th:action="@{/cart/remove}"
+                  method="post"
+                  style="display: inline"
+                >
+                  <input
+                    type="hidden"
+                    name="productId"
+                    th:value="${item.product.id}"
+                  />
+                  <button
+                    type="submit"
+                    class="item-remove-btn"
+                    title="Xóa sản phẩm"
+                    onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?');"
+                  >
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div
+              th:if="${#lists.isEmpty(cartItems)}"
+              class="empty-cart-message"
+            >
+              Giỏ hàng của bạn đang trống.
+              <a th:href="@{/}">Tiếp tục mua sắm</a>.
+            </div>
+          </div>
+
+          <div class="order-summary" th:if="${not #lists.isEmpty(cartItems)}">
+            <h2>
+              Thông tin đơn hàng (<span th:text="${cartItemCount ?: 0}">0</span
+              >)
+            </h2>
+            <div class="summary-row">
+              <span
+                >Tạm tính (<span th:text="${cartItemCount ?: 0}">0</span> mặt
+                hàng)</span
+              >
+              <span
+                th:text="${#numbers.formatDecimal(subtotal ?: 0, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                >0đ</span
+              >
+            </div>
+            <div class="summary-row">
+              <span>Phí vận chuyển</span>
+              <span
+                th:text="${shippingFee == 0 ? 'Miễn Phí Giao Hàng' : (#numbers.formatDecimal(shippingFee, 0, 'COMMA', 0, 'POINT') + 'đ')}"
+                >Miễn Phí Giao Hàng</span
+              >
+            </div>
+            <div class="summary-row" th:if="${discount > 0}">
+              <span>Tổng khuyến mãi</span>
+              <span
+                th:text="'-' + ${#numbers.formatDecimal(discount ?: 0, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                >-0đ</span
+              >
+            </div>
+
+            <form
+              th:action="@{/cart/discount}"
+              method="post"
+              class="discount-code"
+            >
+              <input
+                type="text"
+                name="discountCode"
+                placeholder="Mã giảm giá"
+                th:value="${appliedDiscountCode}"
+              />
+              <button type="submit" class="apply-discount-btn">Áp dụng</button>
+            </form>
+
+            <div class="summary-total">
+              <span>Tổng tiền</span>
+              <span
+                class="total-amount"
+                th:text="${#numbers.formatDecimal(total ?: 0, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                >0đ</span
+              >
+            </div>
+            <span class="vat-info">(Đã bao gồm VAT)</span>
+
+            <form th:action="@{/cart/checkout}" method="get">
+              <button type="submit" class="checkout-btn">Thanh toán</button>
+            </form>
+
+            <a th:href="@{/}" class="continue-shopping-link"
+              >Tiếp tục mua hàng</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        th:if="${welcomeMessage}"
+        id="welcomeToast"
+        class="toast-notification welcome-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${welcomeMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartSuccessMessage}"
+        id="cartSuccessToast"
+        class="toast-notification cart-success-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartSuccessMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartErrorMessage}"
+        id="cartErrorToast"
+        class="toast-notification cart-error-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartErrorMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragment/footer :: footer}"></footer>
+
+    <script th:src="@{/js/script.js}"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      function updateQty(productId, amount) {
+        const qtyInput = document.getElementById("quantity-" + productId);
+        if (!qtyInput) return;
+
+        let currentQty = parseInt(qtyInput.value);
+        let newQty = currentQty + amount;
+        const maxQty = parseInt(qtyInput.getAttribute("max")) || 99;
+
+        if (newQty < 1) newQty = 1;
+        else if (newQty > maxQty) newQty = maxQty;
+
+        if (newQty !== currentQty) {
+          qtyInput.value = newQty;
+          const submitBtn = document.getElementById("submit-" + productId);
+          if (submitBtn) {
+            submitBtn.click();
+          } else {
+            qtyInput.form.submit();
+          }
+        }
+      }
+
+      function submitUpdateForm(inputElement) {
+        if (inputElement && inputElement.form) {
+          let value = parseInt(inputElement.value);
+          const min = parseInt(inputElement.getAttribute("min")) || 1;
+          const max = parseInt(inputElement.getAttribute("max")) || 99;
+          if (isNaN(value) || value < min) {
+            inputElement.value = min;
+          } else if (value > max) {
+            inputElement.value = max;
+          }
+          const productId =
+            inputElement.name === "quantity"
+              ? inputElement.form.querySelector("input[name=productId]").value
+              : null;
+          if (productId) {
+            const submitBtn = document.getElementById("submit-" + productId);
+            if (submitBtn) submitBtn.click();
+            else inputElement.form.submit();
+          } else {
+            inputElement.form.submit();
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const successAlert = document.querySelector(".alert-success");
+        const errorAlert = document.querySelector(".alert-danger");
+
+        if (successAlert) {
+          setTimeout(() => {
+            successAlert.style.display = "none";
+          }, 3000);
+        }
+        if (errorAlert) {
+          setTimeout(() => {
+            errorAlert.style.display = "none";
+          }, 5000);
+        }
+      });
+    </script>
+  </body>
+</html>

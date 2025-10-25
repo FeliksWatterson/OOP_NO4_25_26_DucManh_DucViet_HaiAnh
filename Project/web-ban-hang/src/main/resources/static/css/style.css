@@ -494,15 +494,6 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: var(--border-radius-sm);
 }
 
-.toast-banner img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  -o-object-position: center;
-  object-position: center;
-}
-
 .toast-detail {
   width: -webkit-calc(100% - 85px);
   width: calc(100% - 85px);
@@ -513,6 +504,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: var(--fs-10);
   color: var(--sonic-silver);
   margin-bottom: 8px;
+  flex-grow: 1;
 }
 
 .toast-title {
@@ -3581,4 +3573,115 @@ footer {
 .header-top {
   background-color: #fff;
   z-index: 997;
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 250px;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: hsl(34, 40%, 95%);
+  color: var(--white);
+  border: 1px solid var(--onyx);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-sm);
+  padding: 12px 18px;
+  z-index: 1001;
+  opacity: 1;
+  transition: opacity 0.5s ease, bottom 0.5s ease;
+  animation: toastFadeIn 0.5s ease forwards;
+}
+
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    bottom: 0px;
+  }
+  to {
+    opacity: 1;
+    bottom: 25px;
+  }
+}
+@keyframes toastFadeOut {
+  from {
+    opacity: 1;
+    bottom: 25px;
+  }
+  to {
+    opacity: 0;
+    bottom: 0px;
+  }
+}
+
+.cart-error-toast {
+  background-color: hsl(0, 79%, 63%);
+  border-color: hsl(0, 60%, 50%);
+  color: white;
+}
+
+.toast-icon {
+  display: none;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+  align-items: center;
+}
+
+.toast-notification .toast-icon ion-icon {
+  color: var(--cultured);
+}
+
+.cart-error-toast .toast-icon ion-icon {
+  color: white;
+}
+
+.toast-detail {
+  flex-grow: 1;
+}
+.toast-message {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.4;
+  color: #9d8f7b;
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: hsl(34, 10%, 15%);
+  cursor: pointer;
+  padding: 0 0 0 10px;
+  line-height: 1;
+  align-self: flex-start;
+}
+.toast-close-btn:hover {
+  color: white;
+}
+.toast-close-btn ion-icon {
+  display: block;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.95rem;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }

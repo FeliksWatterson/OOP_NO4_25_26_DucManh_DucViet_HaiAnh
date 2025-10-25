@@ -79,14 +79,15 @@
             >
               <ion-icon name="log-in-outline"></ion-icon>
             </a>
-            <button class="action-btn">
-              <ion-icon name="heart-outline"></ion-icon>
-              <span class="count">0</span>
-            </button>
-            <button class="action-btn">
+            <a th:href="@{/cart}" class="action-btn">
               <ion-icon name="bag-handle-outline"></ion-icon>
-              <span class="count">0</span>
-            </button>
+              <span
+                class="count"
+                th:with="loggedInCustomer=${session.loggedInCustomer}"
+                th:text="${loggedInCustomer != null ? @cartService.getTotalItems(loggedInCustomer) : '0'}"
+                >0</span
+              >
+            </a>
           </div>
         </div>
       </div>

@@ -58,42 +58,6 @@
       </div>
     </div>
 
-    <div class="notification-toast" data-toast>
-      <button class="toast-close-btn" data-toast-close>
-        <ion-icon name="close-outline"></ion-icon>
-      </button>
-      <div class="toast-banner">
-        <img
-          th:src="@{/images/products/yeunuoc.jpg}"
-          alt=""
-          width="80"
-          height="70"
-        />
-      </div>
-      <div
-        th:if="${welcomeMessage}"
-        id="welcomeToast"
-        class="welcome-toast show-once"
-        role="alert"
-      >
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${welcomeMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="document.getElementById('welcomeToast').classList.remove('show-once')"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-      <div class="toast-detail">
-        <p class="toast-message">Ai đó ở Hà Nội vừa mua</p>
-        <p class="toast-title">Áo Thun Yêu Nước</p>
-        <p class="toast-meta"><time datetime="PT2M">2 Phút</time> Trước</p>
-      </div>
-    </div>
-
     <header th:replace="~{fragment/header :: header}"></header>
 
     <main>
@@ -774,6 +738,7 @@
                 </div>
               </div>
             </div>
+
             <div id="flash-sale" class="product-featured">
               <h2 class="title">Flash Sale</h2>
               <div class="slider-with-arrows">
@@ -820,7 +785,22 @@
                             Old Price
                           </del>
                         </div>
-                        <button class="add-cart-btn">Thêm Vào Giỏ</button>
+                        <form
+                          th:action="@{/cart/add}"
+                          method="post"
+                          style="margin-bottom: 15px"
+                        >
+                          <input
+                            type="hidden"
+                            name="productId"
+                            th:value="${p.id}"
+                          />
+                          <input type="hidden" name="quantity" value="1" />
+                          <input type="hidden" name="returnUrl" value="/" />
+                          <button type="submit" class="add-cart-btn">
+                            Thêm Vào Giỏ
+                          </button>
+                        </form>
                         <div class="showcase-status">
                           <div class="wrapper">
                             <p>
@@ -899,15 +879,26 @@
                       Sale
                     </p>
                     <div class="showcase-actions">
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-                      <button class="btn-action">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </button>
-                      <button class="btn-action">
-                        <ion-icon name="bag-add-outline"></ion-icon>
-                      </button>
+                      <form
+                        th:action="@{/cart/add}"
+                        method="post"
+                        style="display: inline"
+                      >
+                        <input
+                          type="hidden"
+                          name="productId"
+                          th:value="${p.id}"
+                        />
+                        <input type="hidden" name="quantity" value="1" />
+                        <input type="hidden" name="returnUrl" value="/" />
+                        <button
+                          type="submit"
+                          class="btn-action"
+                          title="Thêm vào giỏ hàng"
+                        >
+                          <ion-icon name="bag-add-outline"></ion-icon>
+                        </button>
+                      </form>
                     </div>
                   </div>
                   <div class="showcase-content">
@@ -949,6 +940,68 @@
             </div>
           </div>
         </div>
+      </div>
+      <div
+        th:if="${welcomeMessage}"
+        id="welcomeToast"
+        class="toast-notification welcome-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${welcomeMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartSuccessMessage}"
+        id="cartSuccessToast"
+        class="toast-notification cart-success-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartSuccessMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div
+        th:if="${cartErrorMessage}"
+        id="cartErrorToast"
+        class="toast-notification cart-error-toast"
+        role="alert"
+      >
+        <div class="toast-icon">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <div class="toast-detail">
+          <p class="toast-message" th:text="${cartErrorMessage}"></p>
+        </div>
+        <button
+          type="button"
+          class="toast-close-btn"
+          onclick="this.parentElement.style.display='none';"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
       </div>
     </main>
 
