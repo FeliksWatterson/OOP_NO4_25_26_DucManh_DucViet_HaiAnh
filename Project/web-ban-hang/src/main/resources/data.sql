@@ -1,4 +1,3 @@
-
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE products;
 SET FOREIGN_KEY_CHECKS = 1;
@@ -7,18 +6,38 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ban chay
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Đèn Ngủ Led Cảm Ứng Thông Minh', 'Đèn ngủ LED cảm ứng thông minh.', 109000, 210000, 'Nhà Cửa & Đời Sống', '/images/products/1.jpg', '/images/products/1.jpg', 99, 'bestSeller'),
-('Chảo Chống Dính Đá Hoa Cương 26cm', 'Chảo chống dính đá hoa cương 26cm.', 335000, 460000, 'Nhà Bếp', '/images/products/2.jpg', '/images/products/2.jpg', 88, 'bestSeller'),
-('Son Lì Cao Cấp Velvet Rose', 'Son lì cao cấp Velvet Rose.', 210000, 350000, 'Sức Khỏe & Làm Đẹp', '/images/products/3.jpg', '/images/products/3.jpg', 150, 'bestSeller'),
-('Dầu gội bồ kết gừng bưởi 500ml Nhà Mơ giảm rụng mọc tóc', 'Dầu gội thảo mộc giảm rụng tóc.', 75000, 170000, 'Sức Khỏe & Làm Đẹp', '/images/products/4.jpg', '/images/products/4.jpg', 120, 'bestSeller');
+('Đèn Ngủ Led Cảm Ứng Thông Minh', 'Đèn tích hợp cảm biến ánh sáng hoạt động với 2 chế độ.
+                                    \nChế độ On: Đèn luôn sáng sau khi cấp nguồn
+                                    \nChế độ Auto: Đèn chỉ sáng khi cấp nguồn và cường độ ánh sáng <15 lux
+                                    \nỨng dụng: Sử dụng làm đèn ngủ, đèn chiếu sáng chân tường,...', 
+                                    109000, 210000, 'Nhà Cửa & Đời Sống', '/images/products/1.jpg', '/images/products/1.jpg', 99, 'bestSeller'),
+
+('Chảo Chống Dính Đá Hoa Cương 26cm', 'Bề mặt chảo chống dính được tráng đá hoa cương siêu bền, không phản ứng với thức ăn, an toàn sức khỏe.
+                                    \nĐộ dày 2,686mm được đúc bằng nhôm nguyên khối chắc chắn, chịu lực cao.
+                                    \nBề mặt phủ chống dính đá hoa cương bền đẹp, không bao giờ bị bong tróc hay mất chất chống dính như các loại chảo thường, giúp bạn yên tâm sử dụng lâu dài.', 
+                                    335000, 460000, 'Nhà Bếp', '/images/products/2.jpg', '/images/products/2.jpg', 88, 'bestSeller'),
+
+('Son Lì Cao Cấp Velvet Rose', 'Lấy cảm hứng từ vẻ đẹp kiêu sa, quyến rũ của những đóa hồng quyền lực, son thỏi cao cấp Velvet Rose là sự kết hợp hoàn hảo giữa thiết kế sang trọng và chất son đỉnh cao, giúp tôn vinh nét đẹp tự nhiên và hiện đại của người phụ nữ. Đây không chỉ là một thỏi son, mà còn là một tuyên ngôn sắc đẹp dành riêng cho bạn.', 
+                                    210000, 350000, 'Sức Khỏe & Làm Đẹp', '/images/products/3.jpg', '/images/products/3.jpg', 150, 'bestSeller'),
+
+('Combo Dầu Gội Bưởi, Bồ Kết, Dầu Xả Cafuné 480ml giúp tóc chắc khỏe chống gãy rụng cho tóc', 'Bộ sản phẩm chăm sóc tóc từ The Cafuné hoàn thiện quy trình gội – xả – dưỡng hằng ngày. 
+                                                                                            \nDầu gội Bưởi & Bồ Kết làm sạch bụi bẩn, dầu thừa; dầu xả Bưởi bổ sung ẩm cho tóc mềm mượt. ', 
+                                                                                            179000, 188000, 'Sức Khỏe & Làm Đẹp', '/images/products/4.jpg', '/images/products/4.jpg', 120, 'bestSeller');
 
 -- san pham moi
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Đèn bàn LED thông minh', 'Đèn bàn LED cảm ứng, sạc USB.', 999000, 1500000, 'Nhà Cửa & Đời Sống', '/images/products/denban.jpg', '/images/products/denban.jpg', 40, 'new'),
-('Bộ Dưỡng Da Thiên Nhiên', 'Combo dưỡng da thiên nhiên 3 bước.', 1150000, 1870000, 'Sức Khỏe & Làm Đẹp', '/images/products/duongda.jpg', '/images/products/duongda.jpg', 35, 'new'),
-('Tai Nghe Không Dây Moondrop Ultra Sonic', 'Tai nghe true wireless âm thanh chi tiết.', 1490000, 2200000, 'Công Nghệ & Thiết Bị Số', '/images/products/true.jpg', '/images/products/true.jpg', 60, 'new'),
-('Bình Gốm Decor Nhà Cửa', 'Bình gốm decor phong cách tối giản.', 720000, 1200000, 'Nhà Cửa & Đời Sống', '/images/products/gom.jpg', '/images/products/gom.jpg', 25, 'new');
+('Đèn bàn LED thông minh', 'Đèn bàn LED thông minh tích hợp nhiều tính năng thông minh và hiện đại, sử dụng chip Led có hiệu suất ánh sáng cao, cho ánh sáng trung thực tự nhiên và hỗ trợ bảo vệ mắt một cách tối đa', 
+                            999000, 1500000, 'Nhà Cửa & Đời Sống', '/images/products/denban.jpg', '/images/products/denban.jpg', 40, 'new'),
+
+('Bộ Dưỡng Da Thiên Nhiên', 'Bộ sản phẩm, đầy đủ các công đoạn từ làm sạch đến dưỡng da, giải quyết 2 vấn đề về da mà nhiều nàng đang gặp phải, cho nàng một làn da khỏe mạnh, rạng ngời sức sống.', 
+                            1150000, 1870000, 'Sức Khỏe & Làm Đẹp', '/images/products/duongda.jpg', '/images/products/duongda.jpg', 35, 'new'),
+
+('Tai Nghe Không Dây Moondrop Ultra Sonic', 'Sau Block, Moondrop tiếp tục trình làng chiếc tai nghe True Wireless mới có tên gọi là Ultrasonic. Sản phẩm được trang bị công nghệ Bluetooth 5.3 tiên tiến, hỗ trợ các codec âm thanh chất lượng cao như LDAC và LC3. Đặc biệt, nó còn tích hợp tính năng khử tiếng ồn chủ động (ANC) và có chế độ game mode với độ trễ khoảng 55ms, đáp ứng mọi nhu cầu đa dạng của người dùng.', 
+                                            1490000, 2200000, 'Công Nghệ & Thiết Bị Số', '/images/products/true.jpg', '/images/products/true.jpg', 60, 'new'),
+
+('Bình Gốm Decor Nhà Cửa', 'Bình gốm decor là sản phẩm phù hợp với nhiều yêu cầu mục đích lựa chọn chậu kết hợp cây, hoa trong trang trí nội thất. Bề mặt nhẵn mịn của bình hoa kết hợp cây, hoa khi trang trí trong nhà, ban công, sân vườn như tạo một bản hòa tấu nhẹ nhàng của thiên nhiên.', 
+                            720000, 1200000, 'Nhà Cửa & Đời Sống', '/images/products/gom.jpg', '/images/products/gom.jpg', 25, 'new');
 
 -- mua nhieu nhat
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)

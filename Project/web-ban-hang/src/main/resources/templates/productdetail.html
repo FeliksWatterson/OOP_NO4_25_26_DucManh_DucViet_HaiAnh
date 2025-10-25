@@ -48,12 +48,12 @@
         <div class="product-detail-container">
           <div class="product-image-section">
             <div class="product-main-image">
-             <img
+              <img
                 th:src="${product.imageUrl != null ? product.imageUrl : '/images/placeholder.png'}"
-                th:alt="${product.name}" />
-
+                th:alt="${product.name}"
+              />
+            </div>
           </div>
-
           <div class="product-info-section">
             <h1 class="product-title" th:text="${product.name}">
               Tên sản phẩm
@@ -73,6 +73,21 @@
                 th:if="${product.originalPrice != null and product.originalPrice > product.price}"
                 th:text="${#numbers.formatDecimal(product.originalPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"
               ></span>
+            </div>
+
+            <div class="extra-info">
+              <p>
+                <ion-icon name="paper-plane-outline"></ion-icon>
+                Giao hàng toàn quốc.
+              </p>
+              <p>
+                <ion-icon name="shield-checkmark-outline"></ion-icon>
+                Kiểm tra sản phẩm khi giao đến.
+              </p>
+              <p>
+                <ion-icon name="return-up-back-outline"></ion-icon>
+                Đổi size/mẫu trong vòng 14 ngày.
+              </p>
             </div>
 
             <div class="quantity-selector">
@@ -110,49 +125,20 @@
 
             <div class="action-buttons">
               <button type="button" class="btn-add-to-cart">
-                <ion-icon
-                  name="cart-outline"
-                  style="margin-right: 5px; vertical-align: middle"
-                ></ion-icon>
+                <ion-icon name="cart-outline"></ion-icon>
                 Thêm vào giỏ hàng
               </button>
               <button type="button" class="btn-buy-now">Mua ngay</button>
             </div>
-
-            <div class="product-description">
-              <h3>Mô tả sản phẩm</h3>
-              <p
-                th:utext="${product.description != null and not #strings.isEmpty(product.description)
-                  ? #strings.replace(product.description, '\n', '<br/>')
-                  : 'Chưa có mô tả cho sản phẩm này.'}">
-              </p>
-
-            </div>
-
-            <div class="extra-info">
-              <p>
-                <ion-icon
-                  name="paper-plane-outline"
-                  style="vertical-align: middle; margin-right: 5px"
-                ></ion-icon>
-                Giao hàng toàn quốc.
-              </p>
-              <p>
-                <ion-icon
-                  name="shield-checkmark-outline"
-                  style="vertical-align: middle; margin-right: 5px"
-                ></ion-icon>
-                Kiểm tra sản phẩm khi giao đến.
-              </p>
-              <p>
-                <ion-icon
-                  name="return-up-back-outline"
-                  style="vertical-align: middle; margin-right: 5px"
-                ></ion-icon>
-                Đổi size/mẫu trong vòng 14 ngày.
-              </p>
-            </div>
           </div>
+        </div>
+        <div class="product-description">
+          <h3>Mô tả sản phẩm</h3>
+          <p
+            th:utext="${product.description != null and not #strings.isEmpty(product.description)
+              ? #strings.replace(product.description, '\n', '<br/>')
+              : 'Chưa có mô tả cho sản phẩm này.'}"
+          ></p>
         </div>
       </div>
     </main>
