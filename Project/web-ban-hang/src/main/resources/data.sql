@@ -42,24 +42,37 @@ VALUES
 -- mua nhieu nhat
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Vòng Tay Thông Minh Theo Dõi Sức Khỏe', 'Smartband theo dõi sức khỏe, pin bền.', 1360000, 1720000, 'Công Nghệ & Thiết Bị Số', '/images/products/vong.jpg', '/images/products/vong.jpg', 50, 'mostBought'),
-('Máy Khuếch Tán Tinh Dầu', 'Khuếch tán tinh dầu tạo ẩm nhẹ.', 910000, 1450000, 'Nhà Cửa & Đời Sống', '/images/products/mtd.jpg', '/images/products/mtd.jpg', 45, 'mostBought'),
-('Combo Bàn Phím & Chuột Không Dây', 'Combo không dây 2.4GHz tiết kiệm.', 1210000, 1500000, 'Công Nghệ & Thiết Bị Số', '/images/products/banphim.jpg', '/images/products/banphim.jpg', 80, 'mostBought'),
-('Máy Xay Sinh Tố Cầm Tay', 'Máy xay cầm tay dung tích 500ml.', 749000, 1200000, 'Gia Dụng & Nhà Bếp', '/images/products/sinhto.jpg', '/images/products/sinhto.jpg', 70, 'mostBought');
+('Vòng Tay Thông Minh Theo Dõi Sức Khỏe',   'Chiếc vòng tay thông minh theo dõi sức khoẻ còn có chức năng đo nhịp tim một cách chính xác, phản ánh tuần hoàn của máu và giúp bạn nắm rõ sức khỏe. Từ đó, cải thiện sức khỏe nhờ tập luyện và ăn uống.
+                                            \nChiếc vòng tay sức khoẻ thông minh sẽ nắm rõ được bạn đã đi bao nhiêu bước chân trong lúc thể thao, vận động,... Từ đó, nó sẽ cho bạn biết được lượng calo tiêu hao là bao nhiêu và giúp bạn dễ dàng biết cách bù trừ lượng calo cho bản thân.', 
+                                            1360000, 1720000, 'Công Nghệ & Thiết Bị Số', '/images/products/vong.jpg', '/images/products/vong.jpg', 50, 'mostBought'),
+('Máy Khuếch Tán Tinh Dầu', 'Máy khuếch tán tinh dầu không chỉ giúp lan tỏa hương thơm tinh dầu đến mọi góc trong ngôi nhà mà còn đem lại hiệu quả trị liệu tốt hơn cho sức khỏe và tinh thần của bạn. Với thiết kế thanh lịch, đa dạng về mẫu mã và dễ sử dụng, máy xông tinh dầu Kodo trở thành sự lựa chọn hoàn hảo cho những ai yêu thích không gian sống trong lành và thoải mái.', 
+                            910000, 1450000, 'Nhà Cửa & Đời Sống', '/images/products/mtd.jpg', '/images/products/mtd.jpg', 45, 'mostBought'),
+('Combo Bàn Phím & Chuột Không Dây',    'Bạn tìm kiếm một thiết bị tiện lợi phù hợp cho công việc học tập và văn phòng, bộ bàn phím chuột Wireless Dell KM7321W là một trong sự lựa chọn đáng để bạn cân nhắc. Với thiết kế kiểu dáng đẹp mắt, màu sắc hiện đại, phong cách phù hợp với mọi môi trường làm việc. Kết nối không dây kép cho phép bạn điều khiển nhiều hệ thống cùng lúc, cực kỳ lý tưởng và tiện lợi cho việc kiểm soát công việc khắp nơi ngay tại chỗ ngồi của bạn.', 
+                                        1210000, 1500000, 'Công Nghệ & Thiết Bị Số', '/images/products/banphim.jpg', '/images/products/banphim.jpg', 80, 'mostBought'),
+('Máy Xay Sinh Tố Cầm Tay', 'Máy xay cầm tay là thiết bị nhà bếp đa năng có thể được sử dụng để xay nhuyễn thực phẩm, đánh bông, trộn đều và thậm chí là làm kem. Chúng thường nhỏ gọn và dễ sử dụng, khiến chúng trở thành một sự bổ sung tuyệt vời cho bất kỳ nhà bếp nào.', 
+                            749000, 1200000, 'Gia Dụng & Nhà Bếp', '/images/products/sinhto.jpg', '/images/products/sinhto.jpg', 70, 'mostBought');
 
 -- danh gia cao
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Đồng Hồ Thời Trang SilverLine', 'Đồng hồ thời trang, chống nước 3ATM.', 2760000, 3320000, 'Thời Trang & Phụ Kiện', '/images/products/silver.jpg', '/images/products/silver.jpg', 20, 'topRated'),
-('Bộ Nến Thơm Cao Cấp', 'Bộ nến thơm thư giãn hương tự nhiên.', 560000, 920000, 'Nhà Cửa & Đời Sống', '/images/products/nenthom.jpg', '/images/products/nenthom.jpg', 55, 'topRated'),
-('Ba lô Du Lịch Chống Nước AirFit', 'Balo 35L, chất liệu chống thấm.', 1490000, 2200000, 'Du Lịch & Cắm Trại', '/images/products/balo.jpg', '/images/products/balo.jpg', 33, 'topRated'),
-('Tinh Chất Vitamin C 50ml', 'Serum Vitamin C sáng da, đều màu.', 420000, 570000, 'Sức Khỏe & Làm Đẹp', '/images/products/vitamin.jpg', '/images/products/vitamin.jpg', 90, 'topRated');
+('Đồng Hồ Thời Trang SilverLine',   'Được chế tác từ thép không gỉ mạ đôi với lớp hoàn thiện bằng bạc đánh bóng, những chiếc đồng hồ này được tạo ra để nâng tầm mọi phong cách, dù là ngày hay đêm.', 
+                                    2760000, 3320000, 'Thời Trang & Phụ Kiện', '/images/products/silver.jpg', '/images/products/silver.jpg', 20, 'topRated'),
+('Hộp Nến Thơm Quà Tặng Misscandle',    'Nến thơm Misscandle - Bộ quà tặng hoàn hảo với hương thơm dài lâu.
+                                        \nMang đến không gian sống đầy hương thơm và ánh sáng ấm áp. Hộp nến thơm cao cấp Misscandle. Bộ sản phẩm cao cấp này bao gồm 2 nến với thời gian cháy kéo dài lên đến hơn 15h , tạo nên không khí thư giãn và dễ chịu cho mọi không gian.', 
+                                        560000, 920000, 'Nhà Cửa & Đời Sống', '/images/products/nenthom.jpg', '/images/products/nenthom.jpg', 55, 'topRated'),
+('Ba lô Du Lịch Chống Nước AirFit', 'Balo 35L, chất liệu chống thấm.
+                                    \nKhả năng chống nước: Sản phẩm được khuyến cáo đi mưa nhỏ, không dầm mưa lâu , chất vải trượt nước nhưng nếu dầm mưa nước sẽ có khả năng len lỏi vào các đường chỉ may nối giữa các bộ phận của túi hoặc dây kéo', 
+                                    1490000, 2200000, 'Du Lịch & Cắm Trại', '/images/products/balo.jpg', '/images/products/balo.jpg', 33, 'topRated'),
+('Tinh Chất Vitamin C 50ml', 'Công nghệ giúp ổn định vitamin nguyên chất được hoàn thiện bằng phương pháp vô thủy, hiệu quả trong việc cải thiện các vết thâm và nếp nhăn.
+                            \nKhả năng làm sáng da mạnh mẽ chỉ với một giọt tinh chất.', 420000, 570000, 'Sức Khỏe & Làm Đẹp', '/images/products/vitamin.jpg', '/images/products/vitamin.jpg', 90, 'topRated');
 
 -- flash sale
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Combo dầu gội, dầu xả, sữa tắm Old Spice Swagger', 'Bộ chăm sóc cơ thể cho nam giới.', 1250000, 1600000, 'Sức Khỏe & Làm Đẹp', '/images/products/shampoo.jpg', '/images/products/shampoo.jpg', 36, 'flashSale'),
-('SmartWatch Cubitt AURA Pro', 'Đồng hồ thông minh nhiều tính năng, GPS.', 2320000, 2900000, 'Công Nghệ & Thiết Bị Số', '/images/products/cubitt.jpg', '/images/products/cubitt.jpg', 36, 'flashSale');
+('Combo dầu gội, dầu xả, sữa tắm Old Spice Swagger', 'Bộ sản phẩm Old Spice Swagger mang đến giải pháp chăm sóc toàn diện cho nam giới với hương thơm mạnh mẽ, nam tính từ gỗ tuyết tùng và chanh lá cam.', 
+                                                    1250000, 1600000, 'Sức Khỏe & Làm Đẹp', '/images/products/shampoo.jpg', '/images/products/shampoo.jpg', 36, 'flashSale'),
+('SmartWatch Cubitt AURA Pro', 'Màn hình AMOLED 1.43 inch sắc nét, hỗ trợ 24/7 theo dõi sức khỏe. Với khả năng chống nước và thời lượng pin lên đến 10 ngày, đây là lựa chọn hoàn hảo cho lối sống năng động.', 
+                                                    2320000, 2900000, 'Công Nghệ & Thiết Bị Số', '/images/products/cubitt.jpg', '/images/products/cubitt.jpg', 36, 'flashSale');
 
 -- goi y
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)

@@ -171,7 +171,7 @@
   appearance: textfield;
   -moz-appearance: textfield;
 }
-/* Áp dụng cho button bên trong .quantity-controls */
+
 .item-quantity .quantity-controls .quantity-btn {
   height: 100%;
   width: 30px;
