@@ -20,46 +20,7 @@
     />
   </head>
   <body>
-    <div class="overlay" data-overlay></div>
-
-    <div class="modal" data-modal>
-      <div class="modal-close-overlay" data-modal-overlay></div>
-      <div class="modal-content">
-        <button class="modal-close-btn" data-modal-close>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-        <div class="newsletter-img">
-          <img
-            th:src="@{/images/newsletter.png}"
-            alt=""
-            width="400"
-            height="400"
-          />
-        </div>
-        <div class="newsletter">
-          <form action="#">
-            <div class="newsletter-header">
-              <h3 class="newsletter-title">Đăng Ký Nhận Bản Tin.</h3>
-              <p class="newsletter-desc">
-                Hãy đăng ký để nhận thông tin về sản phẩm mới nhất và ưu đãi đặc
-                biệt.
-              </p>
-            </div>
-            <input
-              type="email"
-              name="email"
-              class="email-field"
-              placeholder="Nhập địa chỉ Email"
-              required
-            />
-            <button type="submit" class="btn-newsletter">Đăng Ký Ngay</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
     <header th:replace="~{fragment/header :: header}"></header>
-
     <main>
       <div class="banner">
         <div class="container">
@@ -902,10 +863,7 @@
                     </div>
                   </div>
                   <div class="showcase-content">
-                    <a
-                      href="#"
-                      class="showcase-category"
-                      th:text="${p.category}"
+                    <a class="showcase-category" th:text="${p.category}"
                       >Category</a
                     >
                     <a th:href="@{'/product/' + ${p.id}}">

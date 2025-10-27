@@ -77,15 +77,48 @@ VALUES
 -- goi y
 INSERT INTO products (name, description, price, original_price, category, image_url, hover_image_url, stock, section)
 VALUES
-('Sách - Combo tự học + tập viết Tiếng Nga', 'Combo tự học + tập viết Tiếng Nga.', 75000, 89000, 'Sách Học Tập', '/images/products/nga2.jpg', '/images/products/nga1.jpg', 120, 'suggested'),
-('Máy khuyếch tán tinh dầu', 'Máy khuyếch tán tinh dầu gia dụng.', 104000, 210000, 'Nhà Cửa & Đời Sống', '/images/products/td1.jpg', '/images/products/td2.jpg', 150, 'suggested'),
-('Combo 3 hộp 300 miếng lau kính', 'Khăn lau kính chuyên dụng.', 45000, 92000, 'Phụ Kiện & Trang Sức', '/images/products/kinh1.jpg', '/images/products/kinh2.jpg', 200, 'suggested'),
-('Ốp Điện Thoại Mềm Chống Sốc', 'Ốp mềm chống sốc, bền bỉ.', 38000, 55000, 'Điện thoại & Phụ kiện', '/images/products/op1.jpg', '/images/products/op2.jpg', 300, 'suggested'),
-('Sách - Thiên văn học trực quan', 'Sách minh họa trực quan về thiên văn.', 427000, 550000, 'Sách Tiếng Việt', '/images/products/tv1.jpg', '/images/products/tv2.jpg', 50, 'suggested'),
-('Kẹo Sữa Trà Xanh Matcha UHA', 'Kẹo sữa vị matcha UHA.', 34000, 45000, 'Đồ ăn vặt', '/images/products/keo1.jpg', '/images/products/keo2.jpg', 400, 'suggested'),
-('Máy Nghe Nhạc FiiO SNOWSKY Echo Mini', 'Máy nghe nhạc nhỏ gọn, chất âm tốt.', 1349000, 1700000, 'Thiết Bị Điện Tử', '/images/products/nhac1.jpg', '/images/products/nhac2.jpg', 45, 'suggested'),
-('IEM TangZu Wan''er SG 2 Jade Dragon', 'Tai nghe IEM tầm giá phổ thông.', 521000, 660000, 'Thiết Bị Điện Tử', '/images/products/waner1.jpg', '/images/products/waner2.jpg', 120, 'suggested'),
-('Sticker tem thư series Memories', 'Sticker trang trí phong cách vintage.', 34000, 76000, 'Nhà Sách Online', '/images/products/tem1.jpg', '/images/products/tem2.jpg', 500, 'suggested'),
-('Vợt Kumpoo K520 Pro chính hãng', 'Vợt cầu lông cân bằng, dễ chơi.', 458000, 650000, 'Thể Thao & Du Lịch', '/images/products/ku1.jpg', '/images/products/ku2.jpg', 60, 'suggested'),
-('TPCN Revive KSM-66 Ashwagandha', 'Thực phẩm bổ sung hỗ trợ sức khỏe.', 540000, 570000, 'Sức Khỏe & Làm Đẹp', '/images/products/sam1.jpg', '/images/products/sam2.jpg', 80, 'suggested'),
-('Áo Polo MYO Vải Cotton To The Moon', 'Áo polo nam vải cotton.', 350000, 390000, 'Thời Trang Nam', '/images/products/moon1.jpg', '/images/products/moon2.jpg', 90, 'suggested');
+('Sách - Combo tự học + tập viết Tiếng Nga',    '“Tập viết tiếng Nga cho người mới bắt đầu” là bước khởi đầu lý tưởng cho những ai muốn làm quen với tiếng Nga – một ngôn ngữ giàu lịch sử và văn hóa.
+                                                \nCuốn sách được thiết kế dành riêng cho người mới học, giúp bạn từng bước làm quen với bảng chữ cái Cyrillic, luyện viết các từ – cụm từ quen thuộc, các câu đơn giản, cùng một số thành ngữ và tục ngữ phổ biến trong tiếng Nga. Phần phiên âm gần với âm tiếng Việt sẽ hỗ trợ bạn tiếp cận phát âm dễ dàng hơn. Ngoài ra, từ điển thu gọn ở cuối sách giúp bạn tra cứu nhanh nghĩa của các từ đã gặp trong quá trình luyện tập.', 
+                                                75000, 89000, 'Sách Học Tập', '/images/products/nga2.jpg', '/images/products/nga1.jpg', 120, 'suggested'),
+('Máy khuyếch tán tinh dầu', 'Máy khuếch tán tinh dầu không chỉ giúp lan tỏa hương thơm tinh dầu đến mọi góc trong ngôi nhà mà còn đem lại hiệu quả trị liệu tốt hơn cho sức khỏe và tinh thần của bạn. Với thiết kế thanh lịch, đa dạng về mẫu mã và dễ sử dụng, máy xông tinh dầu Kodo trở thành sự lựa chọn hoàn hảo cho những ai yêu thích không gian sống trong lành và thoải mái.', 
+                                104000, 210000, 'Nhà Cửa & Đời Sống', '/images/products/td1.jpg', '/images/products/td2.jpg', 150, 'suggested'),
+('Combo 3 hộp 300 miếng lau kính', 'Khăn lau kính nano  giúp làm sạch kính nhanh chóng, chống bám hơi nước và sương mù hiệu quả. Thiết kế tiện lợi dùng một lần, phù hợp cho kính mắt, kính cận, màn hình và các bề mặt kính khác.', 
+                                45000, 92000, 'Phụ Kiện & Trang Sức', '/images/products/kinh1.jpg', '/images/products/kinh2.jpg', 200, 'suggested'),
+('Ốp Điện Thoại Mềm Chống Sốc', 'Chất liệu mềm mại và linh hoạt: Ốp silicon thường được làm từ chất liệu dẻo, giúp dễ dàng lắp ráp và tháo rời. Điều này giúp bảo vệ điện thoại mà không làm hỏng bề mặt của máy.
+                                \nBảo vệ tốt: Mặc dù có độ mỏng, nhưng ốp silicon trong suốt có khả năng hấp thụ lực khi điện thoại bị rơi, giúp giảm thiểu tác động vào máy. Tuy nhiên, tính năng bảo vệ sẽ không mạnh mẽ như các loại ốp cứng hoặc ốp bảo vệ chuyên dụng.', 
+                                38000, 55000, 'Điện thoại & Phụ kiện', '/images/products/op1.jpg', '/images/products/op2.jpg', 300, 'suggested'),
+('Sách - Thiên văn học trực quan', 'Cuốn sách này sẽ cung cấp những nội dung tuyệt vời về thiên văn:
+                                    \n    Nguồn gốc của vũ trụ
+                                    \n    Lịch sử ngành thiên văn học
+                                    \n    Trọn vẹn hệ Mặt trời và các hành tinh
+                                    \n    Hướng dẫn quan sát bầu trời đêm
+                                    \n    Chi tiết 88 chòm sao, biểu đồ sao
+                                    \n    Lịch quan sát thiên văn hàng tháng, niêm giám cho đến năm 2031 về các hiện tượng đặc biệt', 
+                                    427000, 550000, 'Sách Tiếng Việt', '/images/products/tv1.jpg', '/images/products/tv2.jpg', 50, 'suggested'),
+('Kẹo Sữa Trà Xanh Matcha UHA', 'Nguyên liệu được tuyển chọn kỹ lưỡng, an toàn. Kẹo được kết hợp trà xanh Matcha thơm lừng với màu xanh bắt mắt, hòa quyện cùng sữa Hokkaido béo ngậy, cho vị thơm ngon hoàn hảo. Mang hương vị hấp dẫn đến khó cưỡng trong từng viên kẹo. 
+                                \nHDSD: Dùng trực tiếp ngay sau khi mở bao bì.', 
+                                34000, 45000, 'Đồ ăn vặt', '/images/products/keo1.jpg', '/images/products/keo2.jpg', 400, 'suggested'),
+('Máy Nghe Nhạc FiiO SNOWSKY Echo Mini', 'Echo Mini ra mắt không chỉ đánh dấu sự trở lại của FiiO trong lĩnh vực máy nghe nhạc kỹ thuật số di động mà còn là sản phẩm “chào sân” của thương hiệu con Snowsky, thổi thêm một luồng gió mới cho thị trường.
+                                        \nKhoác lên mình tấm áo hoài cổ, Echo Mini gợi nhớ về những chiếc máy cassette player vang bóng một thời, nhưng ẩn sâu bên trong là cả một kho tàng công nghệ hiện đại. Sản phẩm được trang bị chip DAC kép CS43131 cho âm thanh sạch, chi tiết với độ méo tiếng thấp. Đầu ra 4.4mm balanced cung cấp công suất lên đến 250mW ở tải 32Ω, đủ mạnh để điều khiển hầu hết IEM/earbud trên thị trường. Hơn thế, chiếc máy nghe nhạc này còn sử dụng kết nối Bluetooth 5.3, có bộ nhớ trong 8GB và hỗ trợ thẻ TF lên đến 256GB để mở rộng dung lượng lưu trữ. Đây đều là những khía cạnh mà máy cassette truyền thống không hề có.', 
+                                          1349000, 1700000, 'Thiết Bị Điện Tử', '/images/products/nhac1.jpg', '/images/products/nhac2.jpg', 45, 'suggested'),
+('IEM TangZu Wan''er SG 2 Jade Dragon', 'TANGZU WAN''ER SG 2 Phiên bản Rồng Ngọc Xanh.
+                                        \nTangzu Wan''er SG từng là tượng đài bất khả chiến bại trong phân khúc tai nghe siêu tiết kiệm, khẳng định vị thế dẫn đầu với chất âm vượt trội, thách thức mọi đối thủ cùng tầm giá. Giờ đây, Wan''er SG 2 xuất hiện, không chỉ là sự thay thế, mà là sự khẳng định lại vị thế, sẵn sàng cạnh tranh sòng phẳng với những sản phẩm đắt tiền hơn.
+                                        \nThế hệ thứ hai thay đổi hoàn toàn về hình dạng vỏ, tạo cảm giác thoải mái, ổn định khi đeo. Ống dẫn âm cũng được làm ngắn hơn một chút. Socket 2-pin không phải là dạng nổi nữa mà là dạng phẳng giúp cho việc tháo rút cáp dễ dàng mà vẫn giữ được độ bền. Đặc biệt, thiết kế khoang âm được nâng cấp nhằm cải thiện hiệu suất âm thanh.', 
+                                        521000, 660000, 'Thiết Bị Điện Tử', '/images/products/waner1.jpg', '/images/products/waner2.jpg', 120, 'suggested'),
+('Sticker tem thư series Memories', 'Bạn nào đam mê làm penpal, viết thư tay thì không thể bỏ qua em sticker stamp cực vintage này. Để tiện lợi, bạn có thể dùng thử các mẫu khác nhau với giá vô cùng hạt rẻ. Sticker thiết kế bắt mắt, tiện lợi, chỉ cần bóc dán là có ngay những tấm thư xinh xắn rồi. Dùng trang trí sổ, làm thiệp kỉ niệm hay trang trí các vật dụng trong nhà.', 
+                                    34000, 76000, 'Nhà Sách Online', '/images/products/tem1.jpg', '/images/products/tem2.jpg', 500, 'suggested'),
+('Vợt Kumpoo K520 Pro chính hãng', 'Sau những thành công ngoài mong đợi của phiên bản K520, nhà Kumpoo quyết định cho ra mắt tiếp siêu phẩm vợt cầu lông Kumpoo Power Control K520 Pro Nội địa trung hướng đến đối tượng là người chơi phong trào yêu thích khả năng công thủ linh hoạt.
+                                    \nÁp dụng công nghệ High Modulus Graphite + Nano Carbon Control Power tăng độ bền lên 20%, giúp người chơi có những cú đánh uy lực, chuẩn xác.
+                                    \nVợt Kumpoo K520 Pro thuộc dòng vợt cầu lông giá rẻ với thông số khá dễ chịu như trọng lượng 4U, điểm cân bằng 290mm và so với bản thường, Kumpoo K520 Pro sẽ có đũa cứng hơn giúp các pha phản tạt và phòng thủ của người chơi được hỗ trợ nhiều hơn.
+                                    \nChuyển đổi chế độ tấn công và phòng thủ theo ý muốn rất tốt cho những người mới bắt đầu luyện tập buộc và bảo vệ cổ tay.', 
+                                    458000, 650000, 'Thể Thao & Du Lịch', '/images/products/ku1.jpg', '/images/products/ku2.jpg', 60, 'suggested'),
+('TPCN Revive KSM-66 Ashwagandha', 'KSM -66 là dạng Ashwagandha ưu việt đã được nghiên cứu lâm sàng – dạng Ashwagandha mạnh nhất – giúp hỗ trợ cân bằng cảm xúc, thư giãn và nâng cao sức khỏe tổng thể.
+                                    \nKSM-66 đã được thử nghiệm lâm sàng trong 22 nghiên cứu.
+                                    \nHỗ trợ cân bằng cảm xúc, thư giãn và nâng cao sức khỏe tổng thể.
+                                    \nVỏ viên nang có nguồn gốc thực vật, phù hợp cho người có các hạn chế về chế độ ăn, tôn giáo hoặc văn hóa.', 
+                                    540000, 570000, 'Sức Khỏe & Làm Đẹp', '/images/products/sam1.jpg', '/images/products/sam2.jpg', 80, 'suggested'),
+('Áo Polo MYO Vải Cotton To The Moon', 'Polo của MYO được thiết kế với form rộng hơn, không dùng bo tay và cổ trụ lớn hơn. Mang đến cho bạn một trãi nghiệm phá cách.
+                                        \nÁo Polo được in trực tiếp lên áo bằng công nghệ in DTG, đây là một trong những sản phẩm Polo bán chạy nhất tại MYO.
+                                        \nChất liệu 98% sợi cotton + 2% sợi spandex cho khả năng thấm hút và co giản cực tốt.
+                                        \nForm áo rộng phù hợp với những bạn trẻ theo phong cách streetwear.', 
+                                        350000, 390000, 'Thời Trang Nam', '/images/products/moon1.jpg', '/images/products/moon2.jpg', 90, 'suggested');
