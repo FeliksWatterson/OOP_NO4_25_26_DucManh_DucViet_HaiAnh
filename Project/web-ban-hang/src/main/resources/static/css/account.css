@@ -177,3 +177,45 @@
   color: var(--salmon-pink);
   font-weight: var(--weight-600);
 }
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.order-table th,
+.order-table td {
+  border: 1px solid var(--cultured);
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+.order-table th {
+  background-color: hsl(34, 40%, 97%);
+  font-weight: 600;
+  color: var(--eerie-black);
+}
+.order-table td {
+  color: var(--onyx);
+}
+.order-table .order-id {
+  font-weight: 500;
+  color: var(--salmon-pink);
+}
+.order-table .order-status {
+  font-weight: 500;
+}
+.no-orders {
+  text-align: center;
+  padding: 30px;
+  color: var(--sonic-silver);
+}
+.view-details-link {
+  color: var(--salmon-pink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.view-details-link:hover {
+  text-decoration: underline;
+}

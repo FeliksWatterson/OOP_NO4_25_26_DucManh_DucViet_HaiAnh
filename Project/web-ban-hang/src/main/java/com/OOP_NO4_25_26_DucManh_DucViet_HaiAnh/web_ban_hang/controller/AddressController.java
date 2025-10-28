@@ -1,7 +1,9 @@
 package com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.controller;
 
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Address;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Order;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Customer;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.services.OrderService;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.AddressInterface;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class AddressController {
     @Autowired
     private AddressInterface addressService;
 
+    @Autowired
+    private OrderService orderService;
+
 
     @GetMapping
     public String showAddressesPage(Model model, HttpSession session) {
@@ -35,6 +40,8 @@ public class AddressController {
         if (!model.containsAttribute("newAddress")) { 
              model.addAttribute("newAddress", new Address());
         }
+        List<Order> orders = orderService.findOrdersByCustomer(customer);
+        model.addAttribute("orders", orders);
         return "address"; 
     }
 
@@ -71,6 +78,8 @@ public class AddressController {
              if (!model.containsAttribute("newAddress")) {
                 model.addAttribute("newAddress", new Address());
             }
+             List<Order> orders = orderService.findOrdersByCustomer(customer);
+             model.addAttribute("orders", orders);
              return "address"; 
          } else {
              redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy địa chỉ.");

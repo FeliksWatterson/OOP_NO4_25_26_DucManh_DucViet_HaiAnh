@@ -127,17 +127,21 @@
               </div>
 
               <div class="action-buttons">
-                <button type="submit" class="btn-add-to-cart">
-                  <ion-icon
-                    name="cart-outline"
-                    style="margin-right: 5px; vertical-align: middle"
-                  ></ion-icon>
-                  Thêm vào giỏ hàng
-                </button>
-                <button type="button" class="btn-buy-now">Mua ngay</button>
-              </div>
-            </form>
-          </div>
+                <form th:action="@{/cart/add}" method="post" style="display: inline-block;"> <input type="hidden" name="productId" th:value="${product.id}" />
+                    <input type="hidden" name="quantity" id="addToCartQuantity" value="1" />
+                    <input type="hidden" name="returnUrl" th:value="@{'/product/' + ${product.id}}" /> <button type="submit" class="btn-add-to-cart" onclick="updateFormQuantity('addToCartQuantity')">
+                      <ion-icon name="cart-outline" style="margin-right: 5px; vertical-align: middle"></ion-icon>
+                      Thêm vào giỏ hàng
+                    </button>
+                </form>
+
+                <form th:action="@{/cart/add-and-checkout}" method="post" style="display: inline-block;"> <input type="hidden" name="productId" th:value="${product.id}" />
+                    <input type="hidden" name="quantity" id="buyNowQuantity" value="1" />
+                    <button type="submit" class="btn-buy-now" onclick="updateFormQuantity('buyNowQuantity')">
+                        Mua ngay
+                    </button>
+                </form>
+            </div>
         </div>
         <div class="product-description">
           <h3>Mô tả sản phẩm</h3>

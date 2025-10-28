@@ -144,9 +144,8 @@
 
 .address-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;
+  gap: 20px;
   background-color: var(--white);
   padding: 15px 20px;
   border: 1px solid var(--cultured);
@@ -160,14 +159,12 @@
 
 .address-info {
   flex-grow: 1;
-  /* Thêm để fix lỗi wrapping */
-  min-width: 0; /* Cho phép flex item co lại nếu cần */
+  min-width: 0;
 }
 
 .address-info p {
   display: flex;
-  /* align-items: baseline; Bỏ baseline, thử dùng flex-start */
-  align-items: flex-start; /* Căn label và value lên đầu dòng */
+  align-items: flex-start;
   gap: 8px;
   margin-bottom: 8px;
   color: var(--onyx);
@@ -183,16 +180,12 @@
   color: var(--eerie-black);
   min-width: 85px;
   flex-shrink: 0;
-  /* Bỏ display: inline-block; */
-  /* Căn chỉnh text trong strong nếu cần */
-  /* text-align: left; */
 }
 
 .address-info span {
   word-break: break-word;
-  /* Thêm để fix lỗi wrapping */
-  min-width: 0; /* Cho phép span co lại và wrap */
-  flex-grow: 1; /* Cho phép span chiếm không gian còn lại */
+  min-width: 0;
+  flex-grow: 1;
 }
 
 .default-badge {
@@ -200,15 +193,15 @@
   font-size: 0.8rem;
   font-weight: 500;
   margin-left: 5px;
-  white-space: nowrap; /* Ngăn không cho badge xuống dòng */
+  white-space: nowrap;
 }
 
 .address-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -251,10 +244,6 @@
 .address-actions .delete-btn:hover {
   color: hsl(0, 70%, 50%);
   background-color: hsl(0, 100%, 95%);
-}
-
-.address-item.default-address .address-actions {
-  justify-content: center;
 }
 
 .set-default-btn {

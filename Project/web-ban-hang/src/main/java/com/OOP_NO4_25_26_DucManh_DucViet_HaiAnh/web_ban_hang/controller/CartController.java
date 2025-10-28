@@ -65,6 +65,31 @@ public class CartController {
         return "cart";
     }
 
+    @PostMapping("/add-and-checkout")
+     public String addToCartAndCheckout(@RequestParam("productId") Long productId,
+                                        @RequestParam(value = "quantity", defaultValue = "1") int quantity,
+                                        HttpSession session,
+                                        RedirectAttributes redirectAttributes) {
+
+        Customer loggedInCustomer = (Customer) session.getAttribute(CUSTOMER_SESSION_KEY);
+        if (loggedInCustomer == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Vui lòng đăng nhập để mua hàng.");
+            session.setAttribute("buyNowProduct", productId);
+            session.setAttribute("buyNowQuantity", quantity);
+            session.setAttribute("redirectAfterLogin", "/cart/handle-buy-now"); 
+            return "redirect:/auth";
+        }
+
+        try {
+            cartService.addItem(loggedInCustomer, productId, quantity);
+            return "redirect:/checkout";
+
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("cartErrorMessage", e.getMessage());
+            return "redirect:/product/" + productId;
+        }
+     }
+
      @PostMapping("/add")
      public String addToCart(@RequestParam("productId") Long productId,
                             @RequestParam(value = "quantity", defaultValue = "1") int quantity,
@@ -169,13 +194,13 @@ public class CartController {
         return "redirect:/cart";
     }
 
-     @GetMapping("/checkout")
+    @GetMapping("/checkout") 
     public String proceedToCheckout(HttpSession session, RedirectAttributes redirectAttributes) {
 
         Customer loggedInCustomer = (Customer) session.getAttribute(CUSTOMER_SESSION_KEY);
         if (loggedInCustomer == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "Vui lòng đăng nhập để tiến hành thanh toán.");
-            session.setAttribute("redirectAfterLogin", "/cart/checkout"); 
+            session.setAttribute("redirectAfterLogin", "/checkout"); 
             return "redirect:/auth";
         }
 
@@ -184,7 +209,7 @@ public class CartController {
             redirectAttributes.addFlashAttribute("cartErrorMessage", "Giỏ hàng trống, không thể thanh toán.");
             return "redirect:/cart";
         }
-        System.out.println("Chuyển đến thanh toán với " + cartService.getTotalItems(loggedInCustomer) + " sản phẩm.");
-        return "redirect:/"; 
+
+        return "redirect:/checkout";
     }
 }

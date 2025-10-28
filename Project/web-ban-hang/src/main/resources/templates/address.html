@@ -27,10 +27,27 @@
         color: #333;
         background-color: #f7f7f7;
       }
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
     </style>
   </head>
   <body>
     <header th:replace="~{fragment/header :: header}"></header>
+
     <main class="account-main">
       <div class="container">
         <div class="breadcrumbs">
@@ -74,8 +91,8 @@
                 class="address-form"
               >
                 <div class="form-group">
-                  <label for="addFullName">Họ và tên:</label>
-                  <input
+                  <label for="addFullName">Họ và tên:</label
+                  ><input
                     type="text"
                     id="addFullName"
                     th:field="*{fullName}"
@@ -83,8 +100,8 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="addPhone">Số điện thoại:</label>
-                  <input
+                  <label for="addPhone">Số điện thoại:</label
+                  ><input
                     type="tel"
                     id="addPhone"
                     th:field="*{phone}"
@@ -92,8 +109,35 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="addAddressDetail">Địa chỉ chi tiết:</label>
-                  <textarea
+                  <label for="addCity">Tỉnh/Thành phố:</label
+                  ><input
+                    type="text"
+                    id="addCity"
+                    th:field="*{city}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addDistrict">Quận/Huyện:</label
+                  ><input
+                    type="text"
+                    id="addDistrict"
+                    th:field="*{district}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addWard">Phường/Xã:</label
+                  ><input
+                    type="text"
+                    id="addWard"
+                    th:field="*{ward}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addAddressDetail">Địa chỉ chi tiết:</label
+                  ><textarea
                     id="addAddressDetail"
                     th:field="*{addressDetail}"
                     rows="3"
@@ -105,12 +149,11 @@
                     type="checkbox"
                     id="addIsDefault"
                     th:field="*{default}"
-                  />
-                  <label for="addIsDefault">Đặt làm địa chỉ mặc định</label>
+                  /><label for="addIsDefault">Đặt làm địa chỉ mặc định</label>
                 </div>
                 <div class="form-actions">
-                  <button type="submit" class="btn-save">Lưu</button>
-                  <button
+                  <button type="submit" class="btn-save">Lưu</button
+                  ><button
                     type="button"
                     class="btn-cancel"
                     onclick="toggleAddForm()"
@@ -134,8 +177,8 @@
                 class="address-form"
               >
                 <div class="form-group">
-                  <label for="editFullName">Họ và tên:</label>
-                  <input
+                  <label for="editFullName">Họ và tên:</label
+                  ><input
                     type="text"
                     id="editFullName"
                     th:field="*{fullName}"
@@ -143,8 +186,8 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="editPhone">Số điện thoại:</label>
-                  <input
+                  <label for="editPhone">Số điện thoại:</label
+                  ><input
                     type="tel"
                     id="editPhone"
                     th:field="*{phone}"
@@ -152,8 +195,35 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="editAddressDetail">Địa chỉ chi tiết:</label>
-                  <textarea
+                  <label for="editCity">Tỉnh/Thành phố:</label
+                  ><input
+                    type="text"
+                    id="editCity"
+                    th:field="*{city}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editDistrict">Quận/Huyện:</label
+                  ><input
+                    type="text"
+                    id="editDistrict"
+                    th:field="*{district}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editWard">Phường/Xã:</label
+                  ><input
+                    type="text"
+                    id="editWard"
+                    th:field="*{ward}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="editAddressDetail">Địa chỉ chi tiết:</label
+                  ><textarea
                     id="editAddressDetail"
                     th:field="*{addressDetail}"
                     rows="3"
@@ -165,12 +235,11 @@
                     type="checkbox"
                     id="editIsDefault"
                     th:field="*{default}"
-                  />
-                  <label for="editIsDefault">Đặt làm địa chỉ mặc định</label>
+                  /><label for="editIsDefault">Đặt làm địa chỉ mặc định</label>
                 </div>
                 <div class="form-actions">
-                  <button type="submit" class="btn-save">Lưu thay đổi</button>
-                  <a th:href="@{/account/address}" class="btn-cancel">Hủy</a>
+                  <button type="submit" class="btn-save">Lưu thay đổi</button
+                  ><a th:href="@{/account/address}" class="btn-cancel">Hủy</a>
                 </div>
               </form>
             </div>
@@ -195,7 +264,7 @@
                   </p>
                   <p>
                     <strong>Địa chỉ:</strong>
-                    <span th:text="${address.addressDetail}"></span>
+                    <span th:text="${address.getFullShippingAddress()}"></span>
                   </p>
                   <p>
                     <strong>Số điện thoại:</strong>
@@ -206,26 +275,35 @@
                   <a
                     th:href="@{/account/address/edit/{id}(id=${address.id})}"
                     class="action-btn edit-btn"
+                    title="Sửa địa chỉ"
                   >
                     <ion-icon name="create-outline"></ion-icon>
                   </a>
+
                   <form
                     th:action="@{/account/address/delete/{id}(id=${address.id})}"
                     method="post"
-                    style="margin: 0"
                     th:unless="${address.default}"
                     onsubmit="return confirm('Bạn có chắc chắn muốn xóa địa chỉ này?');"
                   >
-                    <button type="submit" class="action-btn delete-btn">
+                    <button
+                      type="submit"
+                      class="action-btn delete-btn"
+                      title="Xóa địa chỉ"
+                    >
                       <ion-icon name="trash-outline"></ion-icon>
                     </button>
                   </form>
+
                   <form
                     th:unless="${address.default}"
                     th:action="@{/account/address/setDefault/{id}(id=${address.id})}"
                     method="post"
-                    style="display: inline"
-                  ></form>
+                  >
+                    <button type="submit" class="set-default-btn">
+                      Đặt làm mặc định
+                    </button>
+                  </form>
                 </div>
               </div>
               <p th:if="${#lists.isEmpty(addresses)}">
@@ -233,30 +311,38 @@
               </p>
             </div>
           </div>
-
           <div class="account-sidebar">
             <div class="account-card sidebar-card">
               <nav class="sidebar-nav">
                 <ul>
                   <li>
-                    <a th:href="@{/account}"
-                      ><ion-icon name="person-outline"></ion-icon
-                      ><span>Thông tin cá nhân</span></a
-                    >
+                    <a th:href="@{/account}">
+                      <ion-icon name="person-outline"></ion-icon>
+                      <span>Thông tin cá nhân</span>
+                    </a>
                   </li>
                   <li>
-                    <a href="#" class="active"
-                      ><ion-icon name="location-outline"></ion-icon
-                      ><span th:text="|Quản lý địa chỉ (${addressCount})|"
+                    <a href="#" class="active">
+                      <ion-icon name="location-outline"></ion-icon>
+                      <span th:text="|Quản lý địa chỉ (${addressCount})|"
                         >Quản lý địa chỉ (0)</span
-                      ></a
-                    >
+                      >
+                    </a>
                   </li>
                   <li>
-                    <a th:href="@{/logout}"
-                      ><ion-icon name="log-out-outline"></ion-icon
-                      ><span>Đăng xuất</span></a
+                    <a
+                      th:href="@{/account}"
+                      onclick="sessionStorage.setItem('showSection', 'orderHistory');"
                     >
+                      <ion-icon name="document-text-outline"></ion-icon>
+                      <span>Lịch sử đơn hàng</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a th:href="@{/logout}">
+                      <ion-icon name="log-out-outline"></ion-icon>
+                      <span>Đăng xuất</span>
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -266,6 +352,7 @@
       </div>
     </main>
     <footer th:replace="~{fragment/footer :: footer}"></footer>
+
     <script th:src="@{/js/script.js}"></script>
     <script
       type="module"
@@ -281,38 +368,48 @@
         var editForm = document.getElementById("editAddressForm");
         var addressList = document.getElementById("addressListContainer");
 
-        if (form) {
-          if (editForm && editForm.offsetParent !== null) {
-            window.location.href = "/account/address";
-            return;
-          }
-
+        if (form && !editForm) {
           var isHidden =
             form.style.display === "none" || form.style.display === "";
           form.style.display = isHidden ? "block" : "none";
-
           if (addressList) {
             addressList.style.display = isHidden ? "none" : "flex";
           }
+        } else if (editForm) {
+          window.location.href = "/account/address";
         }
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", () => {
         const alertSuccess = document.querySelector(".alert-success");
         const alertError = document.querySelector(".alert-danger");
         if (alertSuccess) {
-          setTimeout(() => (alertSuccess.style.display = "none"), 3000);
+          setTimeout(() => {
+            if (alertSuccess) alertSuccess.style.display = "none";
+          }, 3000);
         }
         if (alertError) {
-          setTimeout(() => (alertError.style.display = "none"), 5000);
+          setTimeout(() => {
+            if (alertError) alertError.style.display = "none";
+          }, 5000);
         }
 
-        const addForm = document.getElementById("addAddressForm");
-        const hasAddError = document.querySelector(".alert-danger") && false;
-        const editFormIsVisible = document.getElementById("editAddressForm");
+        const hasAddError =
+          document.querySelector(".alert-danger") &&
+          document.getElementById("addAddressForm");
+        const editFormVisible = document.getElementById("editAddressForm");
+        const newAddressModel = null;
 
-        if (hasAddError && addForm && !editFormIsVisible) {
-          addForm.style.display = "block";
+        if (
+          hasAddError &&
+          !editFormVisible &&
+          newAddressModel &&
+          Object.keys(newAddressModel).length > 1
+        ) {
+          const addForm = document.getElementById("addAddressForm");
+          const listContainer = document.getElementById("addressListContainer");
+          if (addForm) addForm.style.display = "block";
+          if (listContainer) listContainer.style.display = "none";
         }
       });
     </script>

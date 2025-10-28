@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt Hàng Thành Công - Mộc E-commerce</title>
+    <link
+      rel="shortcut icon"
+      th:href="@{/images/logo/favicon.svg}"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/checkout.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .order-success-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: var(--white);
+        border-radius: var(--border-radius-md);
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+      .success-icon {
+        text-align: center;
+      }
+      .success-icon ion-icon {
+        font-size: 4rem;
+        color: #28a745;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+      .order-success-container h2 {
+        color: var(--eerie-black);
+        margin-bottom: 15px;
+      }
+      .order-success-container p {
+        color: var(--sonic-silver);
+        margin-bottom: 10px;
+        line-height: 1.6;
+      }
+      .order-id {
+        font-weight: 600;
+        color: var(--eerie-black);
+      }
+      .action-links {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .action-links a {
+        padding: 10px 20px;
+        border-radius: var(--border-radius-sm);
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        font-size: 0.9rem;
+      }
+      .btn-continue {
+        background-color: var(--salmon-pink);
+        color: var(--white);
+      }
+      .btn-continue:hover {
+        background-color: var(--eerie-black);
+      }
+      .btn-view-order {
+        background-color: var(--cultured);
+        color: var(--eerie-black);
+        border: 1px solid var(--salmon-pink);
+      }
+      .btn-view-order:hover {
+        background-color: hsla(34, 35%, 70%, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header th:replace="~{fragment/header :: header}"></header>
+
+    <main>
+      <div class="container">
+        <div class="breadcrumbs">
+          <a th:href="@{/}">Trang chủ</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <a th:href="@{/checkout}">Thanh Toán</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <span>Đặt hàng thành công</span>
+        </div>
+
+        <div class="order-success-container" th:if="${order}">
+          <div class="success-icon">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </div>
+          <h2>Đặt Hàng Thành Công!</h2>
+          <p>Cảm ơn bạn đã mua hàng tại Mộc E-commerce.</p>
+          <p>
+            Mã đơn hàng của bạn là:
+            <strong class="order-id" th:text="'#' + ${order.id}">#12345</strong>
+          </p>
+          <div class="action-links">
+            <a th:href="@{/}" class="btn-continue">Tiếp tục mua sắm</a>
+            <a
+              th:href="@{/account}"
+              onclick="sessionStorage.setItem('showSection', 'orderHistory');"
+              class="btn-view-order"
+              >Xem lịch sử đơn hàng</a
+            >
+          </div>
+        </div>
+        <div class="order-success-container" th:unless="${order}">
+          <h2>Lỗi</h2>
+          <p>
+            Không thể hiển thị thông tin đơn hàng. Vui lòng thử lại hoặc liên hệ
+            hỗ trợ.
+          </p>
+          <div class="action-links">
+            <a th:href="@{/}" class="btn-continue">Về trang chủ</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragment/footer :: footer}"></footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script th:src="@{/js/script.js}"></script>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh Toán - Mộc E-commerce</title>
+
+    <link
+      rel="shortcut icon"
+      th:href="@{/images/logo/favicon.svg}"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/checkout.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragment/header :: header}"></header>
+
+    <main class="checkout-main">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a th:href="@{/}">Trang chủ</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <a th:href="@{/cart}">Giỏ Hàng</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <span>Thanh Toán</span>
+        </div>
+
+        <div class="checkout-container">
+          <div class="checkout-form">
+            <form th:action="@{/checkout/place-order}" method="post">
+              <div class="form-section">
+                <h3>1. Địa chỉ giao hàng</h3>
+                <div class="form-group">
+                  <label for="email">Địa chỉ email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    th:value="${customer?.email}"
+                    placeholder="example@gmail.com"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="fullName">Họ và Tên *</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    th:value="${defaultAddress?.fullName ?: customer?.fullName}"
+                    placeholder="Họ và Tên"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Số điện thoại *</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    th:value="${defaultAddress?.phone ?: customer?.phone}"
+                    placeholder="Số điện thoại"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="city">Tỉnh/Thành phố *</label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Tỉnh/Thành phố"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="district">Quận/Huyện *</label>
+                  <input
+                    type="text"
+                    id="district"
+                    name="district"
+                    placeholder="Quận/Huyện"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="ward">Phường/Xã *</label>
+                  <input
+                    type="text"
+                    id="ward"
+                    name="ward"
+                    placeholder="Phường/Xã"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="addressDetail">Địa chỉ đường *</label>
+                  <input
+                    type="text"
+                    id="addressDetail"
+                    name="addressDetail"
+                    th:value="${defaultAddress?.addressDetail}"
+                    placeholder="Địa chỉ đường (Số nhà, tên đường,...)"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="note">Ghi chú</label>
+                  <textarea
+                    id="note"
+                    name="note"
+                    rows="3"
+                    placeholder="Ghi chú"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>2. Vận chuyển</h3>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value="standard"
+                      checked
+                    />
+                    <span>GHN - Tiêu chuẩn</span>
+                    <span
+                      class="shipping-cost"
+                      th:text="${#numbers.formatDecimal(shippingFee, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      >+ 30.000 đ</span
+                    >
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>3. Phương thức thanh toán</h3>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="cod"
+                      checked
+                    />
+                    <ion-icon name="cash-outline"></ion-icon>
+                    <span>Thanh toán khi nhận hàng (COD)</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="paymentMethod" value="vnpay" />
+                    <ion-icon name="card-outline"></ion-icon>
+                    <span
+                      >Thanh toán thẻ VNPay (ATM, VISA, Mastercard,...)</span
+                    >
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a th:href="@{/cart}" class="back-link">Quay lại giỏ hàng</a>
+                <button type="submit" class="place-order-btn">Đặt Hàng</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="order-summary-wrapper">
+            <div class="order-summary">
+              <h4>
+                Thông tin đơn hàng (<span th:text="${cartItemCount ?: 0}"
+                  >0</span
+                >)
+              </h4>
+              <div class="summary-items">
+                <div th:each="item : ${cartItems}" class="summary-item">
+                  <div class="summary-item-image">
+                    <img
+                      th:src="${item.product.imageUrl ?: '/images/placeholder.png'}"
+                      th:alt="${item.product.name}"
+                    />
+                    <span
+                      class="summary-item-quantity"
+                      th:text="${item.quantity}"
+                      >1</span
+                    >
+                  </div>
+                  <div class="summary-item-details">
+                    <span
+                      class="summary-item-name"
+                      th:text="${item.product.name}"
+                      >Product Name</span
+                    >
+                  </div>
+                  <span
+                    class="summary-item-price"
+                    th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                    >Giá</span
+                  >
+                </div>
+              </div>
+
+              <div class="summary-totals">
+                <div class="summary-row">
+                  <span>Tổng sản phẩm</span>
+                  <span
+                    th:text="${#numbers.formatDecimal(subtotal ?: 0, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                    >0 đ</span
+                  >
+                </div>
+                <div class="summary-row">
+                  <span>Vận chuyển</span>
+                  <span
+                    th:text="${#numbers.formatDecimal(shippingFee ?: 0, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                    >0 đ</span
+                  >
+                </div>
+                <div class="summary-row discount-row" th:if="${discount > 0}">
+                  <span>Giảm giá</span>
+                  <span
+                    th:text="'-' + ${#numbers.formatDecimal(discount ?: 0, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                    >-0 đ</span
+                  >
+                </div>
+                <div class="summary-row total-row">
+                  <span>Tổng tiền</span>
+                  <span
+                    class="final-total"
+                    th:text="${#numbers.formatDecimal(total ?: 0, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                    >0 đ</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragment/footer :: footer}"></footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script th:src="@{/js/script.js}"></script>
+  </body>
+</html>

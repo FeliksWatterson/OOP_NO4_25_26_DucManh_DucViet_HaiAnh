@@ -1,0 +1,323 @@
+.checkout-main {
+  padding: 20px 0 40px 0;
+  background-color: #f9f9f9;
+}
+
+.checkout-main .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: var(--sonic-silver);
+}
+.breadcrumbs a {
+  color: var(--salmon-pink);
+}
+.breadcrumbs ion-icon {
+  font-size: 12px;
+}
+
+.checkout-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.checkout-form {
+  flex: 1 1 60%;
+  min-width: 400px;
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-summary-wrapper {
+  flex: 1 1 35%;
+  min-width: 300px;
+  position: sticky;
+  top: 110px;
+}
+
+.order-summary {
+  background-color: var(--white);
+  padding: 25px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--cultured);
+}
+
+.form-section {
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--cultured);
+}
+.form-section:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.form-section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--eerie-black);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--sonic-silver);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.form-group label:not(.radio-label) {
+  font-weight: 500;
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid hsl(34, 20%, 85%);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.95rem;
+  color: var(--onyx);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: hsl(34, 15%, 75%);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--salmon-pink);
+  box-shadow: 0 0 0 2px hsla(34, 35%, 70%, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid var(--cultured);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  background-color: var(--white);
+}
+
+.radio-label:hover {
+  border-color: hsl(34, 20%, 80%);
+}
+
+.radio-label input[type="radio"] {
+  width: auto;
+  flex-shrink: 0;
+  accent-color: var(--salmon-pink);
+}
+
+.radio-label span {
+  font-size: 0.95rem;
+  color: var(--onyx);
+}
+
+.radio-label .shipping-cost {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--eerie-black);
+}
+.radio-label ion-icon {
+  font-size: 1.3rem;
+  color: var(--salmon-pink);
+  flex-shrink: 0;
+}
+
+.discount-section {
+  margin-top: 30px;
+}
+.discount-form {
+  display: flex;
+  margin-top: 10px;
+}
+.discount-form input {
+  flex-grow: 1;
+  border-right: none;
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+.discount-form button {
+  padding: 12px 20px;
+  background-color: var(--eerie-black);
+  color: var(--white);
+  border: 1px solid var(--eerie-black);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+.discount-form button:hover {
+  background-color: var(--onyx);
+}
+
+.order-summary h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--eerie-black);
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--cultured);
+}
+
+.summary-items {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--cultured);
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.summary-item-image {
+  position: relative;
+  flex-shrink: 0;
+}
+.summary-item-image img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border: 1px solid var(--cultured);
+  border-radius: var(--border-radius-sm);
+}
+.summary-item-quantity {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--sonic-silver);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--white);
+}
+
+.summary-item-details {
+  flex-grow: 1;
+  overflow: hidden;
+}
+.summary-item-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--onyx);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.summary-item-attributes {
+  font-size: 0.8rem;
+  color: var(--sonic-silver);
+}
+
+.summary-item-price {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--eerie-black);
+  white-space: nowrap;
+}
+
+.summary-totals .summary-row {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.summary-totals .total-row {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--cultured);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.summary-totals .final-total {
+  font-size: 1.3rem;
+  color: var(--salmon-pink);
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cultured);
+}
+
+.back-link {
+  color: var(--salmon-pink);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.place-order-btn {
+  padding: 14px 30px;
+  background-color: var(--salmon-pink);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.place-order-btn:hover {
+  background-color: var(--eerie-black);
+}
+.place-order-btn:active {
+  transform: scale(0.98);
+}

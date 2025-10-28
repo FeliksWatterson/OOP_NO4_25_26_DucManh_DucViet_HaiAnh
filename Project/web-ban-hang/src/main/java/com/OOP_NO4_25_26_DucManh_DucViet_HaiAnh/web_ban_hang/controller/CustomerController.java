@@ -1,10 +1,14 @@
 package com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.controller;
 
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Customer;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Order;
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.services.OrderService;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.CustomerInterface;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Address;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.AddressInterface;
-import jakarta.servlet.http.HttpSession; 
+import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerInterface customerService;
+
+    @Autowired 
+    private OrderService orderService;
 
     @GetMapping("/auth")
     public String showAuthPage(Model model, HttpSession session) {
@@ -97,6 +104,9 @@ public class CustomerController {
 
         long addressCount = addressService.countAddressesByCustomer(freshCustomer);
         model.addAttribute("addressCount", addressCount);
+
+        List<Order> orders = orderService.findOrdersByCustomer(freshCustomer);
+        model.addAttribute("orders", orders);
 
 
         return "account";

@@ -18,17 +18,63 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .account-content > .content-section {
+        display: none;
+      }
+      .account-content > .content-section.active-section {
+        display: block;
+      }
+      .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .order-table th,
+      .order-table td {
+        border: 1px solid var(--cultured);
+        padding: 12px 15px;
+        text-align: left;
+        font-size: 0.9rem;
+        vertical-align: middle;
+      }
+      .order-table th {
+        background-color: hsl(34, 40%, 97%);
+        font-weight: 600;
+        color: var(--eerie-black);
+      }
+      .order-table td {
+        color: var(--onyx);
+      }
+      .order-table .order-id {
+        font-weight: 500;
+        color: var(--salmon-pink);
+      }
+      .order-table .order-status {
+        font-weight: 500;
+      }
+      .no-orders {
+        text-align: center;
+        padding: 30px;
+        color: var(--sonic-silver);
+      }
+      .view-details-link {
+        color: var(--salmon-pink);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .view-details-link:hover {
+        text-decoration: underline;
+      }
+      .order-history-content h2 {
+        font-size: 1.5rem;
+        color: var(--eerie-black);
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--cultured);
+      }
+    </style>
   </head>
-  <style>
-    body {
-      font-family: "Montserrat", sans-serif;
-      font-weight: 300;
-      line-height: 1.5;
-      color: #333;
-      background-color: #ffff;
-    }
-  </style>
-
   <body>
     <header th:replace="~{fragment/header :: header}"></header>
 
@@ -43,14 +89,23 @@
         <div class="account-container">
           <div class="account-content">
             <div class="account-overview-cards">
-              <div class="account-card overview-card">
+              <a
+                href="#"
+                class="account-card overview-card"
+                style="text-decoration: none"
+                onclick="showSection('orderHistory'); return false;"
+              >
                 <div class="card-icon">
                   <ion-icon name="document-text-outline"></ion-icon>
-                  <span class="badge">3</span>
+                  <span
+                    class="badge"
+                    th:if="${not #lists.isEmpty(orders)}"
+                    th:text="${#lists.size(orders)}"
+                    >0</span
+                  >
                 </div>
                 <p>Lịch sử đơn hàng</p>
-              </div>
-
+              </a>
               <div class="account-card overview-card">
                 <div class="card-icon">
                   <ion-icon name="happy-outline"></ion-icon>
@@ -59,7 +114,10 @@
               </div>
             </div>
 
-            <div class="account-card info-card">
+            <div
+              class="info-card content-section active-section"
+              id="personalInfoContent"
+            >
               <h3>Thông tin cá nhân</h3>
               <div class="info-grid">
                 <div class="info-item">
@@ -86,7 +144,7 @@
                   <span class="info-label">Địa chỉ mặc định:</span>
                   <span
                     class="info-value"
-                    th:text="${defaultAddress?.addressDetail ?: 'Chưa có địa chỉ mặc định'}"
+                    th:text="${defaultAddress?.getFullShippingAddress() ?: 'Chưa có địa chỉ mặc định'}"
                     >Vietnam</span
                   >
                 </div>
@@ -95,6 +153,48 @@
                 >Chỉnh sửa thông tin</a
               >
             </div>
+
+            <div
+              class="order-history-content account-card content-section"
+              id="orderHistoryContent"
+            >
+              <h2>Lịch Sử Đơn Hàng</h2>
+              <div th:if="${not #lists.isEmpty(orders)}">
+                <table class="order-table">
+                  <thead>
+                    <tr>
+                      <th>Mã Đơn Hàng</th>
+                      <th>Ngày Đặt</th>
+                      <th>Địa chỉ giao hàng</th>
+                      <th>Tổng Tiền</th>
+                      <th>Trạng Thái</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="order : ${orders}">
+                      <td class="order-id" th:text="'#' + ${order.id}">#123</td>
+                      <td
+                        th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"
+                      >
+                        dd/MM/yyyy HH:mm
+                      </td>
+                      <td th:text="${order.shippingAddress}">Địa chỉ...</td>
+                      <td
+                        th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      >
+                        100.000 đ
+                      </td>
+                      <td class="order-status" th:text="${order.status}">
+                        Đặt hàng thành công
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div th:if="${#lists.isEmpty(orders)}" class="no-orders">
+                <p>Bạn chưa có đơn hàng nào.</p>
+              </div>
+            </div>
           </div>
 
           <div class="account-sidebar">
@@ -102,7 +202,11 @@
               <nav class="sidebar-nav">
                 <ul>
                   <li>
-                    <a href="#" class="active">
+                    <a
+                      href="#"
+                      class="active"
+                      onclick="showSection('personalInfo'); return false;"
+                    >
                       <ion-icon name="person-outline"></ion-icon>
                       <span>Thông tin cá nhân</span>
                     </a>
@@ -113,6 +217,15 @@
                       <span th:text="|Quản lý địa chỉ (${addressCount})|"
                         >Quản lý địa chỉ (0)</span
                       >
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="showSection('orderHistory'); return false;"
+                    >
+                      <ion-icon name="document-text-outline"></ion-icon>
+                      <span>Lịch sử đơn hàng</span>
                     </a>
                   </li>
                   <li>
@@ -140,5 +253,47 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <script>
+      function showSection(sectionId) {
+        document
+          .querySelectorAll(".account-content > .content-section")
+          .forEach((div) => {
+            div.classList.remove("active-section");
+            div.style.display = "none";
+          });
+        const sectionToShow = document.getElementById(sectionId + "Content");
+        if (sectionToShow) {
+          sectionToShow.classList.add("active-section");
+          sectionToShow.style.display = "block";
+        }
+
+        document.querySelectorAll(".sidebar-nav li a").forEach((link) => {
+          link.classList.remove("active");
+        });
+        const activeLink = document.querySelector(
+          `.sidebar-nav li a[onclick*="showSection('${sectionId}')"]`
+        );
+        if (activeLink) {
+          activeLink.classList.add("active");
+        } else {
+          if (sectionId === "personalInfo") {
+            const infoLink = document.querySelector(
+              ".sidebar-nav li a[onclick*=\"showSection('personalInfo')\"]"
+            );
+            if (infoLink) infoLink.classList.add("active");
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const sectionToDisplay = sessionStorage.getItem("showSection");
+        if (sectionToDisplay === "orderHistory") {
+          showSection("orderHistory");
+          sessionStorage.removeItem("showSection");
+        } else {
+          showSection("personalInfo");
+        }
+      });
+    </script>
   </body>
 </html>
