@@ -59,22 +59,19 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* Ẩn thanh cuộn trên tất cả slider, showcase và category */
 .slider-container::-webkit-scrollbar,
 .showcase-wrapper::-webkit-scrollbar,
 .category-item-container::-webkit-scrollbar {
-  display: none; /* Ẩn scrollbar cho trình duyệt WebKit (Chrome, Edge, Safari) */
+  display: none;
 }
 
-/* Giữ cuộn mượt, nhưng không hiển thị thanh trượt */
 .slider-container,
 .showcase-wrapper,
 .category-item-container {
-  -ms-overflow-style: none; /* Ẩn scrollbar trên IE/Edge cũ */
-  scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Nếu muốn ẩn toàn trang (cả body luôn) */
 body::-webkit-scrollbar {
   display: none;
 }

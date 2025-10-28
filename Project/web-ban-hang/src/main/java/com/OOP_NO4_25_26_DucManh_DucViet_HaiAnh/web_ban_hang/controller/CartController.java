@@ -1,12 +1,10 @@
 package com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.controller;
 
-// Bỏ import Cart model cũ nếu còn
-// import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Cart;
-import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.CartItem; // Vẫn dùng CartItem (Entity)
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.CartItem; 
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Customer;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Product;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.services.ProductService;
-import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.services.CartService; // Import CartService mới
+import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.services.CartService; 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
