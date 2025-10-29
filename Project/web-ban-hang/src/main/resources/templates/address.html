@@ -339,6 +339,27 @@
                     </a>
                   </li>
                   <li>
+                    <a th:href="@{/account/change-password}">
+                      <ion-icon name="lock-closed-outline"></ion-icon>
+                      <span>Đổi mật khẩu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="confirmAccountDeletion(); return false;"
+                    >
+                      <ion-icon name="trash-outline"></ion-icon>
+                      <span>Xóa tài khoản</span>
+                    </a>
+                    <form
+                      id="deleteAccountForm"
+                      th:action="@{/account/delete}"
+                      method="post"
+                      style="display: none"
+                    ></form>
+                  </li>
+                  <li>
                     <a th:href="@{/logout}">
                       <ion-icon name="log-out-outline"></ion-icon>
                       <span>Đăng xuất</span>

@@ -219,3 +219,87 @@
 .view-details-link:hover {
   text-decoration: underline;
 }
+.account-content > .content-section {
+  display: none;
+}
+.account-content > .content-section.active-section {
+  display: block;
+}
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.order-table th,
+.order-table td {
+  border: 1px solid var(--cultured);
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+.order-table th {
+  background-color: hsl(34, 40%, 97%);
+  font-weight: 600;
+  color: var(--eerie-black);
+}
+.order-table td {
+  color: var(--onyx);
+}
+.order-table .order-id {
+  font-weight: 500;
+  color: var(--salmon-pink);
+}
+.order-table .order-status {
+  font-weight: 500;
+}
+.no-orders {
+  text-align: center;
+  padding: 30px;
+  color: var(--sonic-silver);
+}
+.view-details-link {
+  color: var(--salmon-pink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.view-details-link:hover {
+  text-decoration: underline;
+}
+.order-history-content h2 {
+  font-size: 1.5rem;
+  color: var(--eerie-black);
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cultured);
+}
+.password-form .form-group {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 1;
+}
+.password-form label {
+  font-size: 0.8rem;
+  color: var(--sonic-silver);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.password-form input[type="password"] {
+  padding: 10px;
+  border: 1px solid var(--cultured);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  color: var(--onyx);
+  width: 100%;
+  box-sizing: border-box;
+}
+.password-form input[type="password"]:focus {
+  outline: none;
+  border-color: var(--salmon-pink);
+  box-shadow: 0 0 0 2px hsla(34, 35%, 70%, 0.2);
+}
+.password-form .info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px 20px;
+}

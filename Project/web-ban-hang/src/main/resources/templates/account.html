@@ -18,62 +18,6 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .account-content > .content-section {
-        display: none;
-      }
-      .account-content > .content-section.active-section {
-        display: block;
-      }
-      .order-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-      .order-table th,
-      .order-table td {
-        border: 1px solid var(--cultured);
-        padding: 12px 15px;
-        text-align: left;
-        font-size: 0.9rem;
-        vertical-align: middle;
-      }
-      .order-table th {
-        background-color: hsl(34, 40%, 97%);
-        font-weight: 600;
-        color: var(--eerie-black);
-      }
-      .order-table td {
-        color: var(--onyx);
-      }
-      .order-table .order-id {
-        font-weight: 500;
-        color: var(--salmon-pink);
-      }
-      .order-table .order-status {
-        font-weight: 500;
-      }
-      .no-orders {
-        text-align: center;
-        padding: 30px;
-        color: var(--sonic-silver);
-      }
-      .view-details-link {
-        color: var(--salmon-pink);
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .view-details-link:hover {
-        text-decoration: underline;
-      }
-      .order-history-content h2 {
-        font-size: 1.5rem;
-        color: var(--eerie-black);
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--cultured);
-      }
-    </style>
   </head>
   <body>
     <header th:replace="~{fragment/header :: header}"></header>
@@ -155,6 +99,64 @@
             </div>
 
             <div
+              class="info-card content-section"
+              id="changePasswordContent"
+              style="display: none"
+            >
+              <h3>Đổi mật khẩu</h3>
+              <form
+                th:action="@{/account/change-password}"
+                method="post"
+                class="password-form"
+              >
+                <div class="info-grid">
+                  <div class="form-group">
+                    <label for="oldPassword">Mật khẩu cũ:</label>
+                    <input
+                      type="password"
+                      id="oldPassword"
+                      name="oldPassword"
+                      required
+                    />
+                  </div>
+                  <div></div>
+                  <div class="form-group">
+                    <label for="newPassword">Mật khẩu mới:</label>
+                    <input
+                      type="password"
+                      id="newPassword"
+                      name="newPassword"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      required
+                    />
+                  </div>
+                </div>
+                <p
+                  th:if="${passwordError}"
+                  style="color: red; margin-top: 10px"
+                  th:text="${passwordError}"
+                ></p>
+                <p
+                  th:if="${passwordSuccess}"
+                  style="color: green; margin-top: 10px"
+                  th:text="${passwordSuccess}"
+                ></p>
+
+                <button type="submit" class="edit-btn" style="margin-top: 20px">
+                  Lưu thay đổi
+                </button>
+              </form>
+            </div>
+
+            <div
               class="order-history-content account-card content-section"
               id="orderHistoryContent"
             >
@@ -229,6 +231,27 @@
                     </a>
                   </li>
                   <li>
+                    <a th:href="@{/account/change-password}">
+                      <ion-icon name="lock-closed-outline"></ion-icon>
+                      <span>Đổi mật khẩu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="confirmAccountDeletion(); return false;"
+                    >
+                      <ion-icon name="trash-outline"></ion-icon>
+                      <span>Xóa tài khoản</span>
+                    </a>
+                    <form
+                      id="deleteAccountForm"
+                      th:action="@{/account/delete}"
+                      method="post"
+                      style="display: none"
+                    ></form>
+                  </li>
+                  <li>
                     <a th:href="@{/logout}">
                       <ion-icon name="log-out-outline"></ion-icon>
                       <span>Đăng xuất</span>
@@ -253,7 +276,7 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-    <script>
+    <script th:inline="javascript">
       function showSection(sectionId) {
         document
           .querySelectorAll(".account-content > .content-section")
@@ -261,6 +284,7 @@
             div.classList.remove("active-section");
             div.style.display = "none";
           });
+
         const sectionToShow = document.getElementById(sectionId + "Content");
         if (sectionToShow) {
           sectionToShow.classList.add("active-section");
@@ -269,30 +293,86 @@
 
         document.querySelectorAll(".sidebar-nav li a").forEach((link) => {
           link.classList.remove("active");
-        });
-        const activeLink = document.querySelector(
-          `.sidebar-nav li a[onclick*="showSection('${sectionId}')"]`
-        );
-        if (activeLink) {
-          activeLink.classList.add("active");
-        } else {
-          if (sectionId === "personalInfo") {
-            const infoLink = document.querySelector(
-              ".sidebar-nav li a[onclick*=\"showSection('personalInfo')\"]"
-            );
-            if (infoLink) infoLink.classList.add("active");
+          const linkPath = link.getAttribute("href");
+          const onclickAttr = link.getAttribute("onclick");
+
+          let isMatch = false;
+          if (
+            linkPath &&
+            linkPath.includes("/account/change-password") &&
+            sectionId === "changePassword"
+          ) {
+            isMatch = true;
+          } else if (
+            linkPath &&
+            linkPath.includes("/account/address") &&
+            sectionId === "address"
+          ) {
+            isMatch = true;
+          } else if (
+            onclickAttr &&
+            onclickAttr.includes(`showSection('${sectionId}')`)
+          ) {
+            isMatch = true;
           }
+
+          if (isMatch) {
+            link.classList.add("active");
+          }
+        });
+
+        if (
+          !document.querySelector(".sidebar-nav li a.active") &&
+          sectionId !== "address"
+        ) {
+          const infoLink = document.querySelector(
+            ".sidebar-nav li a[onclick*=\"showSection('personalInfo')\"]"
+          );
+          if (infoLink) infoLink.classList.add("active");
+        }
+      }
+
+      function confirmAccountDeletion() {
+        if (
+          confirm(
+            "Bạn có chắc chắn muốn xóa tài khoản này không? Hành động này không thể hoàn tác và sẽ xóa tất cả dữ liệu liên quan."
+          )
+        ) {
+          document.getElementById("deleteAccountForm").submit();
         }
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const sectionToDisplay = sessionStorage.getItem("showSection");
-        if (sectionToDisplay === "orderHistory") {
-          showSection("orderHistory");
+        const showPasswordFormOnLoad = /*[[${showChangePasswordFormOnLoad}]]*/ false;
+        const showPasswordFormAfterAction = /*[[${showChangePasswordForm}]]*/ false;
+        const sectionToDisplayFromSession =
+          sessionStorage.getItem("showSection");
+
+        let initialSection = "personalInfo";
+
+        if (showPasswordFormOnLoad || showPasswordFormAfterAction) {
+          initialSection = "changePassword";
+        } else if (sectionToDisplayFromSession === "orderHistory") {
+          initialSection = "orderHistory";
           sessionStorage.removeItem("showSection");
-        } else {
-          showSection("personalInfo");
         }
+
+        showSection(initialSection);
+
+        const alerts = document.querySelectorAll(
+          ".alert-success, .alert-danger"
+        );
+        alerts.forEach((alert) => {
+          if (alert.textContent.trim()) {
+            setTimeout(() => {
+              alert.style.transition = "opacity 0.5s ease";
+              alert.style.opacity = "0";
+              setTimeout(() => (alert.style.display = "none"), 500);
+            }, 5000);
+          } else {
+            alert.style.display = "none";
+          }
+        });
       });
     </script>
   </body>

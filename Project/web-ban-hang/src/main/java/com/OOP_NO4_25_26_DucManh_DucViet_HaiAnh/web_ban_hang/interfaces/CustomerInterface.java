@@ -11,4 +11,7 @@ public interface CustomerInterface {
     void updateCustomer(Customer customer);
     Optional<Customer> findCustomerByEmail(String email);
     Optional<Customer> authenticateCustomer(String email, String rawPassword);
+
+    boolean updatePassword(Long customerId, String oldPassword, String newPassword);
+    void deleteCustomer(Long customerId);
 }
