@@ -2,7 +2,7 @@
 
 ## Thành viên Nhóm 3
 
-1.  **Lê Hoàng Đức Mạnh** - *230110456* - *K17-KHMT_1*
+1.  **Lê Hoàng Đức Mạnh** - *23010456* - *K17-KHMT_1*
 2.  **Đỗ Đức Việt** - *23010382* - *K17-KHMT_1*
 3.  **Lê Nguyễn Hải Anh** - *23010006* - *K17-KHMT_1*
 
