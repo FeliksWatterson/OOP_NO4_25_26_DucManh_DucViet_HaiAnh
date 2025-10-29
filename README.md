@@ -1,6 +1,6 @@
 # Dự án Lập trình Hướng đối tượng của Nhóm 3: Xây dựng website thương mại điện tử Mộc E-Commerce
 
-## Thành viên Nhóm 4
+## Thành viên Nhóm 3
 
 1.  **Lê Hoàng Đức Mạnh** - *230110456* - *K17-KHMT_1*
 2.  **Đỗ Đức Việt** - *23010382* - *K17-KHMT_1*
