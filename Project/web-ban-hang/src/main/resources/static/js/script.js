@@ -9,13 +9,6 @@ if (modal && modalCloseOverlay && modalCloseBtn) {
   modalCloseOverlay.addEventListener("click", modalCloseFunc);
   modalCloseBtn.addEventListener("click", modalCloseFunc);
 }
-const notificationToast = document.querySelector("[data-toast]");
-const toastCloseBtn = document.querySelector("[data-toast-close]");
-if (notificationToast && toastCloseBtn) {
-  toastCloseBtn.addEventListener("click", function () {
-    notificationToast.classList.add("closed");
-  });
-}
 const mobileMenuOpenBtn = document.querySelectorAll(
   "[data-mobile-menu-open-btn]"
 );
@@ -316,34 +309,42 @@ window.addEventListener("scroll", () => {
 
   lastScrollY = currentScrollY;
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const modalOverlay = document.getElementById("globalModalOverlay");
+  const modalContent = document.getElementById("globalModalContent");
+  const modalIcon = document.getElementById("globalModalIcon");
+  const modalMessage = document.getElementById("globalModalMessage");
+  const modalCloseBtn = document.getElementById("globalModalCloseBtn");
+  let modalTimeout;
 
-const toasts = document.querySelectorAll(".toast-notification");
+  function showGlobalModal(message, type = "success", duration = 3000) {
+    if (!modalContent || !modalOverlay || !modalIcon || !modalMessage) return;
 
-toasts.forEach((toast) => {
-  let duration = 5000;
+    clearTimeout(modalTimeout);
 
-  if (
-    toast.classList.contains("cart-success-toast") ||
-    toast.classList.contains("welcome-toast")
-  ) {
-    duration = 3000;
+    modalMessage.textContent = message;
+
+    modalIcon.classList.remove("success", "error");
+    modalIcon.classList.add(type);
+
+    modalOverlay.classList.add("active");
+    modalContent.classList.add("active");
+
+    if (duration > 0) {
+      modalTimeout = setTimeout(hideGlobalModal, duration);
+    }
   }
 
-  const timer = setTimeout(() => {
-    toast.style.animation = "toastFadeOut 0.5s ease forwards";
-    setTimeout(() => {
-      if (toast) toast.style.display = "none";
-    }, 500);
-  }, duration);
-
-  const closeButton = toast.querySelector(".toast-close-btn");
-  if (closeButton) {
-    closeButton.addEventListener("click", () => {
-      clearTimeout(timer);
-      toast.style.animation = "toastFadeOut 0.5s ease forwards";
-      setTimeout(() => {
-        if (toast) toast.style.display = "none";
-      }, 500);
-    });
+  function hideGlobalModal() {
+    if (modalOverlay && modalContent) {
+      modalOverlay.classList.remove("active");
+      modalContent.classList.remove("active");
+    }
+    clearTimeout(modalTimeout);
   }
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", hideGlobalModal);
+  if (modalOverlay) modalOverlay.addEventListener("click", hideGlobalModal);
+
+  window.showGlobalModal = showGlobalModal;
 });

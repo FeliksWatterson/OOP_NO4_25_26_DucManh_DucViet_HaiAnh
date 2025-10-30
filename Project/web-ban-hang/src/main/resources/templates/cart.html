@@ -308,68 +308,6 @@
           </div>
         </div>
       </div>
-      <div
-        th:if="${welcomeMessage}"
-        id="welcomeToast"
-        class="toast-notification welcome-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${welcomeMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <div
-        th:if="${cartSuccessMessage}"
-        id="cartSuccessToast"
-        class="toast-notification cart-success-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${cartSuccessMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <div
-        th:if="${cartErrorMessage}"
-        id="cartErrorToast"
-        class="toast-notification cart-error-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${cartErrorMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
     </main>
 
     <footer th:replace="~{fragment/footer :: footer}"></footer>

@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/account.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart.css}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,9 +28,20 @@
         <div class="breadcrumbs">
           <a th:href="@{/}">Trang chủ</a>
           <ion-icon name="chevron-forward-outline"></ion-icon>
-          <span>Tài khoản</span>
-        </div>
+          <a th:href="@{/account}">Tài khoản</a>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
 
+          <span id="breadcrumb-section-name">
+            <span
+              th:if="${showChangePasswordFormOnLoad == true or showChangePasswordForm == true}"
+              >Đổi mật khẩu</span
+            >
+            <span
+              th:unless="${showChangePasswordFormOnLoad == true or showChangePasswordForm == true}"
+              >Thông tin cá nhân</span
+            >
+          </span>
+        </div>
         <div class="account-container">
           <div class="account-content">
             <div class="account-overview-cards">
@@ -170,6 +182,7 @@
                       <th>Địa chỉ giao hàng</th>
                       <th>Tổng Tiền</th>
                       <th>Trạng Thái</th>
+                      <th>Chi tiết</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,6 +201,15 @@
                       </td>
                       <td class="order-status" th:text="${order.status}">
                         Đặt hàng thành công
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          class="view-details-btn"
+                          th:attr="data-modal-target='#order-details-' + ${order.id}"
+                        >
+                          Xem
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -267,6 +289,104 @@
 
     <footer th:replace="~{fragment/footer :: footer}"></footer>
 
+    <div th:each="order : ${orders}">
+      <div
+        class="modal-overlay"
+        th:id="'order-details-' + ${order.id} + '-overlay'"
+      ></div>
+
+      <div class="modal-content" th:id="'order-details-' + ${order.id}">
+        <button type="button" class="modal-close-btn">&times;</button>
+
+        <div class="order-details-summary">
+          <h3 th:text="|Chi tiết đơn hàng #${order.id}|">Chi tiết đơn hàng</h3>
+          <p
+            th:text="|Ngày tạo: ${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}|"
+          >
+            Ngày tạo
+          </p>
+
+          <div class="shipping-info">
+            <p>
+              <strong>Người nhận:</strong>
+              <span th:text="${order.fullName}"></span>
+            </p>
+            <p>
+              <strong>Điện thoại:</strong>
+              <span th:text="${order.phone}"></span>
+            </p>
+            <p>
+              <strong>Địa chỉ:</strong>
+              <span th:text="${order.shippingAddress}"></span>
+            </p>
+            <p>
+              <strong>Phương thức TT:</strong>
+              <span
+                th:text="${order.paymentMethod == 'cod' ? 'Thanh toán khi nhận hàng (COD)' : 'Thanh toán VNPay'}"
+              ></span>
+            </p>
+            <p
+              th:if="${order.note != null and not #strings.isEmpty(order.note)}"
+            >
+              <strong>Ghi chú:</strong> <span th:text="${order.note}"></span>
+            </p>
+          </div>
+
+          <div class="summary-items">
+            <div th:each="item : ${order.orderItems}" class="summary-item">
+              <div class="summary-item-image">
+                <img
+                  th:src="${item.product.imageUrl ?: '/images/placeholder.png'}"
+                  th:alt="${item.product.name}"
+                />
+              </div>
+              <div class="summary-item-details">
+                <span
+                  class="summary-item-name"
+                  th:text="${item.product.name}"
+                ></span>
+                <span
+                  class="summary-item-qty"
+                  th:text="|SL: ${item.quantity} x ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}đ|"
+                ></span>
+              </div>
+              <span
+                class="summary-item-price"
+                th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              ></span>
+            </div>
+          </div>
+
+          <div class="summary-totals">
+            <div class="summary-row">
+              <span>Tổng sản phẩm</span>
+              <span
+                th:text="${#numbers.formatDecimal(order.totalAmount - order.shippingFee + order.discountAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              ></span>
+            </div>
+            <div class="summary-row">
+              <span>Vận chuyển</span>
+              <span
+                th:text="${#numbers.formatDecimal(order.shippingFee, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              ></span>
+            </div>
+            <div class="summary-row" th:if="${order.discountAmount > 0}">
+              <span>Giảm giá</span>
+              <span
+                th:text="'-' + ${#numbers.formatDecimal(order.discountAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              ></span>
+            </div>
+            <div class="summary-row total-row">
+              <span>Tổng tiền</span>
+              <span
+                class="final-total"
+                th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script th:src="@{/js/script.js}"></script>
     <script
       type="module"
@@ -289,6 +409,19 @@
         if (sectionToShow) {
           sectionToShow.classList.add("active-section");
           sectionToShow.style.display = "block";
+        }
+
+        const breadcrumbSpan = document.getElementById(
+          "breadcrumb-section-name"
+        );
+        if (breadcrumbSpan) {
+          if (sectionId === "personalInfo") {
+            breadcrumbSpan.textContent = "Thông tin cá nhân";
+          } else if (sectionId === "changePassword") {
+            breadcrumbSpan.textContent = "Đổi mật khẩu";
+          } else if (sectionId === "orderHistory") {
+            breadcrumbSpan.textContent = "Lịch sử đơn hàng";
+          }
         }
 
         document.querySelectorAll(".sidebar-nav li a").forEach((link) => {
@@ -372,6 +505,43 @@
           } else {
             alert.style.display = "none";
           }
+        });
+
+        const viewButtons = document.querySelectorAll(".view-details-btn");
+        const modalOverlays = document.querySelectorAll(".modal-overlay");
+        const modalCloseButtons = document.querySelectorAll(".modal-close-btn");
+
+        viewButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const modalTargetId = button.dataset.modalTarget;
+            const modal = document.querySelector(modalTargetId);
+            const overlay = document.querySelector(modalTargetId + "-overlay");
+
+            if (modal && overlay) {
+              modal.classList.add("active");
+              overlay.classList.add("active");
+            }
+          });
+        });
+
+        modalCloseButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const modal = button.closest(".modal-content");
+            const overlay = document.querySelector("#" + modal.id + "-overlay");
+
+            modal.classList.remove("active");
+            if (overlay) overlay.classList.remove("active");
+          });
+        });
+
+        modalOverlays.forEach((overlay) => {
+          overlay.addEventListener("click", () => {
+            const modalId = overlay.id.replace("-overlay", "");
+            const modal = document.querySelector("#" + modalId);
+
+            overlay.classList.remove("active");
+            if (modal) modal.classList.remove("active");
+          });
         });
       });
     </script>

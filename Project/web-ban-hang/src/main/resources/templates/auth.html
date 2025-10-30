@@ -15,25 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/auth.css}" />
     <title>Login-Mộc E-Commmerce</title>
   </head>
-
   <body class="auth-page-body">
-    <div
-      th:if="${successMessage}"
-      id="authToast"
-      class="notification-toast"
-      role="alert"
-    >
-      <div class="toast-detail">
-        <p class="toast-message" th:text="${successMessage}"></p>
-      </div>
-      <button
-        type="button"
-        class="toast-close-btn"
-        onclick="document.getElementById('authToast').classList.remove('show-once')"
-      >
-        <ion-icon name="close-outline"></ion-icon>
-      </button>
-    </div>
     <header>
       <div class="header-main">
         <div class="container">

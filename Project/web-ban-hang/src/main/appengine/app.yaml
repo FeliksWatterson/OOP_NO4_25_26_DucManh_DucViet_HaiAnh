@@ -1,0 +1,15 @@
+runtime: java17
+instance_class: F2
+
+handlers:
+  - url: /.*
+    script: this field requires a non-empty value
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+env_variables:
+  SPRING_DATASOURCE_URL: "jdbc:mysql://shinkansen.proxy.rlwy.net:15464/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh"
+  SPRING_DATASOURCE_USERNAME: "root"
+  SPRING_DATASOURCE_PASSWORD: "ZxsfvGkVAqYGwBFLYURCVFpxjftRSRex"

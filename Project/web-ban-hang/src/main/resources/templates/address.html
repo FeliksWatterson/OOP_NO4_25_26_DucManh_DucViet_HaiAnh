@@ -10,6 +10,10 @@
       th:href="@{/images/logo/favicon.svg}"
       type="image/x-icon"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/account.css}" />
     <link rel="stylesheet" th:href="@{/css/address.css}" />
@@ -109,40 +113,37 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="addCity">Tỉnh/Thành phố:</label
-                  ><input
-                    type="text"
+                  <label for="addCity">Tỉnh/Thành phố:</label>
+                  <select
                     id="addCity"
                     th:field="*{city}"
+                    class="address-select"
                     required
-                  />
+                  >
+                    <option value="">Chọn Tỉnh/Thành phố</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="addDistrict">Quận/Huyện:</label
-                  ><input
-                    type="text"
+                  <label for="addDistrict">Quận/Huyện:</label>
+                  <select
                     id="addDistrict"
                     th:field="*{district}"
+                    class="address-select"
                     required
-                  />
+                  >
+                    <option value="">Chọn Quận/Huyện</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="addWard">Phường/Xã:</label
-                  ><input
-                    type="text"
+                  <label for="addWard">Phường/Xã:</label>
+                  <select
                     id="addWard"
                     th:field="*{ward}"
+                    class="address-select"
                     required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="addAddressDetail">Địa chỉ chi tiết:</label
-                  ><textarea
-                    id="addAddressDetail"
-                    th:field="*{addressDetail}"
-                    rows="3"
-                    required
-                  ></textarea>
+                  >
+                    <option value="">Chọn Phường/Xã</option>
+                  </select>
                 </div>
                 <div class="form-group form-check">
                   <input
@@ -195,31 +196,35 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="editCity">Tỉnh/Thành phố:</label
-                  ><input
-                    type="text"
+                  <label for="editCity">Tỉnh/Thành phố:</label>
+                  <select
                     id="editCity"
                     th:field="*{city}"
+                    class="address-select"
                     required
-                  />
+                  ></select>
                 </div>
                 <div class="form-group">
-                  <label for="editDistrict">Quận/Huyện:</label
-                  ><input
-                    type="text"
+                  <label for="editDistrict">Quận/Huyện:</label>
+                  <select
                     id="editDistrict"
                     th:field="*{district}"
+                    class="address-select"
                     required
-                  />
+                  >
+                    <option value="">Chọn Quận/Huyện</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="editWard">Phường/Xã:</label
-                  ><input
-                    type="text"
+                  <label for="editWard">Phường/Xã:</label>
+                  <select
                     id="editWard"
                     th:field="*{ward}"
+                    class="address-select"
                     required
-                  />
+                  >
+                    <option value="">Chọn Phường/Xã</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="editAddressDetail">Địa chỉ chi tiết:</label
@@ -294,16 +299,6 @@
                       <ion-icon name="trash-outline"></ion-icon>
                     </button>
                   </form>
-
-                  <form
-                    th:unless="${address.default}"
-                    th:action="@{/account/address/setDefault/{id}(id=${address.id})}"
-                    method="post"
-                  >
-                    <button type="submit" class="set-default-btn">
-                      Đặt làm mặc định
-                    </button>
-                  </form>
                 </div>
               </div>
               <p th:if="${#lists.isEmpty(addresses)}">
@@ -374,7 +369,11 @@
     </main>
     <footer th:replace="~{fragment/footer :: footer}"></footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/address-api.js}"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"

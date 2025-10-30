@@ -152,68 +152,6 @@
           ></p>
         </div>
       </div>
-      <div
-        th:if="${welcomeMessage}"
-        id="welcomeToast"
-        class="toast-notification welcome-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${welcomeMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <div
-        th:if="${cartSuccessMessage}"
-        id="cartSuccessToast"
-        class="toast-notification cart-success-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${cartSuccessMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <div
-        th:if="${cartErrorMessage}"
-        id="cartErrorToast"
-        class="toast-notification cart-error-toast"
-        role="alert"
-      >
-        <div class="toast-icon">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-        </div>
-        <div class="toast-detail">
-          <p class="toast-message" th:text="${cartErrorMessage}"></p>
-        </div>
-        <button
-          type="button"
-          class="toast-close-btn"
-          onclick="this.parentElement.style.display='none';"
-        >
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
     </main>
 
     <footer th:replace="~{fragment/footer :: footer}"></footer>
@@ -248,5 +186,36 @@
         else if (value > maxQty) this.value = maxQty;
       });
     </script>
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", () => {
+          if (typeof window.showGlobalModal !== 'function') {
+              console.error("showGlobalModal function not found.");
+              return;
+          }
+
+          const messages = [
+              { msg: /*[[${welcomeMessage}]]*/ null, type: 'success', duration: 3000 },
+              { msg: /*[[${cartSuccessMessage}]]*/ null, type: 'success', duration: 3000 },
+              { msg: /*[[${successMessage}]]*/ null, type: 'success', duration: 3000 },
+              { msg: /*[[${passwordSuccess}]]*/ null, type: 'success', duration: 3000 },
+              { msg: /*[[${deleteSuccess}]]*/ null, type: 'success', duration: 3000 },
+              { msg: /*[[${logoutMessage}]]*/ null, type: 'success', duration: 3000 },
+              
+              { msg: /*[[${cartErrorMessage}]]*/ null, type: 'error', duration: 4000 },
+              { msg: /*[[${errorMessage}]]*/ null, type: 'error', duration: 4000 },
+              { msg: /*[[${loginError}]]*/ null, type: 'error', duration: 4000 },
+              { msg: /*[[${passwordError}]]*/ null, type: 'error', duration: 4000 },
+              { msg: /*[[${deleteError}]]*/ null, type: 'error', duration: 4000 },
+              { msg: /*[[${checkoutError}]]*/ null, type: 'error', duration: 4000 }
+          ];
+
+          for (const item of messages) {
+              if (item.msg && item.msg.trim() !== "") {
+                  window.showGlobalModal(item.msg, item.type, item.duration);
+                  break;
+              }
+          }
+      });
+      </script>
   </body>
 </html>

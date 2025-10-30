@@ -1,158 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
-    <footer th:fragment="footer">
-      <div class="footer-nav">
-        <div class="container">
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item">
-              <h2 class="nav-title">Danh Mục Phổ Biến</h2>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Thời trang</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Điện tử</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Mỹ phẩm</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sức khỏe</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Đồng hồ</a>
-            </li>
-          </ul>
+    <footer th:fragment="footer" class="new-site-footer">
+      <div class="container">
+        <div class="new-footer-main">
+          <h2 class="new-footer-title">Mộc E-commerce</h2>
 
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Sản Phẩm</h2></li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Giảm giá</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sản phẩm mới</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Bán chạy nhất</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Liên hệ chúng tôi</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sơ đồ trang</a>
-            </li>
-          </ul>
-
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item">
-              <h2 class="nav-title">Công Ty Của Chúng Tôi</h2>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Giao hàng</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Thông báo pháp lý</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Điều khoản và điều kiện</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Về chúng tôi</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Thanh toán an toàn</a>
-            </li>
-          </ul>
-
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Dịch Vụ</h2></li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Giảm giá</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sản phẩm mới</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Bán chạy nhất</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Liên hệ chúng tôi</a>
-            </li>
-            <li class="footer-nav-item">
-              <a href="#" class="footer-nav-link">Sơ đồ trang</a>
-            </li>
-          </ul>
-
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item"><h2 class="nav-title">Liên Hệ</h2></li>
-            <li class="footer-nav-item flex">
-              <div class="icon-box">
-                <ion-icon name="location-outline"></ion-icon>
-              </div>
-              <address class="content">Hà Đông, Hà Nội, Việt Nam</address>
-            </li>
-            <li class="footer-nav-item flex">
-              <div class="icon-box">
-                <ion-icon name="call-outline"></ion-icon>
-              </div>
-              <a href="tel:+84384887042" class="footer-nav-link"
-                >(+84) 384 887 042</a
-              >
-            </li>
-            <li class="footer-nav-item flex">
-              <div class="icon-box">
-                <ion-icon name="mail-outline"></ion-icon>
-              </div>
-              <a href="mailto:ducmanhlehoang@gmail.com" class="footer-nav-link"
-                >ducmanhlehoang@gmail.com</a
-              >
-            </li>
-          </ul>
-
-          <ul class="footer-nav-list">
-            <li class="footer-nav-item">
-              <h2 class="nav-title">Theo Dõi Chúng Tôi</h2>
+          <ul class="new-footer-social-list">
+            <li>
+              <a class="new-footer-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
             </li>
             <li>
-              <ul class="social-link">
-                <li class="footer-nav-item">
-                  <a href="#" class="footer-nav-link"
-                    ><ion-icon name="logo-facebook"></ion-icon
-                  ></a>
-                </li>
-                <li class="footer-nav-item">
-                  <a href="#" class="footer-nav-link"
-                    ><ion-icon name="logo-twitter"></ion-icon
-                  ></a>
-                </li>
-                <li class="footer-nav-item">
-                  <a href="#" class="footer-nav-link"
-                    ><ion-icon name="logo-linkedin"></ion-icon
-                  ></a>
-                </li>
-                <li class="footer-nav-item">
-                  <a href="#" class="footer-nav-link"
-                    ><ion-icon name="logo-instagram"></ion-icon
-                  ></a>
-                </li>
-              </ul>
+              <a class="new-footer-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a class="new-footer-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a class="new-footer-social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+          </ul>
+
+          <p class="new-footer-subtitle">
+            Dự án được thực hiện bởi sinh viên Nhóm 3 - OOP_N04
+          </p>
+
+          <ul class="new-footer-nav-list">
+            <li><a th:href="@{/}" class="new-footer-nav-link">Trang chủ</a></li>
+            <li><a href="#" class="new-footer-nav-link">Danh mục hàng</a></li>
+            <li>
+              <a href="#flash-sale" class="new-footer-nav-link">Khuyến mãi</a>
+            </li>
+            <li>
+              <a th:href="@{/account}" class="new-footer-nav-link">Tài khoản</a>
+            </li>
+            <li>
+              <a th:href="@{/cart}" class="new-footer-nav-link">Giỏ hàng</a>
             </li>
           </ul>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <div class="container">
-          <img
-            th:src="@{/images/payment.png}"
-            alt="phương thức thanh toán"
-            class="payment-img"
-          />
+        <div class="new-footer-bottom">
           <p class="copyright">
-            &copy; 2025 <a href="#">Mộc</a> mọi quyền được bảo lưu.
+            Copyright &copy; 2025 Nhóm 3 - OOP (Đức Mạnh, Đức Việt, Hải Anh)
           </p>
         </div>
+      </div>
+      <div id="globalModalOverlay" class="global-modal-overlay"></div>
+      <div id="globalModalContent" class="global-modal-content">
+        <button
+          type="button"
+          id="globalModalCloseBtn"
+          class="global-modal-close-btn"
+        >
+          &times;
+        </button>
+        <div id="globalModalIcon" class="global-modal-icon"></div>
+        <p id="globalModalMessage" class="global-modal-message"></p>
       </div>
     </footer>
   </body>

@@ -100,6 +100,9 @@ public class AddressController {
             existingAddress.setFullName(addressDetails.getFullName());
             existingAddress.setPhone(addressDetails.getPhone());
             existingAddress.setAddressDetail(addressDetails.getAddressDetail());
+            existingAddress.setCity(addressDetails.getCity());
+            existingAddress.setDistrict(addressDetails.getDistrict());
+            existingAddress.setWard(addressDetails.getWard());
             existingAddress.setDefault(addressDetails.isDefault());
             existingAddress.setCustomer(customer);
 

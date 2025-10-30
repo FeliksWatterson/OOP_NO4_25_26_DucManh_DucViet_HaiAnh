@@ -11,6 +11,10 @@
       th:href="@{/images/logo/favicon.svg}"
       type="image/x-icon"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/checkout.css}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,33 +77,26 @@
                 </div>
                 <div class="form-group">
                   <label for="city">Tỉnh/Thành phố *</label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    placeholder="Tỉnh/Thành phố"
-                    required
-                  />
+                  <select id="city" name="city" class="address-select" required>
+                    <option value="">Chọn Tỉnh/Thành phố</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="district">Quận/Huyện *</label>
-                  <input
-                    type="text"
+                  <select
                     id="district"
                     name="district"
-                    placeholder="Quận/Huyện"
+                    class="address-select"
                     required
-                  />
+                  >
+                    <option value="">Chọn Quận/Huyện</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="ward">Phường/Xã *</label>
-                  <input
-                    type="text"
-                    id="ward"
-                    name="ward"
-                    placeholder="Phường/Xã"
-                    required
-                  />
+                  <select id="ward" name="ward" class="address-select" required>
+                    <option value="">Chọn Phường/Xã</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="addressDetail">Địa chỉ đường *</label>
@@ -255,6 +252,9 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/address-api.js}"></script>
   </body>
 </html>
