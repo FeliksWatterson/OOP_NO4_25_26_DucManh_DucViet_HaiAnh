@@ -142,11 +142,14 @@
 }
 
 .item-quantity {
-  margin-top: 10px; /* Di chuyển margin-top ra ngoài .quantity-controls */
+  margin-top: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .item-quantity .quantity-controls {
-  display: flex; /* Đặt display flex ở đây */
+  display: flex;
   height: 32px;
   border: 1px solid var(--cart-border-color);
   border-radius: var(--border-radius-sm);
@@ -154,7 +157,6 @@
   align-items: center;
 }
 
-/* Áp dụng cho input bên trong .quantity-controls */
 .item-quantity .quantity-controls input[type="number"] {
   height: 100%;
   padding: 0 3px;
