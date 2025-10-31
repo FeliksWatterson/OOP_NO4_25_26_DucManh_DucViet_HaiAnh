@@ -321,3 +321,25 @@
 .place-order-btn:active {
   transform: scale(0.98);
 }
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  background-color: hsl(34, 40%, 97%);
+  padding: 12px 15px;
+  border-radius: var(--border-radius-sm);
+}
+.form-check input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--salmon-pink);
+}
+.form-check label {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--onyx);
+  font-weight: 500;
+  cursor: pointer;
+}

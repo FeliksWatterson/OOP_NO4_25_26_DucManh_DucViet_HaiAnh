@@ -40,14 +40,7 @@
       <div class="form-container sign-up">
         <form th:action="@{/register}" method="post" th:object="${customer}">
           <h1>Tạo tài khoản</h1>
-
-          <div class="social-icons">
-            <a class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-            <a class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a class="icon"><i class="fa-brands fa-github"></i></a>
-          </div>
-
-          <span>hoặc dùng email của bạn để đăng ký</span>
+          <span>Dùng email của bạn để đăng ký</span>
 
           <input
             type="text"
@@ -80,13 +73,7 @@
       <div class="form-container sign-in">
         <form th:action="@{/login}" method="post">
           <h1>Đăng Nhập</h1>
-          <div class="social-icons">
-            <a class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-            <a class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a class="icon"><i class="fa-brands fa-github"></i></a>
-          </div>
-
-          <span>hoặc sử dụng email và mật khẩu</span>
+          <span>Sử dụng email và mật khẩu</span>
 
           <input
             type="email"

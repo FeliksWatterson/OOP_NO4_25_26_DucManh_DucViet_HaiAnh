@@ -22,9 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function populateSelect(selectElement, data, valueField, nameField) {
     if (!selectElement) return;
-
-    const currentValue = selectElement.value;
-
+    const currentValue = selectElement.value?.trim() || "";
     $(selectElement).find('option:not([value=""])').remove();
 
     data.forEach((item) => {
@@ -33,24 +31,31 @@ document.addEventListener("DOMContentLoaded", () => {
       selectElement.add(option);
     });
 
-    if (currentValue) {
-      selectElement.value = currentValue;
-    }
+    if (currentValue) selectElement.value = currentValue;
+  }
+
+  async function findCodeByName(name, type) {
+    if (!name) return null;
+    const list = await fetchData(`${apiEndpoint}${type}/`);
+    const found = list?.find(
+      (i) => i.name.trim().toLowerCase() === name.trim().toLowerCase()
+    );
+    return found ? found.code : null;
   }
 
   async function setupAddressDropdowns(cityId, districtId, wardId) {
     const citySelect = document.getElementById(cityId);
     const districtSelect = document.getElementById(districtId);
     const wardSelect = document.getElementById(wardId);
-
     if (!citySelect) return;
+
     const currentCity = citySelect.value;
-    const currentDistrict = districtSelect.value;
-    const currentWard = wardSelect.value;
+    const currentDistrict = districtSelect?.value;
+    const currentWard = wardSelect?.value;
 
     const initSelect2 = (selector, placeholder) => {
       $(selector).select2({
-        placeholder: placeholder,
+        placeholder,
         allowClear: true,
         width: "100%",
       });
@@ -63,91 +68,57 @@ document.addEventListener("DOMContentLoaded", () => {
     const cities = await fetchData(`${apiEndpoint}p/`);
     populateSelect(citySelect, cities || [], "code", "name");
 
-    async function loadDistricts() {
-      const selectedCityOption = citySelect.options[citySelect.selectedIndex];
-      const cityCode = selectedCityOption
-        ? selectedCityOption.dataset.code
-        : null;
+    async function loadDistrictsByCityName(cityName) {
+      const code = await findCodeByName(cityName, "p");
+      if (!code) return;
+      const data = await fetchData(`${apiEndpoint}p/${code}?depth=2`);
+      populateSelect(districtSelect, data?.districts || [], "code", "name");
+    }
 
-      $(wardSelect).find('option:not([value=""])').remove();
-      $(wardSelect).val(null).trigger("change");
+    async function loadWardsByDistrictName(districtName) {
+      const code = await findCodeByName(districtName, "d");
+      if (!code) return;
+      const data = await fetchData(`${apiEndpoint}d/${code}?depth=2`);
+      populateSelect(wardSelect, data?.wards || [], "code", "name");
+    }
 
-      if (cityCode) {
-        const districts = await fetchData(
-          `${apiEndpoint}p/${cityCode}?depth=2`
-        );
-        populateSelect(
-          districtSelect,
-          districts.districts || [],
-          "code",
-          "name"
-        );
+    async function handleCityChange() {
+      const selectedCity = citySelect.value;
+      if (selectedCity) {
+        await loadDistrictsByCityName(selectedCity);
       } else {
         $(districtSelect).find('option:not([value=""])').remove();
-        $(districtSelect).val(null).trigger("change");
+        $(wardSelect).find('option:not([value=""])').remove();
       }
+      $(districtSelect).val(null).trigger("change");
+      $(wardSelect).val(null).trigger("change");
     }
 
-    async function loadWards() {
-      const selectedDistrictOption =
-        districtSelect.options[districtSelect.selectedIndex];
-      const districtCode = selectedDistrictOption
-        ? selectedDistrictOption.dataset.code
-        : null;
-
-      if (districtCode) {
-        const wards = await fetchData(
-          `${apiEndpoint}d/${districtCode}?depth=2`
-        );
-        populateSelect(wardSelect, wards.wards || [], "code", "name");
+    async function handleDistrictChange() {
+      const selectedDistrict = districtSelect.value;
+      if (selectedDistrict) {
+        await loadWardsByDistrictName(selectedDistrict);
       } else {
         $(wardSelect).find('option:not([value=""])').remove();
-        $(wardSelect).val(null).trigger("change");
       }
+      $(wardSelect).val(null).trigger("change");
     }
-    $(citySelect).on("select2:select", loadDistricts);
-    $(citySelect).on("select2:clear", loadDistricts);
-    $(districtSelect).on("select2:select", loadWards);
-    $(districtSelect).on("select2:clear", loadWards);
+
+    $(citySelect).on("change select2:select select2:clear", handleCityChange);
+    $(districtSelect).on(
+      "change select2:select select2:clear",
+      handleDistrictChange
+    );
+
     if (currentCity) {
-      $(citySelect).val(currentCity).trigger("change");
-
-      const selectedCityOption = citySelect.options[citySelect.selectedIndex];
-      const cityCode = selectedCityOption
-        ? selectedCityOption.dataset.code
-        : null;
-
-      if (cityCode) {
-        const districts = await fetchData(
-          `${apiEndpoint}p/${cityCode}?depth=2`
-        );
-        populateSelect(
-          districtSelect,
-          districts.districts || [],
-          "code",
-          "name"
-        );
-
-        if (currentDistrict) {
-          $(districtSelect).val(currentDistrict).trigger("change");
-
-          const selectedDistrictOption =
-            districtSelect.options[districtSelect.selectedIndex];
-          const districtCode = selectedDistrictOption
-            ? selectedDistrictOption.dataset.code
-            : null;
-
-          if (districtCode) {
-            const wards = await fetchData(
-              `${apiEndpoint}d/${districtCode}?depth=2`
-            );
-            populateSelect(wardSelect, wards.wards || [], "code", "name");
-            if (currentWard) {
-              $(wardSelect).val(currentWard).trigger("change");
-            }
-          }
-        }
+      await loadDistrictsByCityName(currentCity);
+      if (currentDistrict) {
+        await loadWardsByDistrictName(currentDistrict);
       }
+
+      $(citySelect).val(currentCity).trigger("change.select2");
+      $(districtSelect).val(currentDistrict).trigger("change.select2");
+      $(wardSelect).val(currentWard).trigger("change.select2");
     }
   }
 

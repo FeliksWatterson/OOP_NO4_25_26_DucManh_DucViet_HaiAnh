@@ -42,6 +42,21 @@
             <form th:action="@{/checkout/place-order}" method="post">
               <div class="form-section">
                 <h3>1. Địa chỉ giao hàng</h3>
+                <div
+                  class="form-check"
+                  th:if="${defaultAddress != null}"
+                  th:data-fullname="${defaultAddress.fullName}"
+                  th:data-phone="${defaultAddress.phone}"
+                  th:data-city="${defaultAddress.city}"
+                  th:data-district="${defaultAddress.district}"
+                  th:data-ward="${defaultAddress.ward}"
+                  th:data-detail="${defaultAddress.addressDetail}"
+                >
+                  <input type="checkbox" id="useDefaultAddress" />
+                  <label for="useDefaultAddress"
+                    >Sử dụng địa chỉ mặc định</label
+                  >
+                </div>
                 <div class="form-group">
                   <label for="email">Địa chỉ email *</label>
                   <input
@@ -59,7 +74,7 @@
                     type="text"
                     id="fullName"
                     name="fullName"
-                    th:value="${defaultAddress?.fullName ?: customer?.fullName}"
+                    th:value="${customer?.fullName}"
                     placeholder="Họ và Tên"
                     required
                   />
@@ -70,7 +85,7 @@
                     type="tel"
                     id="phone"
                     name="phone"
-                    th:value="${defaultAddress?.phone ?: customer?.phone}"
+                    th:value="${customer?.phone}"
                     placeholder="Số điện thoại"
                     required
                   />
@@ -104,7 +119,6 @@
                     type="text"
                     id="addressDetail"
                     name="addressDetail"
-                    th:value="${defaultAddress?.addressDetail}"
                     placeholder="Địa chỉ đường (Số nhà, tên đường,...)"
                     required
                   />
@@ -256,5 +270,66 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script th:src="@{/js/script.js}"></script>
     <script th:src="@{/js/address-api.js}"></script>
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", () => {
+        const customerFullName = /*[[${customer?.fullName}]]*/ "";
+        const customerPhone = /*[[${customer?.phone}]]*/ "";
+
+        const useDefaultCheckbox = document.getElementById("useDefaultAddress");
+        const checkboxWrapper = useDefaultCheckbox
+          ? useDefaultCheckbox.closest(".form-check")
+          : null;
+
+        const fullNameInput = document.getElementById("fullName");
+        const phoneInput = document.getElementById("phone");
+        const addressDetailInput = document.getElementById("addressDetail");
+        function waitForOptionAndSet(selectElementId, expectedValue, callback) {
+          let attempts = 0;
+          const maxAttempts = 15;
+          const selectElement = $(selectElementId);
+
+          const interval = setInterval(() => {
+            attempts++;
+            if (
+              selectElement.find(`option[value="${expectedValue}"]`).length > 0
+            ) {
+              clearInterval(interval);
+              selectElement.val(expectedValue).trigger("change");
+              if (callback) callback();
+            } else if (attempts > maxAttempts) {
+              clearInterval(interval);
+              console.error(
+                `Timeout: Không tìm thấy option '${expectedValue}' cho ${selectElementId}`
+              );
+            }
+          }, 200);
+        }
+
+        if (useDefaultCheckbox && checkboxWrapper) {
+          useDefaultCheckbox.addEventListener("change", function () {
+            if (this.checked) {
+              const addr = checkboxWrapper.dataset;
+
+              $(fullNameInput).val(addr.fullname);
+              $(phoneInput).val(addr.phone);
+              $(addressDetailInput).val(addr.detail);
+
+              $("#city").val(addr.city).trigger("change");
+              waitForOptionAndSet("#district", addr.district, () => {
+                waitForOptionAndSet("#ward", addr.ward, null);
+              });
+            } else {
+              $(fullNameInput).val(customerFullName || "");
+              $(phoneInput).val(customerPhone || "");
+              $(addressDetailInput).val("");
+
+              $("#city").val(null).trigger("change");
+              $("#district").val(null).trigger("change");
+              $("#ward").val(null).trigger("change");
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
