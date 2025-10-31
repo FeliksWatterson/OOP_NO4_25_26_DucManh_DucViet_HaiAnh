@@ -4,54 +4,54 @@
     <footer th:fragment="footer" class="new-site-footer">
       <div class="container">
         <div class="new-footer-main">
-          <h2 class="new-footer-title">Mộc E-commerce</h2>
+          <a
+            th:href="@{/}"
+            class="header-logo"
+            style="justify-content: center; margin-bottom: 25px"
+          >
+            <img
+              th:src="@{/images/logo/logo.svg}"
+              alt="Logo Mộc"
+              width="140"
+              height="42"
+            />
+          </a>
 
           <ul class="new-footer-social-list">
             <li>
-              <a class="new-footer-social-link">
+              <a href="#" class="new-footer-social-link">
                 <ion-icon name="logo-facebook"></ion-icon>
               </a>
             </li>
             <li>
-              <a class="new-footer-social-link">
+              <a href="#" class="new-footer-social-link">
                 <ion-icon name="logo-instagram"></ion-icon>
               </a>
             </li>
             <li>
-              <a class="new-footer-social-link">
+              <a href="#" class="new-footer-social-link">
                 <ion-icon name="logo-twitter"></ion-icon>
               </a>
             </li>
             <li>
-              <a class="new-footer-social-link">
+              <a href="#" class="new-footer-social-link">
                 <ion-icon name="logo-linkedin"></ion-icon>
               </a>
             </li>
           </ul>
 
           <p class="new-footer-subtitle">
-            Dự án được thực hiện bởi sinh viên Nhóm 3 - OOP_N04
+            Mộc E-commerce, dự án được thực hiện bởi sinh viên Nhóm 3 - N04 OOP
+            Kì I 25-26
           </p>
-
-          <ul class="new-footer-nav-list">
-            <li><a th:href="@{/}" class="new-footer-nav-link">Trang chủ</a></li>
-            <li><a href="#" class="new-footer-nav-link">Danh mục hàng</a></li>
-            <li>
-              <a href="#flash-sale" class="new-footer-nav-link">Khuyến mãi</a>
-            </li>
-            <li>
-              <a th:href="@{/account}" class="new-footer-nav-link">Tài khoản</a>
-            </li>
-            <li>
-              <a th:href="@{/cart}" class="new-footer-nav-link">Giỏ hàng</a>
-            </li>
-          </ul>
-        </div>
 
         <div class="new-footer-bottom">
-          <p class="copyright">
-            Copyright &copy; 2025 Nhóm 3 - OOP (Đức Mạnh, Đức Việt, Hải Anh)
-          </p>
+          <img
+            th:src="@{/images/payment.png}"
+            alt="phương thức thanh toán"
+            class="payment-img"
+          />
+          <p class="copyright">Copyright &copy; 2025 _2imspencer</p>
         </div>
       </div>
       <div id="globalModalOverlay" class="global-modal-overlay"></div>

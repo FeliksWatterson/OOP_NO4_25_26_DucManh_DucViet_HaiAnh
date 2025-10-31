@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // API endpoint
   const apiEndpoint = "https://provinces.open-api.vn/api/";
 
-  // Kiểm tra xem jQuery và Select2 đã tải chưa
   if (
     typeof jQuery === "undefined" ||
     typeof jQuery.fn.select2 === "undefined"
@@ -11,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Hàm fetch dữ liệu
   async function fetchData(url) {
     try {
       const response = await fetch(url);
@@ -23,45 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Hàm điền dữ liệu vào <select>
   function populateSelect(selectElement, data, valueField, nameField) {
     if (!selectElement) return;
 
-    // Lấy giá trị hiện tại (quan trọng cho form Edit)
     const currentValue = selectElement.value;
 
-    // Xóa các option cũ (trừ option rỗng đầu tiên)
     $(selectElement).find('option:not([value=""])').remove();
 
     data.forEach((item) => {
-      // Giá trị (value) của option chính là tên (nameField)
-      // Backend (Address.java) mong đợi String, không phải Code
       const option = new Option(item[nameField], item[nameField]);
-      option.dataset.code = item[valueField]; // Lưu code vào data-attribute để JS dùng
+      option.dataset.code = item[valueField];
       selectElement.add(option);
     });
 
-    // Đặt lại giá trị hiện tại (nếu có)
-    // Điều này đảm bảo th:field="*{city}" của Thymeleaf hoạt động
     if (currentValue) {
       selectElement.value = currentValue;
     }
   }
 
-  // Hàm xử lý logic cho một bộ dropdown
   async function setupAddressDropdowns(cityId, districtId, wardId) {
     const citySelect = document.getElementById(cityId);
     const districtSelect = document.getElementById(districtId);
     const wardSelect = document.getElementById(wardId);
 
-    if (!citySelect) return; // Bỏ qua nếu không tìm thấy bộ dropdown này
-
-    // Lấy giá trị đã lưu từ Thymeleaf (dùng cho form edit)
+    if (!citySelect) return;
     const currentCity = citySelect.value;
     const currentDistrict = districtSelect.value;
     const currentWard = wardSelect.value;
 
-    // Khởi tạo Select2 (searchable dropdown)
     const initSelect2 = (selector, placeholder) => {
       $(selector).select2({
         placeholder: placeholder,
@@ -74,20 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
     initSelect2(`#${districtId}`, "Chọn Quận/Huyện");
     initSelect2(`#${wardId}`, "Chọn Phường/Xã");
 
-    // 1. Tải Tỉnh/Thành phố
     const cities = await fetchData(`${apiEndpoint}p/`);
     populateSelect(citySelect, cities || [], "code", "name");
 
-    // 2. Tải Quận/Huyện (chỉ khi có Tỉnh được chọn)
     async function loadDistricts() {
       const selectedCityOption = citySelect.options[citySelect.selectedIndex];
       const cityCode = selectedCityOption
         ? selectedCityOption.dataset.code
         : null;
 
-      // Reset Phường/Xã
       $(wardSelect).find('option:not([value=""])').remove();
-      $(wardSelect).val(null).trigger("change"); // Reset Phường
+      $(wardSelect).val(null).trigger("change");
 
       if (cityCode) {
         const districts = await fetchData(
@@ -100,13 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
           "name"
         );
       } else {
-        // Reset Quận/Huyện
         $(districtSelect).find('option:not([value=""])').remove();
         $(districtSelect).val(null).trigger("change");
       }
     }
 
-    // 3. Tải Phường/Xã (chỉ khi có Quận được chọn)
     async function loadWards() {
       const selectedDistrictOption =
         districtSelect.options[districtSelect.selectedIndex];
@@ -120,26 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         populateSelect(wardSelect, wards.wards || [], "code", "name");
       } else {
-        // Reset Phường/Xã
         $(wardSelect).find('option:not([value=""])').remove();
         $(wardSelect).val(null).trigger("change");
       }
     }
-
-    // Gán sự kiện change cho Select2
-    // Khi người dùng CHỌN 1 Tỉnh -> tải Quận
     $(citySelect).on("select2:select", loadDistricts);
-    // Khi người dùng XÓA 1 Tỉnh -> tải (reset) Quận
     $(citySelect).on("select2:clear", loadDistricts);
-
-    // Khi người dùng CHỌN 1 Quận -> tải Phường
     $(districtSelect).on("select2:select", loadWards);
-    // Khi người dùng XÓA 1 Quận -> tải (reset) Phường
     $(districtSelect).on("select2:clear", loadWards);
-
-    // Xử lý tải dữ liệu cho form Edit (khi đã có giá trị ban đầu)
     if (currentCity) {
-      // Phải trigger 'change' để Select2 cập nhật UI
       $(citySelect).val(currentCity).trigger("change");
 
       const selectedCityOption = citySelect.options[citySelect.selectedIndex];
@@ -181,8 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Chạy hàm cho cả 3 form
-  setupAddressDropdowns("city", "district", "ward"); // Trang checkout
-  setupAddressDropdowns("addCity", "addDistrict", "addWard"); // Trang address (form thêm)
-  setupAddressDropdowns("editCity", "editDistrict", "editWard"); // Trang address (form sửa)
+  setupAddressDropdowns("city", "district", "ward");
+  setupAddressDropdowns("addCity", "addDistrict", "addWard");
+  setupAddressDropdowns("editCity", "editDistrict", "editWard");
 });

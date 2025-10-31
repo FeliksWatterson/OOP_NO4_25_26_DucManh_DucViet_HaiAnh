@@ -4,8 +4,8 @@ import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.interfaces.ProductI
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.model.Product;
 import com.OOP_NO4_25_26_DucManh_DucViet_HaiAnh.web_ban_hang.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest; // <-- THÊM IMPORT NÀY
+import org.springframework.data.domain.Pageable; // <-- THÊM IMPORT NÀY
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,4 +69,12 @@ public class ProductService implements ProductInterface {
      public List<Product> findSuggestedProducts() {
          return productRepository.findBySection("suggested");
      }
+
+     public List<Product> searchProducts(String query, int limit) {
+        if (query == null || query.trim().isEmpty()) {
+            return List.of(); 
+        }
+        Pageable pageable = PageRequest.of(0, limit); 
+        return productRepository.findByNameContainingIgnoreCase(query.trim(), pageable);
+    }
 }

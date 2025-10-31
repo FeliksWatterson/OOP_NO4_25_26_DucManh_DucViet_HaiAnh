@@ -348,3 +348,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.showGlobalModal = showGlobalModal;
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchField = document.getElementById("live-search-field");
+  const resultsDropdown = document.getElementById("search-results-dropdown");
+  let debounceTimer;
+
+  if (!searchField || !resultsDropdown) {
+    return;
+  }
+
+  const debounce = (func, delay) => {
+    return function (...args) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  const fetchSearchResults = async (query) => {
+    if (query.length < 2) {
+      resultsDropdown.innerHTML = "";
+      resultsDropdown.classList.remove("active");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `/api/search?query=${encodeURIComponent(query)}`
+      );
+      if (!response.ok) throw new Error("Lỗi mạng");
+
+      const products = await response.json();
+      renderResults(products);
+    } catch (error) {
+      console.error("Lỗi khi tìm kiếm:", error);
+      resultsDropdown.innerHTML = `<div class="search-result-empty">Lỗi khi tải kết quả.</div>`;
+      resultsDropdown.classList.add("active");
+    }
+  };
+
+  const renderResults = (products) => {
+    const baseUrl = document.baseURI || window.location.origin + "/";
+
+    if (products.length === 0) {
+      resultsDropdown.innerHTML = `<div class="search-result-empty">Không tìm thấy sản phẩm nào.</div>`;
+      resultsDropdown.classList.add("active");
+      return;
+    }
+
+    const formatter = new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+      maximumFractionDigits: 0,
+    });
+
+    resultsDropdown.innerHTML = products
+      .map(
+        (product) => `
+        <a href="${baseUrl}product/${product.id}" class="search-result-item">
+          <img src="${
+            product.imageUrl || baseUrl + "images/placeholder.png"
+          }" alt="${product.name}" class="search-result-img">
+          <div class="search-result-info">
+            <span class="search-result-name">${product.name}</span>
+            <span class="search-result-price">${formatter.format(
+              product.price
+            )}</span>
+          </div>
+        </a>
+      `
+      )
+      .join("");
+
+    resultsDropdown.classList.add("active");
+  };
+
+  searchField.addEventListener(
+    "input",
+    debounce((e) => {
+      fetchSearchResults(e.target.value);
+    }, 300)
+  );
+
+  document.addEventListener("click", (e) => {
+    if (
+      resultsDropdown.classList.contains("active") &&
+      !searchField.contains(e.target) &&
+      !resultsDropdown.contains(e.target)
+    ) {
+      resultsDropdown.classList.remove("active");
+    }
+  });
+
+  searchField.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      resultsDropdown.classList.remove("active");
+    }
+  });
+});

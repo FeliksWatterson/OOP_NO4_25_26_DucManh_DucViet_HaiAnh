@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findBySection(String section, Pageable pageable);
     List<Product> findBySection(String section);
+    List<Product> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

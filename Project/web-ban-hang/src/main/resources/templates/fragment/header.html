@@ -40,16 +40,20 @@
             />
           </a>
 
-          <div class="header-search-container">
+          <div class="header-search-container" style="position: relative">
             <input
               type="search"
               name="search"
+              id="live-search-field"
               class="search-field"
               placeholder="Nhập tên sản phẩm muốn tìm kiếm..."
+              autocomplete="off"
             />
-            <button class="search-btn">
+            <button class="search-btn" style="pointer-events: none">
               <ion-icon name="search-outline"></ion-icon>
             </button>
+
+            <div id="search-results-dropdown"></div>
           </div>
 
           <div class="header-user-actions">
