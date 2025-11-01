@@ -58,7 +58,7 @@ body.auth-page-body {
   min-height: 480px;
 }
 
-.container p {
+.container#container p {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.3px;
@@ -66,7 +66,7 @@ body.auth-page-body {
   color: hsl(34, 15%, 55%); 
 }
 
-.container span {
+.container#container span {
   font-size: 12px;
   color: hsl(34, 15%, 55%); /
 }
