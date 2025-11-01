@@ -21,6 +21,7 @@ Xây dựng ứng dụng website thương mại điện tử Mộc E-commerce s�
 * **Quản lý Sản phẩm:**
     * Hiển thị danh sách sản phẩm theo danh mục, sản phẩm mới, bán chạy, gợi ý,...
     * Xem chi tiết thông tin sản phẩm.
+    * Tìm kiếm sản phẩm theo tên.
 * **Quản lý Giỏ hàng:**
     * Thêm sản phẩm vào giỏ.
     * Xem giỏ hàng.
